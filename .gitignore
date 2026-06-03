@@ -1,0 +1,12 @@
+.tools/
+packages/
+artifacts/
+bin/
+obj/
+TestResults/
+.vs/
+*.user
+*.suo
+scratch_check_counts.ps1
+scratch/
+
