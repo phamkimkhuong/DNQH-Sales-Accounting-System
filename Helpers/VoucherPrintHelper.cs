@@ -11,9 +11,9 @@ namespace DNQH_KeToanBanHang.Helpers
     /// </summary>
     public static class VoucherPrintHelper
     {
-        public const string FullCompanyName = "Oriental Logistics Multimodal Transport Company Limited";
-        public const string CompanyName = "ORIENTAL LOGISTICS MULTIMODAL TRANSPORT COMPANY LIMITED (OLC)";
-        public const string CompanyShortName = "OLC";
+        public const string FullCompanyName = "CÔNG TY CỔ PHẦN THƯƠNG MẠI DNQH";
+        public const string CompanyName = "CÔNG TY CỔ PHẦN THƯƠNG MẠI DNQH";
+        public const string CompanyShortName = "DNQH";
         public const string CompanyAddress = "Số 123 Đường Trần Phú, Quận Hà Đông, TP. Hà Nội";
         public const string CompanyTaxCode = "0102030405";
         public const string CompanyPhone = "024.3888.9999";

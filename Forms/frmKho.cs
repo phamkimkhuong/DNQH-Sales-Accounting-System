@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 using DNQH_KeToanBanHang.Constants;
 using DNQH_KeToanBanHang.DataAccess;
@@ -306,6 +308,26 @@ namespace DNQH_KeToanBanHang.Forms
                 return;
             }
 
+            // Kiểm tra ràng buộc toàn vẹn dữ liệu trước khi xóa
+            KhoUsageStats stats = khoDAL.GetUsageStatistics(maKho);
+            if (stats.HasUsage)
+            {
+                List<string> refs = new List<string>();
+                if (stats.TonKhoCount > 0)
+                    refs.Add(string.Format("{0} bản ghi tồn kho", stats.TonKhoCount));
+                if (stats.PhieuXuatCount > 0)
+                    refs.Add(string.Format("{0} phiếu xuất kho", stats.PhieuXuatCount));
+
+                string refSummary = string.Join(", ", refs.ToArray());
+
+                MessageBox.Show(
+                    string.Format("Không thể xóa kho [{0}] vì đang có dữ liệu liên quan ({1}).\n\nĐể đảm bảo toàn vẹn dữ liệu kế toán, bạn cần chuyển hoặc xuất hết tồn kho và xử lý các chứng từ thuộc kho này trước.", maKho, refSummary),
+                    "Cảnh báo ràng buộc toàn vẹn",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+
             DialogResult confirm = MessageBox.Show(
                 string.Format("Bạn có chắc chắn muốn xóa kho [{0}] không?", maKho),
                 "Xác nhận xóa",
@@ -324,7 +346,22 @@ namespace DNQH_KeToanBanHang.Forms
                     }
                     else
                     {
-                        MessageBox.Show("Không thể xóa kho này vì có dữ liệu tồn kho hoặc phiếu xuất liên quan.", "Cảnh báo ràng buộc", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Không thể xóa kho này từ cơ sở dữ liệu.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                catch (SqlException sqlEx)
+                {
+                    if (sqlEx.Number == 547)
+                    {
+                        MessageBox.Show(
+                            string.Format("Không thể xóa kho [{0}] vì có dữ liệu tồn kho hoặc phiếu xuất liên quan.", maKho),
+                            "Cảnh báo ràng buộc toàn vẹn",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        UiErrorHandler.Show(this, "FRMKHO_UI_ERROR", "Lỗi khi xóa kho.", sqlEx);
                     }
                 }
                 catch (Exception ex)

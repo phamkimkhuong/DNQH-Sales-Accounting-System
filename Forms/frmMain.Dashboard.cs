@@ -36,6 +36,7 @@ namespace DNQH_KeToanBanHang.Forms
 
             lblBreadcrumb.Text = "Trang Chủ / Bảng Điều Khiển Tổng Quan";
             btnBackToDashboard.Visible = false;
+            UpdateHeaderNavigationLayout();
             SetActiveNavigation(btnNavDashboard);
 
             Task fireAndForget = LoadDashboardKPIAsync();

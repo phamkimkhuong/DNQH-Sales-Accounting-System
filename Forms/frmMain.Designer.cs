@@ -73,8 +73,11 @@ namespace DNQH_KeToanBanHang.Forms
             this.pnlHeader = new System.Windows.Forms.Panel();
             this.btnHeaderDangXuat = new System.Windows.Forms.Button();
             this.btnHeaderDoiMatKhau = new System.Windows.Forms.Button();
+            this.btnHeaderHotkeys = new System.Windows.Forms.Button();
+            this.pnlHeaderRightDivider = new System.Windows.Forms.Panel();
             this.lblUserProfile = new System.Windows.Forms.Label();
             this.btnBackToDashboard = new System.Windows.Forms.Button();
+            this.pnlHeaderDivider = new System.Windows.Forms.Panel();
             this.lblBreadcrumb = new System.Windows.Forms.Label();
             this.lblAppSubtitle = new System.Windows.Forms.Label();
             this.lblAppTitle = new System.Windows.Forms.Label();
@@ -635,7 +638,7 @@ namespace DNQH_KeToanBanHang.Forms
             // 
             this.lblStatusUser.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
             this.lblStatusUser.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblStatusUser.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(58)))), ((int)(((byte)(237)))));
+            this.lblStatusUser.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(64)))), ((int)(((byte)(175)))));
             this.lblStatusUser.Name = "lblStatusUser";
             this.lblStatusUser.Size = new System.Drawing.Size(117, 21);
             this.lblStatusUser.Text = "Người dùng: ...";
@@ -643,7 +646,7 @@ namespace DNQH_KeToanBanHang.Forms
             // lblStatusRole
             // 
             this.lblStatusRole.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right;
-            this.lblStatusRole.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(40)))), ((int)(((byte)(217)))));
+            this.lblStatusRole.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(85)))), ((int)(((byte)(105)))));
             this.lblStatusRole.Name = "lblStatusRole";
             this.lblStatusRole.Size = new System.Drawing.Size(76, 21);
             this.lblStatusRole.Text = "Vai trò: ...";
@@ -658,7 +661,7 @@ namespace DNQH_KeToanBanHang.Forms
             // 
             // lblStatusTime
             // 
-            this.lblStatusTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(92)))), ((int)(((byte)(246)))));
+            this.lblStatusTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(85)))), ((int)(((byte)(105)))));
             this.lblStatusTime.Name = "lblStatusTime";
             this.lblStatusTime.Size = new System.Drawing.Size(895, 21);
             this.lblStatusTime.Spring = true;
@@ -673,12 +676,15 @@ namespace DNQH_KeToanBanHang.Forms
             // 
             // pnlHeader
             // 
-            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(58)))), ((int)(((byte)(237)))));
+            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.pnlHeader.Controls.Add(this.btnHeaderDangXuat);
             this.pnlHeader.Controls.Add(this.btnHeaderDoiMatKhau);
+            this.pnlHeader.Controls.Add(this.btnHeaderHotkeys);
+            this.pnlHeader.Controls.Add(this.pnlHeaderRightDivider);
             this.pnlHeader.Controls.Add(this.lblUserProfile);
-            this.pnlHeader.Controls.Add(this.btnBackToDashboard);
             this.pnlHeader.Controls.Add(this.lblBreadcrumb);
+            this.pnlHeader.Controls.Add(this.btnBackToDashboard);
+            this.pnlHeader.Controls.Add(this.pnlHeaderDivider);
             this.pnlHeader.Controls.Add(this.lblAppSubtitle);
             this.pnlHeader.Controls.Add(this.lblAppTitle);
             this.pnlHeader.Controls.Add(this.lblLogoIcon);
@@ -691,62 +697,88 @@ namespace DNQH_KeToanBanHang.Forms
             // btnHeaderDangXuat
             // 
             this.btnHeaderDangXuat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHeaderDangXuat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(63)))), ((int)(((byte)(94)))));
             this.btnHeaderDangXuat.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHeaderDangXuat.FlatAppearance.BorderSize = 0;
+            this.btnHeaderDangXuat.FlatAppearance.BorderSize = 1;
             this.btnHeaderDangXuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHeaderDangXuat.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
-            this.btnHeaderDangXuat.ForeColor = System.Drawing.Color.White;
-            this.btnHeaderDangXuat.Location = new System.Drawing.Point(1160, 14);
+            this.btnHeaderDangXuat.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.btnHeaderDangXuat.Location = new System.Drawing.Point(1152, 14);
             this.btnHeaderDangXuat.Name = "btnHeaderDangXuat";
-            this.btnHeaderDangXuat.Size = new System.Drawing.Size(92, 30);
+            this.btnHeaderDangXuat.Size = new System.Drawing.Size(96, 30);
             this.btnHeaderDangXuat.TabIndex = 7;
-            this.btnHeaderDangXuat.Text = "🚪 Đăng xuất";
+            this.btnHeaderDangXuat.Text = " Đăng xuất";
             this.btnHeaderDangXuat.UseVisualStyleBackColor = false;
             this.btnHeaderDangXuat.Click += new System.EventHandler(this.menuDangXuat_Click);
             // 
             // btnHeaderDoiMatKhau
             // 
             this.btnHeaderDoiMatKhau.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnHeaderDoiMatKhau.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(14)))), ((int)(((byte)(165)))), ((int)(((byte)(233)))));
             this.btnHeaderDoiMatKhau.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHeaderDoiMatKhau.FlatAppearance.BorderSize = 0;
+            this.btnHeaderDoiMatKhau.FlatAppearance.BorderSize = 1;
             this.btnHeaderDoiMatKhau.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHeaderDoiMatKhau.Font = new System.Drawing.Font("Segoe UI", 8.5F);
-            this.btnHeaderDoiMatKhau.ForeColor = System.Drawing.Color.White;
-            this.btnHeaderDoiMatKhau.Location = new System.Drawing.Point(1048, 14);
+            this.btnHeaderDoiMatKhau.Location = new System.Drawing.Point(1056, 14);
             this.btnHeaderDoiMatKhau.Name = "btnHeaderDoiMatKhau";
-            this.btnHeaderDoiMatKhau.Size = new System.Drawing.Size(104, 30);
+            this.btnHeaderDoiMatKhau.Size = new System.Drawing.Size(88, 30);
             this.btnHeaderDoiMatKhau.TabIndex = 6;
-            this.btnHeaderDoiMatKhau.Text = "🔑 Đổi MK";
+            this.btnHeaderDoiMatKhau.Text = " Đổi MK";
             this.btnHeaderDoiMatKhau.UseVisualStyleBackColor = false;
             this.btnHeaderDoiMatKhau.Click += new System.EventHandler(this.menuDoiMatKhau_Click);
+            // 
+            // btnHeaderHotkeys
+            // 
+            this.btnHeaderHotkeys.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnHeaderHotkeys.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHeaderHotkeys.FlatAppearance.BorderSize = 1;
+            this.btnHeaderHotkeys.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHeaderHotkeys.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.btnHeaderHotkeys.Location = new System.Drawing.Point(940, 14);
+            this.btnHeaderHotkeys.Name = "btnHeaderHotkeys";
+            this.btnHeaderHotkeys.Size = new System.Drawing.Size(108, 30);
+            this.btnHeaderHotkeys.TabIndex = 10;
+            this.btnHeaderHotkeys.Text = " Phím tắt (F1)";
+            this.btnHeaderHotkeys.UseVisualStyleBackColor = false;
+            this.btnHeaderHotkeys.Click += new System.EventHandler(this.btnHeaderHotkeys_Click);
+            // 
+            // pnlHeaderRightDivider
+            // 
+            this.pnlHeaderRightDivider.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlHeaderRightDivider.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
+            this.pnlHeaderRightDivider.Location = new System.Drawing.Point(926, 14);
+            this.pnlHeaderRightDivider.Name = "pnlHeaderRightDivider";
+            this.pnlHeaderRightDivider.Size = new System.Drawing.Size(1, 30);
+            this.pnlHeaderRightDivider.TabIndex = 9;
             // 
             // lblUserProfile
             // 
             this.lblUserProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblUserProfile.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.lblUserProfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.lblUserProfile.Location = new System.Drawing.Point(740, 18);
+            this.lblUserProfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(232)))), ((int)(((byte)(240)))));
+            this.lblUserProfile.Location = new System.Drawing.Point(520, 18);
             this.lblUserProfile.Name = "lblUserProfile";
-            this.lblUserProfile.Size = new System.Drawing.Size(298, 22);
+            this.lblUserProfile.Size = new System.Drawing.Size(395, 22);
             this.lblUserProfile.TabIndex = 5;
             this.lblUserProfile.Text = "👤 Nguyễn Văn Quản Trị (Quản trị viên)";
             this.lblUserProfile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
+            // pnlHeaderDivider
+            // 
+            this.pnlHeaderDivider.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
+            this.pnlHeaderDivider.Location = new System.Drawing.Point(304, 14);
+            this.pnlHeaderDivider.Name = "pnlHeaderDivider";
+            this.pnlHeaderDivider.Size = new System.Drawing.Size(1, 30);
+            this.pnlHeaderDivider.TabIndex = 8;
+            // 
             // btnBackToDashboard
             // 
-            this.btnBackToDashboard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(185)))), ((int)(((byte)(129)))));
             this.btnBackToDashboard.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBackToDashboard.FlatAppearance.BorderSize = 0;
+            this.btnBackToDashboard.FlatAppearance.BorderSize = 1;
             this.btnBackToDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBackToDashboard.Font = new System.Drawing.Font("Segoe UI", 8.5F, System.Drawing.FontStyle.Bold);
-            this.btnBackToDashboard.ForeColor = System.Drawing.Color.White;
-            this.btnBackToDashboard.Location = new System.Drawing.Point(245, 14);
+            this.btnBackToDashboard.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.btnBackToDashboard.Location = new System.Drawing.Point(318, 14);
             this.btnBackToDashboard.Name = "btnBackToDashboard";
-            this.btnBackToDashboard.Size = new System.Drawing.Size(185, 30);
+            this.btnBackToDashboard.Size = new System.Drawing.Size(155, 30);
             this.btnBackToDashboard.TabIndex = 4;
-            this.btnBackToDashboard.Text = "⬅ Bảng Điều Khiển";
+            this.btnBackToDashboard.Text = " Bảng Điều Khiển";
             this.btnBackToDashboard.UseVisualStyleBackColor = false;
             this.btnBackToDashboard.Visible = false;
             this.btnBackToDashboard.Click += new System.EventHandler(this.btnBackToDashboard_Click);
@@ -754,24 +786,25 @@ namespace DNQH_KeToanBanHang.Forms
             // lblBreadcrumb
             // 
             this.lblBreadcrumb.AutoSize = true;
-            this.lblBreadcrumb.Font = new System.Drawing.Font("Segoe UI", 9.5F);
-            this.lblBreadcrumb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            this.lblBreadcrumb.Location = new System.Drawing.Point(440, 19);
+            this.lblBreadcrumb.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblBreadcrumb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(213)))), ((int)(((byte)(225)))));
+            this.lblBreadcrumb.Location = new System.Drawing.Point(318, 19);
             this.lblBreadcrumb.Name = "lblBreadcrumb";
-            this.lblBreadcrumb.Size = new System.Drawing.Size(277, 21);
+            this.lblBreadcrumb.Size = new System.Drawing.Size(277, 20);
             this.lblBreadcrumb.TabIndex = 3;
             this.lblBreadcrumb.Text = "Trang Chủ / Bảng Điều Khiển Tổng Quan";
+            this.lblBreadcrumb.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblAppSubtitle
             // 
             this.lblAppSubtitle.AutoSize = true;
             this.lblAppSubtitle.Font = new System.Drawing.Font("Segoe UI", 7.5F);
-            this.lblAppSubtitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(213)))), ((int)(((byte)(255)))));
+            this.lblAppSubtitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(148)))), ((int)(((byte)(163)))), ((int)(((byte)(184)))));
             this.lblAppSubtitle.Location = new System.Drawing.Point(46, 33);
             this.lblAppSubtitle.Name = "lblAppSubtitle";
-            this.lblAppSubtitle.Size = new System.Drawing.Size(181, 17);
+            this.lblAppSubtitle.Size = new System.Drawing.Size(240, 17);
             this.lblAppSubtitle.TabIndex = 2;
-            this.lblAppSubtitle.Text = "Oriental Logistics Multimodal Transport Company Limited";
+            this.lblAppSubtitle.Text = "Hệ thống Kế toán Bán hàng & Quản trị Doanh nghiệp";
             // 
             // lblAppTitle
             // 
@@ -780,9 +813,9 @@ namespace DNQH_KeToanBanHang.Forms
             this.lblAppTitle.ForeColor = System.Drawing.Color.White;
             this.lblAppTitle.Location = new System.Drawing.Point(44, 9);
             this.lblAppTitle.Name = "lblAppTitle";
-            this.lblAppTitle.Size = new System.Drawing.Size(180, 25);
+            this.lblAppTitle.Size = new System.Drawing.Size(245, 25);
             this.lblAppTitle.TabIndex = 1;
-            this.lblAppTitle.Text = "OLC KẾ TOÁN BH";
+            this.lblAppTitle.Text = "DNQH KẾ TOÁN BÁN HÀNG";
             // 
             // lblLogoIcon
             // 
@@ -798,7 +831,7 @@ namespace DNQH_KeToanBanHang.Forms
             // pnlSidebar
             // 
             this.pnlSidebar.AutoScroll = true;
-            this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(20)))), ((int)(((byte)(52)))));
+            this.pnlSidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(23)))), ((int)(((byte)(42)))));
             this.pnlSidebar.Controls.Add(this.btnNavTaiKhoan);
             this.pnlSidebar.Controls.Add(this.btnNavNhanVien);
             this.pnlSidebar.Controls.Add(this.btnNavKho);
@@ -1282,7 +1315,7 @@ namespace DNQH_KeToanBanHang.Forms
             // 
             this.lblRoleNoteTitle.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblRoleNoteTitle.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Bold);
-            this.lblRoleNoteTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(58)))), ((int)(((byte)(237)))));
+            this.lblRoleNoteTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(64)))), ((int)(((byte)(175)))));
             this.lblRoleNoteTitle.Location = new System.Drawing.Point(16, 12);
             this.lblRoleNoteTitle.Name = "lblRoleNoteTitle";
             this.lblRoleNoteTitle.Size = new System.Drawing.Size(960, 24);
@@ -2082,7 +2115,7 @@ namespace DNQH_KeToanBanHang.Forms
             this.MinimumSize = new System.Drawing.Size(1024, 680);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Hệ Thống Thông Tin Kế Toán - Kế Toán Bán Hàng (OLC)";
+            this.Text = "Hệ Thống Thông Tin Kế Toán - Kế Toán Bán Hàng (DNQH)";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
@@ -2171,8 +2204,11 @@ namespace DNQH_KeToanBanHang.Forms
         private System.Windows.Forms.Label lblAppSubtitle;
         private System.Windows.Forms.Label lblAppTitle;
         private System.Windows.Forms.Button btnBackToDashboard;
+        private System.Windows.Forms.Panel pnlHeaderDivider;
+        private System.Windows.Forms.Panel pnlHeaderRightDivider;
         private System.Windows.Forms.Label lblBreadcrumb;
         private System.Windows.Forms.Label lblUserProfile;
+        private System.Windows.Forms.Button btnHeaderHotkeys;
         private System.Windows.Forms.Button btnHeaderDangXuat;
         private System.Windows.Forms.Button btnHeaderDoiMatKhau;
         private System.Windows.Forms.Panel pnlSidebar;

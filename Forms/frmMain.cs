@@ -25,14 +25,12 @@ namespace DNQH_KeToanBanHang.Forms
         private void ApplyFoundationDesign()
         {
             UiStyler.Apply(this);
-            UiStyler.StyleButton(btnHeaderDangXuat, UiButtonRole.Danger);
-            UiStyler.StyleButton(btnHeaderDoiMatKhau, UiButtonRole.Information);
-            UiStyler.StyleButton(btnBackToDashboard, UiButtonRole.Secondary);
+            ApplyHeaderButtonsDesign();
             UiStyler.StyleButton(btnRefreshKPI, UiButtonRole.Secondary);
 
             if (!SystemInformation.HighContrast)
             {
-                pnlHeader.BackColor = UiTheme.Primary;
+                pnlHeader.BackColor = UiTheme.Sidebar;
                 pnlSidebar.BackColor = UiTheme.Sidebar;
                 pnlWorkspace.BackColor = UiTheme.Canvas;
                 pnlDashboard.BackColor = UiTheme.Canvas;
@@ -61,7 +59,8 @@ namespace DNQH_KeToanBanHang.Forms
             ApplyModernMenuAndIcons();
             ApplyKpiCardBadges();
             ApplyQuickActionIcons();
-            ApplyHeaderButtonIcons();
+            ApplyHeaderButtonsDesign();
+            UpdateHeaderNavigationLayout();
 
             cboSafetyThreshold.Items.Clear();
             cboSafetyThreshold.Items.AddRange(new object[] { "≤ 5 SP", "≤ 10 SP (Mặc định)", "≤ 20 SP", "≤ 50 SP" });
@@ -114,18 +113,18 @@ namespace DNQH_KeToanBanHang.Forms
             // Menu con Danh Mục
             menuKhachHang.Image = UiIconProvider.GetIcon(UiIconType.Users, 16, Color.FromArgb(14, 165, 233));
             menuNhaCungCap.Image = UiIconProvider.GetIcon(UiIconType.Supplier, 16, Color.FromArgb(245, 158, 11));
-            menuLoaiSanPham.Image = UiIconProvider.GetIcon(UiIconType.Category, 16, Color.FromArgb(168, 85, 247));
+            menuLoaiSanPham.Image = UiIconProvider.GetIcon(UiIconType.Category, 16, Color.FromArgb(14, 165, 233));
             menuSanPham.Image = UiIconProvider.GetIcon(UiIconType.Product, 16, Color.FromArgb(59, 130, 246));
             menuKho.Image = UiIconProvider.GetIcon(UiIconType.Warehouse, 16, Color.FromArgb(234, 88, 12));
 
             // Menu con Kế Toán Bán Hàng
             menuDonDatHang.Image = UiIconProvider.GetIcon(UiIconType.Order, 16, Color.FromArgb(37, 99, 235));
             menuTraCuuDonDatHang.Image = UiIconProvider.GetIcon(UiIconType.Search, 16, Color.FromArgb(100, 116, 139));
-            menuHoaDonBan.Image = UiIconProvider.GetIcon(UiIconType.Invoice, 16, Color.FromArgb(124, 58, 237));
+            menuHoaDonBan.Image = UiIconProvider.GetIcon(UiIconType.Invoice, 16, Color.FromArgb(30, 64, 175));
             menuTraCuuHoaDon.Image = UiIconProvider.GetIcon(UiIconType.Search, 16, Color.FromArgb(100, 116, 139));
 
             // Menu con Quản Lý Kho
-            menuTonKho.Image = UiIconProvider.GetIcon(UiIconType.Stock, 16, Color.FromArgb(217, 70, 239));
+            menuTonKho.Image = UiIconProvider.GetIcon(UiIconType.Stock, 16, Color.FromArgb(2, 132, 199));
             menuPhieuXuatKho.Image = UiIconProvider.GetIcon(UiIconType.Delivery, 16, Color.FromArgb(249, 115, 22));
             menuTraCuuPhieuXuat.Image = UiIconProvider.GetIcon(UiIconType.Search, 16, Color.FromArgb(100, 116, 139));
 
@@ -140,22 +139,22 @@ namespace DNQH_KeToanBanHang.Forms
             // Menu con Kế Toán Chi Tiết
             menuSoChiTietKhachHang.Image = UiIconProvider.GetIcon(UiIconType.Users, 16, Color.FromArgb(14, 165, 233));
             menuSoChiTietSanPham.Image = UiIconProvider.GetIcon(UiIconType.Product, 16, Color.FromArgb(59, 130, 246));
-            menuSoChiTietHoaDon.Image = UiIconProvider.GetIcon(UiIconType.Invoice, 16, Color.FromArgb(124, 58, 237));
+            menuSoChiTietHoaDon.Image = UiIconProvider.GetIcon(UiIconType.Invoice, 16, Color.FromArgb(30, 64, 175));
             menuBaoCaoTuoiNo.Image = UiIconProvider.GetIcon(UiIconType.DetailLedger, 16, Color.FromArgb(220, 38, 38));
 
             // Menu con Kế Toán Tổng Hợp
-            menuBaoCaoDoanhThu.Image = UiIconProvider.GetIcon(UiIconType.Revenue, 16, Color.FromArgb(99, 102, 241));
+            menuBaoCaoDoanhThu.Image = UiIconProvider.GetIcon(UiIconType.Revenue, 16, Color.FromArgb(37, 99, 235));
             menuBaoCaoThuChi.Image = UiIconProvider.GetIcon(UiIconType.MoneyIn, 16, Color.FromArgb(16, 185, 129));
             menuBaoCaoTonKho.Image = UiIconProvider.GetIcon(UiIconType.Stock, 16, Color.FromArgb(234, 88, 12));
-            menuBaoCaoBieuDo.Image = UiIconProvider.GetIcon(UiIconType.GeneralReport, 16, Color.FromArgb(124, 58, 237));
+            menuBaoCaoBieuDo.Image = UiIconProvider.GetIcon(UiIconType.GeneralReport, 16, Color.FromArgb(30, 64, 175));
         }
 
         private void ApplyKpiCardBadges()
         {
-            AttachCardBadge(pnlCardRevenue, UiIconType.Revenue, Color.FromArgb(243, 232, 255), Color.FromArgb(109, 40, 217));
+            AttachCardBadge(pnlCardRevenue, UiIconType.Revenue, Color.FromArgb(239, 246, 255), Color.FromArgb(30, 64, 175));
             AttachCardBadge(pnlCardReceipt, UiIconType.MoneyIn, Color.FromArgb(236, 253, 245), Color.FromArgb(5, 150, 105));
             AttachCardBadge(pnlCardPayment, UiIconType.MoneyOut, Color.FromArgb(254, 242, 242), Color.FromArgb(225, 29, 72));
-            AttachCardBadge(pnlCardStock, UiIconType.Stock, Color.FromArgb(253, 242, 248), Color.FromArgb(219, 39, 119));
+            AttachCardBadge(pnlCardStock, UiIconType.Stock, Color.FromArgb(254, 243, 199), Color.FromArgb(217, 119, 6));
         }
 
         private void AttachCardBadge(Panel cardPanel, UiIconType iconType, Color bgColor, Color iconColor)
@@ -174,10 +173,10 @@ namespace DNQH_KeToanBanHang.Forms
         private void ApplyQuickActionIcons()
         {
             SetupQuickActionButton(btnActionDonHang, UiIconType.Order, Color.FromArgb(37, 99, 235), "Lập Đơn Đặt Hàng\r\nTiếp nhận đơn mới");
-            SetupQuickActionButton(btnActionHoaDon, UiIconType.Invoice, Color.FromArgb(124, 58, 237), "Lập Hóa Đơn Bán\r\nLập từ đơn hàng");
+            SetupQuickActionButton(btnActionHoaDon, UiIconType.Invoice, Color.FromArgb(30, 64, 175), "Lập Hóa Đơn Bán\r\nLập từ đơn hàng");
             SetupQuickActionButton(btnActionXuatKho, UiIconType.Delivery, Color.FromArgb(194, 65, 12), "Lập Phiếu Xuất\r\nXuất kho giao hàng");
             SetupQuickActionButton(btnActionPhieuThu, UiIconType.MoneyIn, Color.FromArgb(4, 120, 87), "Lập Phiếu Thu\r\nThu tiền theo hóa đơn");
-            SetupQuickActionButton(btnActionBaoCao, UiIconType.GeneralReport, Color.FromArgb(99, 102, 241), "Báo Cáo Doanh Thu\r\nXem doanh số bán");
+            SetupQuickActionButton(btnActionBaoCao, UiIconType.GeneralReport, Color.FromArgb(2, 132, 199), "Báo Cáo Doanh Thu\r\nXem doanh số bán");
             SetupQuickActionButton(btnActionTonKho, UiIconType.Stock, Color.FromArgb(180, 83, 9), "Tra Cứu Tồn Kho\r\nKiểm tra số lượng tồn");
             SetupQuickActionButton(btnActionChungTu, UiIconType.Voucher, Color.FromArgb(15, 118, 110), "Chứng Từ Kế Toán\r\nHạch toán Nợ/Có");
             SetupQuickActionButton(btnActionSoQuy, UiIconType.Revenue, Color.FromArgb(190, 18, 60), "Sổ Quỹ Thu - Chi\r\nKiểm soát tiền mặt");
@@ -193,49 +192,83 @@ namespace DNQH_KeToanBanHang.Forms
             btn.Text = "  " + cleanText;
         }
 
-        private void ApplyHeaderButtonIcons()
+        private void StyleHeaderButton(Button btn, Color iconColor, Color hoverColor, string text, UiIconType iconType)
         {
-            btnHeaderDoiMatKhau.Image = UiIconProvider.GetIcon(UiIconType.Key, 14, Color.White);
-            btnHeaderDoiMatKhau.ImageAlign = ContentAlignment.MiddleLeft;
-            btnHeaderDoiMatKhau.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnHeaderDoiMatKhau.Text = " Đổi MK";
+            if (btn == null) return;
+            btn.Cursor = Cursors.Hand;
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 1;
+            btn.FlatAppearance.BorderColor = Color.FromArgb(71, 85, 105);
+            btn.BackColor = Color.FromArgb(30, 41, 59);
+            btn.ForeColor = Color.FromArgb(241, 245, 249);
+            btn.FlatAppearance.MouseOverBackColor = hoverColor;
+            btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(15, 23, 42);
+            btn.Font = new Font("Segoe UI", 8.5F, FontStyle.Regular);
+            btn.Image = UiIconProvider.GetIcon(iconType, 13, iconColor);
+            btn.ImageAlign = ContentAlignment.MiddleLeft;
+            btn.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn.Padding = new Padding(6, 0, 6, 0);
+            btn.Text = " " + text;
+        }
 
-            btnHeaderDangXuat.Image = UiIconProvider.GetIcon(UiIconType.Logout, 14, Color.White);
-            btnHeaderDangXuat.ImageAlign = ContentAlignment.MiddleLeft;
-            btnHeaderDangXuat.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnHeaderDangXuat.Text = " Đăng xuất";
+        private void ApplyHeaderButtonsDesign()
+        {
+            // Nút Bảng Điều Khiển (chỉ hiện khi đang xem form con)
+            StyleHeaderButton(
+                btnBackToDashboard,
+                Color.FromArgb(147, 197, 253),
+                Color.FromArgb(51, 65, 85),
+                "Bảng Điều Khiển",
+                UiIconType.Home);
+
+            // Nút Phím tắt (F1)
+            StyleHeaderButton(
+                btnHeaderHotkeys,
+                Color.FromArgb(147, 197, 253),
+                Color.FromArgb(51, 65, 85),
+                "Phím tắt (F1)",
+                UiIconType.Keyboard);
+
+            // Nút Đổi MK
+            StyleHeaderButton(
+                btnHeaderDoiMatKhau,
+                Color.FromArgb(250, 204, 21),
+                Color.FromArgb(51, 65, 85),
+                "Đổi MK",
+                UiIconType.Key);
+
+            // Nút Đăng xuất
+            StyleHeaderButton(
+                btnHeaderDangXuat,
+                Color.FromArgb(244, 63, 94),
+                Color.FromArgb(190, 18, 60),
+                "Đăng xuất",
+                UiIconType.Logout);
 
             btnRefreshKPI.Image = UiIconProvider.GetIcon(UiIconType.Refresh, 14, UiTheme.Primary);
             btnRefreshKPI.ImageAlign = ContentAlignment.MiddleLeft;
             btnRefreshKPI.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnRefreshKPI.Text = " Làm mới số liệu";
+        }
 
-            btnBackToDashboard.Image = UiIconProvider.GetIcon(UiIconType.Home, 14, Color.White);
-            btnBackToDashboard.ImageAlign = ContentAlignment.MiddleLeft;
-            btnBackToDashboard.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnBackToDashboard.Text = " Bảng Điều Khiển";
-
-            // Nút Tra Cứu Phím Tắt Toàn Cục (F1)
-            Button btnHeaderHotkeys = new Button
+        public void UpdateHeaderNavigationLayout()
+        {
+            if (btnBackToDashboard != null && lblBreadcrumb != null)
             {
-                Name = "btnHeaderHotkeys",
-                Anchor = AnchorStyles.Top | AnchorStyles.Right,
-                Cursor = Cursors.Hand,
-                FlatStyle = FlatStyle.Flat,
-                Font = new Font("Segoe UI", 8.5F, FontStyle.Bold),
-                ForeColor = Color.White,
-                Location = new Point(btnHeaderDoiMatKhau.Left - 130, btnHeaderDoiMatKhau.Top),
-                Size = new Size(122, btnHeaderDoiMatKhau.Height),
-                Text = " Phím tắt (F1)",
-                UseVisualStyleBackColor = false
-            };
-            btnHeaderHotkeys.Image = UiIconProvider.GetIcon(UiIconType.Keyboard, 15, Color.White);
-            btnHeaderHotkeys.ImageAlign = ContentAlignment.MiddleLeft;
-            btnHeaderHotkeys.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnHeaderHotkeys.FlatAppearance.BorderSize = 0;
-            UiStyler.StyleButton(btnHeaderHotkeys, UiButtonRole.Secondary);
-            btnHeaderHotkeys.Click += delegate { UiInteractionHelper.ShowHotkeysHelp(this); };
-            pnlHeader.Controls.Add(btnHeaderHotkeys);
+                if (btnBackToDashboard.Visible)
+                {
+                    lblBreadcrumb.Location = new Point(btnBackToDashboard.Right + 12, 19);
+                }
+                else
+                {
+                    lblBreadcrumb.Location = new Point(318, 19);
+                }
+            }
+        }
+
+        private void btnHeaderHotkeys_Click(object sender, EventArgs e)
+        {
+            UiInteractionHelper.ShowHotkeysHelp(this);
         }
 
         private void frmMain_Load(object sender, EventArgs e)

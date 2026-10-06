@@ -489,7 +489,7 @@ namespace DNQH_KeToanBanHang.Forms
 
         private void ShowValidation(Control control, string message)
         {
-            _validationErrors.SetError(control, message);
+            UiInteractionHelper.ShowValidationError(_validationErrors, control, message);
             UiFeedbackHelper.ShowToast(this, message, UiStatusKind.Warning, 4000);
             if (control != null && control.CanFocus)
             {

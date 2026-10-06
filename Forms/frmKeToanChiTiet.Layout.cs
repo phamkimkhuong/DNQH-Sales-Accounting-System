@@ -160,6 +160,8 @@ namespace DNQH_KeToanBanHang.Forms
             if (!SystemInformation.HighContrast)
             {
                 pnlHeader.BackColor = UiTheme.Canvas;
+                lblTitle.ForeColor = UiTheme.Primary;
+                lblSubTitle.ForeColor = UiTheme.TextSecondary;
                 pnlFilterKH.BackColor = UiTheme.Surface;
                 pnlFilterSP.BackColor = UiTheme.Surface;
                 pnlFilterHDB.BackColor = UiTheme.Surface;

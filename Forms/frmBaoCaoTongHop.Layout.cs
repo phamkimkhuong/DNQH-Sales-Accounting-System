@@ -152,6 +152,8 @@ namespace DNQH_KeToanBanHang.Forms
             if (!SystemInformation.HighContrast)
             {
                 pnlHeader.BackColor = UiTheme.Canvas;
+                lblTitle.ForeColor = UiTheme.Primary;
+                lblSubTitle.ForeColor = UiTheme.TextSecondary;
                 pnlKpiBanner.BackColor = UiTheme.Canvas;
                 Panel[] cards = { pnlKpi1, pnlKpi2, pnlKpi3, pnlKpi4, pnlKpi5 };
                 foreach (Panel card in cards)

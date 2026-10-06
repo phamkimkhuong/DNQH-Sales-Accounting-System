@@ -16,12 +16,12 @@ namespace DNQH_KeToanBanHang.Helpers
         // Bảng màu hiện đại hài hòa với UiTheme
         public static readonly Color[] Palette = new Color[]
         {
-            Color.FromArgb(124, 58, 237),  // Purple / Primary
+            Color.FromArgb(30, 64, 175),   // Corporate Navy / Primary
             Color.FromArgb(14, 165, 233),  // Sky Blue
             Color.FromArgb(16, 185, 129),  // Emerald Green
             Color.FromArgb(245, 158, 11),  // Amber
             Color.FromArgb(244, 63, 94),   // Rose Red
-            Color.FromArgb(99, 102, 241),  // Indigo
+            Color.FromArgb(37, 99, 235),   // Blue 600
             Color.FromArgb(20, 184, 166),  // Teal
             Color.FromArgb(234, 88, 12)    // Orange
         };
@@ -101,7 +101,7 @@ namespace DNQH_KeToanBanHang.Helpers
             Series series = new Series("DoanhThu")
             {
                 ChartType = SeriesChartType.Column,
-                Color = Color.FromArgb(124, 58, 237),
+                Color = Color.FromArgb(37, 99, 235),
                 BorderWidth = 0,
                 IsValueShownAsLabel = false,
                 XValueType = ChartValueType.String,
@@ -119,7 +119,7 @@ namespace DNQH_KeToanBanHang.Helpers
 
                     if (item.DoanhThu > 50000000)
                     {
-                        pt.Color = Color.FromArgb(109, 40, 217);
+                        pt.Color = Color.FromArgb(30, 64, 175);
                     }
                 }
             }
@@ -159,7 +159,7 @@ namespace DNQH_KeToanBanHang.Helpers
             Series series = new Series("RevenueSeries")
             {
                 ChartType = SeriesChartType.Column,
-                Color = Color.FromArgb(99, 102, 241), // Indigo
+                Color = Color.FromArgb(37, 99, 235), // Corporate Blue
                 BorderWidth = 0,
                 IsValueShownAsLabel = false,
                 XValueType = ChartValueType.String,
@@ -176,7 +176,7 @@ namespace DNQH_KeToanBanHang.Helpers
                     pt.ToolTip = string.Format("Ngày: {0}\nDoanh thu: {1:N0} VNĐ\nSố hóa đơn: {2}", item.NhanNgay, item.DoanhThu, item.SoHoaDon);
                     if (item.DoanhThu > 50000000)
                     {
-                        pt.Color = Color.FromArgb(124, 58, 237); // Deep Purple
+                        pt.Color = Color.FromArgb(30, 64, 175); // Deep Corporate Navy
                     }
                 }
             }

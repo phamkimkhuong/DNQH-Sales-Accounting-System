@@ -124,9 +124,16 @@ namespace DNQH_KeToanBanHang.Helpers
             }
         }
 
+        #region Modern Inline Validation Engine
+        private static Control _currentErrorControl;
+        private static Label _currentErrorLabel;
+        private static readonly Dictionary<Control, Color> _originalBackColors = new Dictionary<Control, Color>();
+        private static readonly Dictionary<Control, Color> _originalForeColors = new Dictionary<Control, Color>();
+        private static readonly HashSet<Control> _hookedParents = new HashSet<Control>();
+
         public static void WireValidationAutoClear(ErrorProvider provider, Control container)
         {
-            if (provider == null || container == null)
+            if (container == null)
             {
                 return;
             }
@@ -136,33 +143,61 @@ namespace DNQH_KeToanBanHang.Helpers
                 TextBoxBase textBox = control as TextBoxBase;
                 if (textBox != null)
                 {
-                    textBox.TextChanged += delegate { provider.SetError(textBox, string.Empty); };
+                    textBox.TextChanged += delegate
+                    {
+                        if (provider != null) provider.SetError(textBox, string.Empty);
+                        ClearActiveValidation(textBox);
+                    };
                 }
 
                 ComboBox comboBox = control as ComboBox;
                 if (comboBox != null)
                 {
-                    comboBox.SelectedIndexChanged += delegate { provider.SetError(comboBox, string.Empty); };
-                    comboBox.TextChanged += delegate { provider.SetError(comboBox, string.Empty); };
+                    comboBox.SelectedIndexChanged += delegate
+                    {
+                        if (provider != null) provider.SetError(comboBox, string.Empty);
+                        ClearActiveValidation(comboBox);
+                    };
+                    comboBox.TextChanged += delegate
+                    {
+                        if (provider != null) provider.SetError(comboBox, string.Empty);
+                        ClearActiveValidation(comboBox);
+                    };
                 }
 
                 NumericUpDown numeric = control as NumericUpDown;
                 if (numeric != null)
                 {
-                    numeric.ValueChanged += delegate { provider.SetError(numeric, string.Empty); };
+                    numeric.ValueChanged += delegate
+                    {
+                        if (provider != null) provider.SetError(numeric, string.Empty);
+                        ClearActiveValidation(numeric);
+                    };
                 }
 
                 DateTimePicker datePicker = control as DateTimePicker;
                 if (datePicker != null)
                 {
-                    datePicker.ValueChanged += delegate { provider.SetError(datePicker, string.Empty); };
+                    datePicker.ValueChanged += delegate
+                    {
+                        if (provider != null) provider.SetError(datePicker, string.Empty);
+                        ClearActiveValidation(datePicker);
+                    };
                 }
 
                 DataGridView grid = control as DataGridView;
                 if (grid != null)
                 {
-                    grid.CellValueChanged += delegate { provider.SetError(grid, string.Empty); };
-                    grid.RowsAdded += delegate { provider.SetError(grid, string.Empty); };
+                    grid.CellValueChanged += delegate
+                    {
+                        if (provider != null) provider.SetError(grid, string.Empty);
+                        ClearActiveValidation(grid);
+                    };
+                    grid.RowsAdded += delegate
+                    {
+                        if (provider != null) provider.SetError(grid, string.Empty);
+                        ClearActiveValidation(grid);
+                    };
                 }
 
                 if (control.HasChildren)
@@ -174,23 +209,214 @@ namespace DNQH_KeToanBanHang.Helpers
 
         public static void ShowValidationError(ErrorProvider provider, Control control, string message)
         {
-            if (provider == null || control == null)
+            if (control == null)
             {
                 return;
             }
 
-            provider.Clear();
-            provider.SetIconAlignment(control, ErrorIconAlignment.MiddleRight);
-            provider.SetIconPadding(control, 4);
-            provider.SetError(control, message ?? string.Empty);
-            control.Focus();
+            // 1. Dọn dẹp lỗi cũ trước khi hiển thị lỗi mới
+            ClearActiveValidation();
 
+            // 2. Tắt hoàn toàn bong bóng Tooltip mặc định của ErrorProvider để không che khuất màn hình
+            if (provider != null)
+            {
+                provider.Clear();
+                provider.SetError(control, string.Empty);
+            }
+
+            // 3. Ghi nhớ màu sắc gốc của control
+            if (!_originalBackColors.ContainsKey(control))
+            {
+                _originalBackColors[control] = control.BackColor;
+            }
+            if (!_originalForeColors.ContainsKey(control))
+            {
+                _originalForeColors[control] = control.ForeColor;
+            }
+
+            _currentErrorControl = control;
+
+            // 4. Áp dụng viền đỏ tươi & nền cảnh báo dịu mắt (Modern Alert Highlighting)
+            control.BackColor = Color.FromArgb(254, 242, 242); // Nền hồng nhạt Red-50 chuẩn Tailwind
+            control.ForeColor = Color.FromArgb(153, 27, 27); // Chữ đỏ đậm tương phản cao Red-800
+
+            if (control.Parent != null)
+            {
+                HookParentPaint(control.Parent);
+                control.Parent.Invalidate();
+            }
+
+            // 5. Hiển thị dòng chữ đỏ nhỏ tinh tế ngay dưới ô input
+            DisplayInlineErrorBadge(control, message);
+
+            // 6. Focus và bôi đen để người dùng sửa nhanh
+            control.Focus();
             TextBoxBase textBox = control as TextBoxBase;
             if (textBox != null)
             {
                 textBox.SelectAll();
             }
         }
+
+        public static void ClearActiveValidation(Control specificControl = null)
+        {
+            if (specificControl != null && _currentErrorControl != null && _currentErrorControl != specificControl)
+            {
+                return;
+            }
+
+            // Gỡ nhãn lỗi đỏ inline
+            if (_currentErrorLabel != null)
+            {
+                if (_currentErrorLabel.Parent != null)
+                {
+                    _currentErrorLabel.Parent.Controls.Remove(_currentErrorLabel);
+                }
+                _currentErrorLabel.Dispose();
+                _currentErrorLabel = null;
+            }
+
+            // Khôi phục màu sắc gốc cho ô nhập liệu
+            if (_currentErrorControl != null)
+            {
+                Control c = _currentErrorControl;
+                _currentErrorControl = null;
+
+                Color origBack;
+                if (_originalBackColors.TryGetValue(c, out origBack))
+                {
+                    c.BackColor = origBack;
+                }
+                else
+                {
+                    TextBox tb = c as TextBox;
+                    c.BackColor = (tb != null && tb.ReadOnly) ? UiTheme.SurfaceMuted : UiTheme.Surface;
+                }
+
+                Color origFore;
+                if (_originalForeColors.TryGetValue(c, out origFore))
+                {
+                    c.ForeColor = origFore;
+                }
+                else
+                {
+                    c.ForeColor = UiTheme.TextPrimary;
+                }
+
+                if (c.Parent != null)
+                {
+                    c.Parent.Invalidate();
+                }
+            }
+        }
+
+        private static void HookParentPaint(Control parent)
+        {
+            if (parent == null || _hookedParents.Contains(parent))
+            {
+                return;
+            }
+
+            _hookedParents.Add(parent);
+            parent.Paint += Parent_ValidationPaint;
+            parent.Disposed += delegate { _hookedParents.Remove(parent); };
+        }
+
+        private static void Parent_ValidationPaint(object sender, PaintEventArgs e)
+        {
+            if (_currentErrorControl != null && _currentErrorControl.Parent == sender && _currentErrorControl.Visible)
+            {
+                using (var pen = new Pen(Color.FromArgb(239, 68, 68), 1.5f)) // Đỏ tươi Red-500
+                {
+                    Rectangle rect = new Rectangle(
+                        _currentErrorControl.Left - 1,
+                        _currentErrorControl.Top - 1,
+                        _currentErrorControl.Width + 1,
+                        _currentErrorControl.Height + 1);
+                    e.Graphics.DrawRectangle(pen, rect);
+                }
+            }
+        }
+
+        private static Control GetBadgeContainer(Control control)
+        {
+            if (control == null) return null;
+
+            // Tìm container tổ tiên không bị ràng buộc bởi grid tự động (TableLayoutPanel hoặc FlowLayoutPanel)
+            Control current = control.Parent;
+            while (current != null)
+            {
+                if (!(current is TableLayoutPanel) && !(current is FlowLayoutPanel))
+                {
+                    return current;
+                }
+                current = current.Parent;
+            }
+            return control.FindForm();
+        }
+
+        private static void DisplayInlineErrorBadge(Control control, string message)
+        {
+            if (control == null || string.IsNullOrWhiteSpace(message))
+            {
+                return;
+            }
+
+            Control container = GetBadgeContainer(control);
+            if (container == null)
+            {
+                return;
+            }
+
+            Label errLabel = new Label
+            {
+                Name = "lblValidationInlineError",
+                Text = " ⚠ " + message.Trim() + " ",
+                Font = new Font("Segoe UI", 8F, FontStyle.Regular),
+                ForeColor = Color.FromArgb(185, 28, 28), // Đỏ sẫm #B91C1C
+                BackColor = Color.FromArgb(254, 242, 242), // Nền hồng nhạt #FEF2F2
+                BorderStyle = BorderStyle.FixedSingle,
+                AutoSize = true,
+                Cursor = Cursors.Hand
+            };
+
+            // Chuyển đổi tọa độ tuyệt đối của ô input sang tọa độ cục bộ của container
+            // Điều này đảm bảo nhãn lỗi luôn THẲNG HÀNG 100% với mép trái của ô input
+            Point screenPt = control.PointToScreen(new Point(0, control.Height + 1));
+            Point ptInContainer = container.PointToClient(screenPt);
+
+            int x = ptInContainer.X;
+            int y = ptInContainer.Y;
+
+            // Đảm bảo nhãn không bị tràn lề phải của container
+            if (x < 4) x = 4;
+            if (x + 220 > container.ClientSize.Width)
+            {
+                x = Math.Max(4, container.ClientSize.Width - 230);
+            }
+
+            // Nếu vị trí đáy vượt quá chiều cao container, đặt lên phía trên ô input
+            if (y + 20 > container.ClientSize.Height)
+            {
+                Point screenTopPt = control.PointToScreen(new Point(0, -18));
+                Point ptTop = container.PointToClient(screenTopPt);
+                y = Math.Max(4, ptTop.Y);
+            }
+
+            errLabel.Location = new Point(x, y);
+
+            // Bấm vào nhãn lỗi sẽ focus lại vào ô nhập và ẩn nhãn
+            errLabel.Click += delegate
+            {
+                control.Focus();
+                ClearActiveValidation();
+            };
+
+            container.Controls.Add(errLabel);
+            errLabel.BringToFront();
+            _currentErrorLabel = errLabel;
+        }
+        #endregion
 
         private static void Form_Shown(object sender, EventArgs e)
         {

@@ -15,19 +15,44 @@ namespace DNQH_KeToanBanHang.Forms
         public frmDangNhap()
         {
             InitializeComponent();
+            LoadLogo();
             validationErrors = UiStyler.CreateErrorProvider(this);
             lblLoginStatus = CreateStatusLabel();
             ApplyFoundationDesign();
             authService = new AuthService();
         }
 
+        private void LoadLogo()
+        {
+            try
+            {
+                string logoPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "assets", "DNQH_App.png");
+                if (System.IO.File.Exists(logoPath))
+                {
+                    picLogo.Image = Image.FromFile(logoPath);
+                }
+                else
+                {
+                    string devPath = System.IO.Path.Combine(Application.StartupPath, @"..\..\assets\DNQH_App.png");
+                    if (System.IO.File.Exists(devPath))
+                    {
+                        picLogo.Image = Image.FromFile(devPath);
+                    }
+                }
+            }
+            catch
+            {
+                // Bỏ qua nếu có sự cố nạp ảnh
+            }
+        }
+
         private Label CreateStatusLabel()
         {
-            ClientSize = new Size(460, 388);
+            ClientSize = new Size(460, 445);
             Label label = new Label
             {
                 AutoEllipsis = true,
-                Location = new Point(36, 326),
+                Location = new Point(36, 385),
                 Name = "lblLoginStatus",
                 Size = new Size(388, 48),
                 TextAlign = ContentAlignment.MiddleLeft

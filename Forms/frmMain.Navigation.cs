@@ -454,6 +454,7 @@ namespace DNQH_KeToanBanHang.Forms
 
             lblBreadcrumb.Text = string.Format("Trang Chủ / {0} / {1}", moduleName, functionName);
             btnBackToDashboard.Visible = true;
+            UpdateHeaderNavigationLayout();
             SetActiveNavigation(GetNavigationButton(childForm));
 
             childForm.Show();

@@ -379,9 +379,9 @@ namespace DNQH_KeToanBanHang.Forms
 
             if (!SystemInformation.HighContrast)
             {
-                pnlHeader.BackColor = UiTheme.Primary;
+                pnlHeader.BackColor = UiTheme.Sidebar;
                 lblTitle.ForeColor = Color.White;
-                lblSubTitle.ForeColor = Color.FromArgb(237, 233, 254);
+                lblSubTitle.ForeColor = Color.FromArgb(203, 213, 225);
                 tpLapDon.BackColor = UiTheme.Canvas;
                 tpDanhSach.BackColor = UiTheme.Canvas;
                 pnlTongTien.BackColor = UiTheme.SurfaceMuted;

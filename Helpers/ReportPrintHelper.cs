@@ -232,7 +232,7 @@ namespace DNQH_KeToanBanHang.Helpers
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(GetHtmlHead("Báo Cáo Doanh Thu Bán Hàng", true));
-            sb.Append(BuildHeaderSection("Mẫu biểu: BC-01/BH<br/>(Hệ thống Kế toán Quản trị OLC)"));
+            sb.Append(BuildHeaderSection("Mẫu biểu: BC-01/BH<br/>(Hệ thống Kế toán Quản trị DNQH)"));
 
             sb.Append(@"
     <div class=""report-title"">BÁO CÁO DOANH THU BÁN HÀNG</div>");
@@ -321,7 +321,7 @@ namespace DNQH_KeToanBanHang.Helpers
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(GetHtmlHead("Báo Cáo Tổng Hợp Thu - Chi", true));
-            sb.Append(BuildHeaderSection("Mẫu biểu: BC-02/TC<br/>(Sổ quỹ dòng tiền OLC)"));
+            sb.Append(BuildHeaderSection("Mẫu biểu: BC-02/TC<br/>(Sổ quỹ dòng tiền DNQH)"));
 
             sb.Append(@"
     <div class=""report-title"">BÁO CÁO TỔNG HỢP THU - CHI DÒNG TIỀN</div>");
@@ -417,7 +417,7 @@ namespace DNQH_KeToanBanHang.Helpers
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(GetHtmlHead("Báo Cáo Tổng Hợp Tồn Kho", true));
-            sb.Append(BuildHeaderSection("Mẫu biểu: BC-03/TK<br/>(Báo cáo Quản trị Kho OLC)"));
+            sb.Append(BuildHeaderSection("Mẫu biểu: BC-03/TK<br/>(Báo cáo Quản trị Kho DNQH)"));
 
             sb.Append(@"
     <div class=""report-title"">BÁO CÁO TỔNG HỢP TỒN KHO HÀNG HÓA</div>");
@@ -598,7 +598,7 @@ namespace DNQH_KeToanBanHang.Helpers
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(GetHtmlHead("Sổ Chi Tiết Bán Hàng Theo Mặt Hàng", true));
-            sb.Append(BuildHeaderSection("Mẫu biểu: S36-DN<br/>(Sổ chi tiết bán sản phẩm OLC)"));
+            sb.Append(BuildHeaderSection("Mẫu biểu: S36-DN<br/>(Sổ chi tiết bán sản phẩm DNQH)"));
 
             sb.Append(@"
     <div class=""report-title"">SỔ CHI TIẾT BÁN HÀNG THEO MẶT HÀNG</div>");
@@ -696,7 +696,7 @@ namespace DNQH_KeToanBanHang.Helpers
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(GetHtmlHead("Hồ Sơ Theo Dõi Hóa Đơn Bán Hàng", false));
-            sb.Append(BuildHeaderSection("Mẫu biểu: HS-HDB<br/>(Hồ sơ đối soát nghiệp vụ OLC)"));
+            sb.Append(BuildHeaderSection("Mẫu biểu: HS-HDB<br/>(Hồ sơ đối soát nghiệp vụ DNQH)"));
 
             sb.Append(@"
     <div class=""report-title"">HỒ SƠ THEO DÕI LUÂN CHUYỂN HÓA ĐƠN</div>");
@@ -871,7 +871,7 @@ namespace DNQH_KeToanBanHang.Helpers
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(GetHtmlHead("BÁO CÁO PHÂN TÍCH TUỔI NỢ KHÁCH HÀNG (TỔNG HỢP)", true));
-            sb.Append(BuildHeaderSection("Mẫu biểu: BC-04/TN<br/>(Báo cáo Tuổi nợ Quản trị OLC)"));
+            sb.Append(BuildHeaderSection("Mẫu biểu: BC-04/TN<br/>(Báo cáo Tuổi nợ Quản trị DNQH)"));
 
             sb.Append(@"<div class=""report-title"">BÁO CÁO PHÂN TÍCH TUỔI NỢ KHÁCH HÀNG</div>");
             sb.AppendFormat(@"<div class=""report-subtitle"">Thời điểm phân tích chốt công nợ: ngày {0:dd} tháng {0:MM} năm {0:yyyy}</div>", ngayChot);
@@ -982,7 +982,7 @@ namespace DNQH_KeToanBanHang.Helpers
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(GetHtmlHead("BÁO CÁO PHÂN TÍCH TUỔI NỢ KHÁCH HÀNG (CHI TIẾT HÓA ĐƠN)", true));
-            sb.Append(BuildHeaderSection("Mẫu biểu: BC-04/TN<br/>(Báo cáo Tuổi nợ Quản trị OLC)"));
+            sb.Append(BuildHeaderSection("Mẫu biểu: BC-04/TN<br/>(Báo cáo Tuổi nợ Quản trị DNQH)"));
 
             sb.Append(@"<div class=""report-title"">BÁO CÁO CHI TIẾT TUỔI NỢ THEO HÓA ĐƠN BÁN</div>");
             sb.AppendFormat(@"<div class=""report-subtitle"">Thời điểm phân tích chốt công nợ: ngày {0:dd} tháng {0:MM} năm {0:yyyy}</div>", ngayChot);

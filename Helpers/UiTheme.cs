@@ -24,8 +24,8 @@ namespace DNQH_KeToanBanHang.Helpers
 
     public static class UiTheme
     {
-        public static readonly Color Primary = Color.FromArgb(124, 58, 237);
-        public static readonly Color PrimaryHover = Color.FromArgb(109, 40, 217);
+        public static readonly Color Primary = Color.FromArgb(30, 64, 175);
+        public static readonly Color PrimaryHover = Color.FromArgb(29, 78, 216);
         public static readonly Color Secondary = Color.FromArgb(100, 116, 139);
         public static readonly Color Canvas = Color.FromArgb(248, 250, 252);
         public static readonly Color Surface = Color.White;
@@ -40,12 +40,12 @@ namespace DNQH_KeToanBanHang.Helpers
         public static readonly Color DangerHover = Color.FromArgb(159, 18, 57);
         public static readonly Color Information = Color.FromArgb(3, 105, 161);
         public static readonly Color InformationHover = Color.FromArgb(7, 89, 133);
-        public static readonly Color Selection = Color.FromArgb(237, 233, 254);
-        public static readonly Color SelectionText = Color.FromArgb(46, 16, 101);
-        public static readonly Color FocusSurface = Color.FromArgb(250, 247, 255);
-        public static readonly Color Sidebar = Color.FromArgb(24, 20, 52);
-        public static readonly Color SidebarHover = Color.FromArgb(49, 46, 89);
-        public static readonly Color SidebarActive = Color.FromArgb(76, 29, 149);
+        public static readonly Color Selection = Color.FromArgb(219, 234, 254);
+        public static readonly Color SelectionText = Color.FromArgb(30, 58, 138);
+        public static readonly Color FocusSurface = Color.FromArgb(239, 246, 255);
+        public static readonly Color Sidebar = Color.FromArgb(15, 23, 42);
+        public static readonly Color SidebarHover = Color.FromArgb(30, 41, 59);
+        public static readonly Color SidebarActive = Color.FromArgb(30, 64, 175);
 
         public const int PagePadding = 20;
         public const int SectionGap = 16;
@@ -620,7 +620,11 @@ namespace DNQH_KeToanBanHang.Helpers
             provider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
             provider.ContainerControl = owner;
             UiInteractionHelper.WireValidationAutoClear(provider, owner);
-            owner.Disposed += delegate { provider.Dispose(); };
+            if (owner != null)
+            {
+                owner.FormClosed += delegate { UiInteractionHelper.ClearActiveValidation(); };
+                owner.Disposed += delegate { provider.Dispose(); };
+            }
             return provider;
         }
 

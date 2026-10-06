@@ -125,6 +125,30 @@ namespace DNQH_KeToanBanHang.DataAccess
             return Database.ExecuteNonQuery(query, param) > 0;
         }
 
+        public KhoUsageStats GetUsageStatistics(string maKho)
+        {
+            KhoUsageStats stats = new KhoUsageStats();
+            if (string.IsNullOrWhiteSpace(maKho))
+                return stats;
+
+            string query = @"
+                SELECT 
+                    (SELECT COUNT(*) FROM TONKHO WHERE MaKho = @MaKho) AS TonKhoCount,
+                    (SELECT COUNT(*) FROM PHIEUXUATKHO WHERE MaKho = @MaKho) AS PhieuXuatCount;
+            ";
+
+            SqlParameter param = new SqlParameter("@MaKho", SqlDbType.Char, 10) { Value = maKho.Trim() };
+            DataTable dt = Database.ExecuteQuery(query, param);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                DataRow row = dt.Rows[0];
+                stats.TonKhoCount = row["TonKhoCount"] != DBNull.Value ? Convert.ToInt32(row["TonKhoCount"]) : 0;
+                stats.PhieuXuatCount = row["PhieuXuatCount"] != DBNull.Value ? Convert.ToInt32(row["PhieuXuatCount"]) : 0;
+            }
+
+            return stats;
+        }
+
         public DataTable Search(string keyword)
         {
             if (string.IsNullOrWhiteSpace(keyword))
@@ -140,6 +164,17 @@ namespace DNQH_KeToanBanHang.DataAccess
             };
 
             return Database.ExecuteQuery(query, param);
+        }
+    }
+
+    public struct KhoUsageStats
+    {
+        public int TonKhoCount;
+        public int PhieuXuatCount;
+
+        public bool HasUsage
+        {
+            get { return TonKhoCount > 0 || PhieuXuatCount > 0; }
         }
     }
 }

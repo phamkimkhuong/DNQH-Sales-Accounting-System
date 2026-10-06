@@ -123,7 +123,7 @@ namespace DNQH_KeToanBanHang.Forms
             // 
             // pnlHeader
             // 
-            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(124, 58, 237);
+            this.pnlHeader.BackColor = System.Drawing.Color.FromArgb(15, 23, 42);
             this.pnlHeader.Controls.Add(this.lblSubTitle);
             this.pnlHeader.Controls.Add(this.lblTitle);
             this.pnlHeader.Dock = System.Windows.Forms.DockStyle.Top;
@@ -137,7 +137,7 @@ namespace DNQH_KeToanBanHang.Forms
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 13.5F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.ForeColor = System.Drawing.Color.White;
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(64)))), ((int)(((byte)(175)))));
             this.lblTitle.Location = new System.Drawing.Point(16, 8);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(430, 25);
@@ -149,7 +149,7 @@ namespace DNQH_KeToanBanHang.Forms
             // 
             this.lblSubTitle.AutoSize = true;
             this.lblSubTitle.Font = new System.Drawing.Font("Segoe UI", 8.5F);
-            this.lblSubTitle.ForeColor = System.Drawing.Color.FromArgb(233, 213, 255);
+            this.lblSubTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(116)))), ((int)(((byte)(139)))));
             this.lblSubTitle.Location = new System.Drawing.Point(17, 34);
             this.lblSubTitle.Name = "lblSubTitle";
             this.lblSubTitle.Size = new System.Drawing.Size(435, 15);
@@ -159,7 +159,7 @@ namespace DNQH_KeToanBanHang.Forms
             // 
             // pnlKpiBanner
             // 
-            this.pnlKpiBanner.BackColor = System.Drawing.Color.FromArgb(250, 245, 255);
+            this.pnlKpiBanner.BackColor = System.Drawing.Color.FromArgb(241, 245, 249);
             this.pnlKpiBanner.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlKpiBanner.Controls.Add(this.pnlKpi5);
             this.pnlKpiBanner.Controls.Add(this.pnlKpi4);
@@ -387,7 +387,7 @@ namespace DNQH_KeToanBanHang.Forms
             this.dtpDenNgayDT.Size = new System.Drawing.Size(120, 24);
             this.dtpDenNgayDT.TabIndex = 3;
 
-            this.btnXemDoanhThu.BackColor = System.Drawing.Color.FromArgb(124, 58, 237);
+            this.btnXemDoanhThu.BackColor = System.Drawing.Color.FromArgb(30, 64, 175);
             this.btnXemDoanhThu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXemDoanhThu.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.btnXemDoanhThu.ForeColor = System.Drawing.Color.White;
@@ -529,7 +529,7 @@ namespace DNQH_KeToanBanHang.Forms
             this.dtpDenNgayTC.Size = new System.Drawing.Size(120, 24);
             this.dtpDenNgayTC.TabIndex = 3;
 
-            this.btnXemThuChi.BackColor = System.Drawing.Color.FromArgb(124, 58, 237);
+            this.btnXemThuChi.BackColor = System.Drawing.Color.FromArgb(30, 64, 175);
             this.btnXemThuChi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXemThuChi.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.btnXemThuChi.ForeColor = System.Drawing.Color.White;
@@ -665,7 +665,7 @@ namespace DNQH_KeToanBanHang.Forms
             this.cboKho.Size = new System.Drawing.Size(250, 25);
             this.cboKho.TabIndex = 1;
 
-            this.btnXemTonKho.BackColor = System.Drawing.Color.FromArgb(124, 58, 237);
+            this.btnXemTonKho.BackColor = System.Drawing.Color.FromArgb(30, 64, 175);
             this.btnXemTonKho.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXemTonKho.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
             this.btnXemTonKho.ForeColor = System.Drawing.Color.White;

@@ -575,8 +575,8 @@ namespace DNQH_KeToanBanHang.Helpers
             {
                 Rectangle rc = new Rectangle(2, 1, e.Item.Width - 4, e.Item.Height - 2);
                 using (GraphicsPath path = UiIconProvider.CreateRoundedRectanglePath(rc, 4f))
-                using (Brush b = new SolidBrush(Color.FromArgb(237, 233, 254)))
-                using (Pen p = new Pen(Color.FromArgb(196, 181, 253)))
+                using (Brush b = new SolidBrush(Color.FromArgb(219, 234, 254)))
+                using (Pen p = new Pen(Color.FromArgb(147, 197, 253)))
                 {
                     e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                     e.Graphics.FillPath(b, path);
@@ -604,12 +604,12 @@ namespace DNQH_KeToanBanHang.Helpers
         public override Color ImageMarginGradientMiddle { get { return Color.White; } }
         public override Color ImageMarginGradientEnd { get { return Color.White; } }
         public override Color MenuBorder { get { return UiTheme.Border; } }
-        public override Color MenuItemBorder { get { return Color.FromArgb(196, 181, 253); } }
-        public override Color MenuItemSelected { get { return Color.FromArgb(237, 233, 254); } }
-        public override Color MenuItemSelectedGradientBegin { get { return Color.FromArgb(237, 233, 254); } }
-        public override Color MenuItemSelectedGradientEnd { get { return Color.FromArgb(237, 233, 254); } }
-        public override Color MenuItemPressedGradientBegin { get { return Color.FromArgb(221, 214, 254); } }
-        public override Color MenuItemPressedGradientEnd { get { return Color.FromArgb(221, 214, 254); } }
+        public override Color MenuItemBorder { get { return Color.FromArgb(147, 197, 253); } }
+        public override Color MenuItemSelected { get { return Color.FromArgb(219, 234, 254); } }
+        public override Color MenuItemSelectedGradientBegin { get { return Color.FromArgb(219, 234, 254); } }
+        public override Color MenuItemSelectedGradientEnd { get { return Color.FromArgb(219, 234, 254); } }
+        public override Color MenuItemPressedGradientBegin { get { return Color.FromArgb(191, 219, 254); } }
+        public override Color MenuItemPressedGradientEnd { get { return Color.FromArgb(191, 219, 254); } }
         public override Color SeparatorDark { get { return UiTheme.Border; } }
         public override Color SeparatorLight { get { return Color.White; } }
     }

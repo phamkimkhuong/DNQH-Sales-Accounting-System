@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 using DNQH_KeToanBanHang.Constants;
 using DNQH_KeToanBanHang.DataAccess;
@@ -380,6 +381,21 @@ namespace DNQH_KeToanBanHang.Forms
                     else
                     {
                         MessageBox.Show("Không thể xóa nhân viên này vì có tài khoản, đơn hàng, hóa đơn hoặc chứng từ liên quan.", "Cảnh báo ràng buộc", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                catch (SqlException sqlEx)
+                {
+                    if (sqlEx.Number == 547)
+                    {
+                        MessageBox.Show(
+                            string.Format("Không thể xóa nhân viên [{0}] vì đang có tài khoản, đơn hàng, hóa đơn hoặc chứng từ liên quan trong hệ thống.", maNV),
+                            "Cảnh báo ràng buộc toàn vẹn",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        UiErrorHandler.Show(this, "FRMNHANVIEN_UI_ERROR", "Lỗi khi xóa nhân viên.", sqlEx);
                     }
                 }
                 catch (Exception ex)
