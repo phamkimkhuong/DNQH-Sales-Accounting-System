@@ -28,7 +28,6 @@ Dự án tuân thủ tuyệt đối các ràng buộc kỹ thuật cố định 
 | **Hệ Quản Trị CSDL** | **Microsoft SQL Server 2022 Express** | Quản lý dữ liệu quan hệ ACID; chạy cục bộ trên máy chủ/máy trạm (`localhost\SQLEXPRESS`). |
 | **Giao tiếp Dữ liệu** | **ADO.NET thuần (`System.Data.SqlClient`)** | Sử dụng Parameterized Queries 100% (chống SQL Injection); quản lý Transaction nguyên tử; không dùng Entity Framework để đảm bảo hiệu năng và kiểm soát trực tiếp I/O. |
 | **Bảo Mật & Mã Hóa** | **PBKDF2-HMAC-SHA256** | Băm mật khẩu an toàn với Salt ngẫu nhiên 16 byte, 100.000 vòng lặp (Rounds); cơ chế xác thực phân quyền dựa trên vai trò (RBAC); từ chối mật khẩu plaintext. |
-| **Kiểm Thử Tự Động** | **MSTest V2 / VSTest Platform** | Bộ kiểm thử tự động gồm 64 Unit Tests và 84 Integration Tests; môi trường kiểm thử cách ly trên database riêng `_Test`. |
 | **Giám Sát & Nhật Ký** | **Structured Logging (`AppLogger`)** | Ghi log tập trung có cấu trúc tại thư mục `logs/`; tự động sinh mã `CorrelationId` để theo dõi và hỗ trợ kỹ thuật khi có lỗi. |
 
 ---
@@ -98,8 +97,7 @@ DNQH_KeToanBanHang/
 ├── DNQH_KeToanBanHang.csproj  # Tệp định nghĩa dự án MSBuild .NET 4.8
 ├── DNQH_KeToanBanHang.sln     # Tệp Solution quản lý toàn bộ giải pháp Visual Studio
 ├── Program.cs                 # Điểm khởi chạy ứng dụng (Main Entry Point & Global Exception Handler)
-├── README.md                  # Tài liệu giới thiệu, hướng dẫn sử dụng và bàn giao hệ thống
-└── run.bat                    # Phím tắt thực thi khởi động nhanh ứng dụng từ thư mục gốc
+└── README.md                  # Tài liệu giới thiệu, hướng dẫn sử dụng và bàn giao hệ thống
 ```
 
 ### Bảng Mô Tả Chi Tiết Nhiệm Vụ Của Từng Thư Mục:
@@ -107,13 +105,13 @@ DNQH_KeToanBanHang/
 | Thư Mục | Chức Năng & Trách Nhiệm Chi Tiết |
 | :--- | :--- |
 | **`assets/`** | Chứa logo thương hiệu và biểu tượng ứng dụng đa độ phân giải (`DNQH_App.ico` từ 16x16 đến 256x256, `DNQH_App.png`). Được nhúng trực tiếp vào PE resource của file `.exe` và nạp lên Titlebar / Taskbar của các Form. |
-| **`database/`** | Quản lý mã nguồn CSDL SQL Server: <br>• `DNQH_KeToanBanHang.sql`: Script DDL tạo cấu trúc 18 bảng, khóa chính, khóa ngoại, chỉ mục và ràng buộc toàn vẹn.<br>• `seed/DevelopmentData.sql`: Script nạp bộ dữ liệu mẫu doanh nghiệp chuẩn (Nhà cung cấp, Sản phẩm, Khách hàng, Kho, Tồn kho, Tài khoản, Đơn hàng, Hóa đơn, Xuất kho, Phiếu thu, Phiếu chi, Chứng từ).<br>• `scripts/CreateTestDatabase.sql`: Script nhân bản database cách ly phục vụ chạy kiểm thử tự động. |
+| **`database/`** | Quản lý mã nguồn CSDL SQL Server: <br>• `DNQH_KeToanBanHang.sql`: Script DDL tạo cấu trúc 18 bảng, khóa chính, khóa ngoại, chỉ mục và ràng buộc toàn vẹn.<br>• `seed/DevelopmentData.sql`: Script nạp bộ dữ liệu mẫu doanh nghiệp chuẩn (Nhà cung cấp, Sản phẩm, Khách hàng, Kho, Tồn kho, Tài khoản, Đơn hàng, Hóa đơn, Xuất kho, Phiếu thu, Phiếu chi, Chứng từ). |
 | **`DataAccess/`** | Chứa các lớp Data Access Object (DAL) phụ trách tương tác với CSDL qua ADO.NET: `SanPhamDAL`, `KhachHangDAL`, `HoaDonBanDAL`, `PhieuXuatKhoDAL`, `PhieuThuDAL`, `PhieuChiDAL`, `ChungTuDAL`, `TonKhoDAL`, `TaiKhoanDAL`, `NhanVienDAL`... |
 | **`Forms/`** | Chứa các cửa sổ giao diện người dùng WinForms: <br>• `frmDangNhap.cs`: Cửa sổ đăng nhập hệ thống.<br>• `frmMain.cs`: Bảng điều khiển trung tâm (Dashboard) phân quyền theo vai trò.<br>• `frmDonDatHang.cs`, `frmHoaDonBan.cs`: Quản lý lập đơn hàng và phát hành hóa đơn.<br>• `frmPhieuXuatKho.cs`: Quản lý lập phiếu xuất kho và trừ tồn kho atomic.<br>• `frmPhieuThu.cs`, `frmPhieuChi.cs`: Quản lý thu tiền bán hàng và chi phí.<br>• `frmChungTu.cs`, `frmKeToanChiTiet.cs`: Quản lý hạch toán sổ cái định khoản kế toán.<br>• `frmBaoCaoTongHop.cs`: Màn hình tổng hợp báo cáo doanh thu, công nợ, tồn kho.<br>• Các form danh mục: `frmSanPham.cs`, `frmKhachHang.cs`, `frmKho.cs`, `frmNhaCungCap.cs`, `frmLoaiSanPham.cs`, `frmNhanVien.cs`, `frmTaiKhoan.cs`, `frmDoiMatKhau.cs`. |
 | **`Services/`** | Chứa các lớp xử lý nghiệp vụ trung tâm (Business Logic): <br>• `AuthService.cs`: Xác thực đăng nhập, mã hóa và kiểm tra vai trò.<br>• `OrderService.cs`: Lập đơn hàng, tính tổng tiền, kiểm tra trạng thái đơn.<br>• `InvoiceService.cs`: Chuyển đổi đơn hàng sang hóa đơn bán hàng, kiểm soát ràng buộc duy nhất 1-1.<br>• `WarehouseService.cs`: Điều phối xuất kho trừ tồn kho nguyên tử đa kho hàng.<br>• `AccountingService.cs`: Quản lý phiếu thu, phiếu chi và ghi sổ chứng từ kế toán.<br>• `ReportingService.cs`: Truy vấn và tổng hợp dữ liệu báo cáo kinh doanh. |
 | **`Models/`** | Định nghĩa các lớp đối tượng thực thể (Domain Entities) ánh xạ trực tiếp với bảng CSDL: `DonDatHang`, `ChiTietDonDatHang`, `HoaDonBan`, `ChiTietHoaDonBan`, `PhieuXuatKho`, `ChiTietPhieuXuatKho`, `PhieuThu`, `PhieuChi`, `ChungTu`, `ChiTietChungTu`, `TonKho`, `SanPham`, `KhachHang`, `NhaCungCap`, `LoaiSanPham`, `NhanVien`, `TaiKhoan` và các DTO báo cáo (`ReportingModels.cs`). |
 | **`Helpers/`** | Cung cấp các công cụ tiện ích độc lập dùng chung cho toàn bộ dự án: <br>• `Database.cs`: Quản lý chuỗi kết nối và thực thi truy vấn ADO.NET an toàn.<br>• `SessionManager.cs`: Lưu trữ và quản lý phiên làm việc của người dùng đang đăng nhập.<br>• `SecurityHelper.cs`: Thuật toán băm và xác minh mật khẩu PBKDF2-SHA256.<br>• `AutoCodeHelper.cs`: Thuật toán thông minh tự động đề xuất sinh mã kế toán liên tục.<br>• `UIResponsiveHelper.cs`: Tự động gán App Icon, kích thước dropdown và responsive UI.<br>• `AppLogger.cs`: Ghi log có cấu trúc chuẩn observability kèm CorrelationId.<br>• `ValidationHelper.cs`: Kiểm tra tính hợp lệ dữ liệu nhập liệu (Email, SĐT, Số tiền).<br>• `CsvExportHelper.cs`: Tiện ích xuất dữ liệu DataGridView ra file Excel/CSV an toàn. |
-| **`scripts/`** | Chứa các kịch bản thực thi (.bat) phục vụ vận hành và kiểm thử: <br>• `tao_shortcut_desktop.bat`: Tự động tạo biểu tượng lối tắt ngoài màn hình Desktop.<br>• `run_unit_tests.bat`: Thực thi bộ kiểm thử tự động MSTest V2.<br>• `run_tests.bat`: Thực thi toàn bộ kiểm thử tích hợp và kiểm thử đơn vị. |
+| **`scripts/`** | Chứa kịch bản thực thi (.bat) phục vụ vận hành: <br>• `tao_shortcut_desktop.bat`: Tự động tạo biểu tượng lối tắt ngoài màn hình Desktop. |
 | **`docs/`** | Lưu trữ toàn bộ 4 tài liệu đặc tả chuẩn của dự án: `01_PROJECT_SPEC.md` (Đặc tả nghiệp vụ), `02_ARCHITECTURE.md` (Kiến trúc hệ thống), `03_ENGINEERING_STANDARDS.md` (Quy chuẩn kỹ thuật), `04_OPERATIONS_OBSERVABILITY.md` (Vận hành & Giám sát). |
 
 ---
@@ -185,27 +183,19 @@ Sau khi nạp database thành công, hệ thống đã có sẵn dữ liệu pho
 
 Sau khi hoàn tất cấu hình chuỗi kết nối và nạp CSDL ở Mục 5, bạn có thể biên dịch và khởi chạy ứng dụng theo một trong các phương thức thuận tiện sau:
 
-### 6.1. Cách 1: Khởi Động Nhanh 1-Click Bằng `run.bat` (Khuyên Dùng Cho Người Đánh Giá)
-Dự án đã tích hợp sẵn kịch bản khởi động thông minh [run.bat](run.bat) ngay tại thư mục gốc, cho phép tự động biên dịch và khởi chạy trực tiếp mà **không bắt buộc phải mở Visual Studio**:
-- **Cách thực hiện:** Nhấp đúp chuột vào file:
-  ```text
-  run.bat
-  ```
----
-
-### 6.2. Cách 2: Mở Và Chạy Trực Tiếp Bằng Visual Studio (Dành Cho Lập Trình Viên)
+### 6.1. Cách 1: Mở Và Chạy Trực Tiếp Bằng Visual Studio (Khuyên Dùng)
 Phương thức chuẩn dành cho người phát triển, chấm mã nguồn hoặc muốn đặt breakpoint gỡ lỗi chi tiết:
-1. **Bước 1:** Nhấp đúp mở tệp giải pháp [DNQH_KeToanBanHang.sln](DNQH_KeToanBanHang.sln) bằng Microsoft Visual Studio (tương thích các phiên bản 2017 / 2019 / 2022).
-2. **Bước 2:** Trên thanh công cụ Solution Configurations, chọn chế độ:
-   - Configuration: **`Debug`** (hoặc **`Release`**).
+1. **Bước 1:** Nhấp đúp mở tệp giải pháp [DNQH_KeToanBanHang.sln](DNQH_KeToanBanHang.sln) bằng Microsoft Visual Studio (tương thích các phiên bản 2017 / 2019 / 2022 / 2026).
+2. **Bước 2:** Trên thanh công cụ Solution Configurations, chọn chế độ mong muốn:
+   - Configuration: **`Debug`** (khi lập trình, gỡ lỗi) hoặc **`Release`** (khi xuất bản bản chạy tối ưu).
    - Platform: **`Any CPU`** (hoặc `x86` / `x64`).
 3. **Bước 3:** Đảm bảo dự án khởi động là `DNQH_KeToanBanHang` (nếu tên dự án chưa được in đậm, nhấp chuột phải vào dự án `DNQH_KeToanBanHang` trong cửa sổ Solution Explorer $\rightarrow$ chọn **`Set as Startup Project`**).
-4. **Bước 4:** Nhấn phím **`F5`** (hoặc nút **`Start`**) để biên dịch và chạy kèm chế độ Debug, hoặc nhấn **`Ctrl + F5`** (Start Without Debugging) để chạy trực tiếp.
+4. **Bước 4:** Nhấn phím **`F5`** (hoặc nút **`Start ▶️`**) để biên dịch và chạy kèm chế độ Debug, hoặc nhấn **`Ctrl + F5`** (Start Without Debugging) để chạy trực tiếp.
 
 ---
 
-### 6.3. Cách 3: Chạy Trực Tiếp Từ Tệp Thực Thi (.EXE) Đã Đóng Gói Sẵn
-Trong trường hợp máy tính đã có sẵn bản biên dịch, bạn có thể khởi chạy ứng dụng trực tiếp bằng cách nhấp đúp vào tệp thực thi:
+### 6.2. Cách 2: Chạy Trực Tiếp Từ Tệp Thực Thi (.EXE) Đã Biên Dịch
+Trong trường hợp máy tính đã có sẵn bản biên dịch (hoặc sau khi build trong Visual Studio), bạn có thể khởi chạy ứng dụng trực tiếp bằng cách nhấp đúp vào tệp thực thi:
 - Phiên bản Debug: `bin\Debug\DNQH_KeToanBanHang.exe`
 - Phiên bản Release: `bin\Release\DNQH_KeToanBanHang.exe`
 
@@ -213,7 +203,7 @@ Trong trường hợp máy tính đã có sẵn bản biên dịch, bạn có th
 
 ---
 
-### 6.4. Tiện Ích: Tự Động Tạo Lối Tắt (Shortcut) Ngoài Màn Hình Desktop
+### 6.3. Tiện Ích: Tự Động Tạo Lối Tắt (Shortcut) Ngoài Màn Hình Desktop
 Để tạo trải nghiệm như một ứng dụng cài đặt hoàn chỉnh cho người đánh giá hoặc người dùng cuối:
 - **Cách thực hiện:** Nhấp đúp chuột vào file:
   ```text

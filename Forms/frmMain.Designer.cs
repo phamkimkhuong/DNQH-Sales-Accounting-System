@@ -23,7 +23,6 @@ namespace DNQH_KeToanBanHang.Forms
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuQuanLyTaiKhoan = new System.Windows.Forms.ToolStripMenuItem();
             this.menuQuanLyNhanVien = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuNhatKyHoatDong = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparatorTraCuuPhimTat = new System.Windows.Forms.ToolStripSeparator();
             this.menuTraCuuPhimTat = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -57,13 +56,10 @@ namespace DNQH_KeToanBanHang.Forms
             this.menuKeToanChiTiet = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSoChiTietKhachHang = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSoChiTietSanPham = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuSoChiTietHoaDon = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuBaoCaoTuoiNo = new System.Windows.Forms.ToolStripMenuItem();
             this.menuKeToanTongHop = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBaoCaoDoanhThu = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBaoCaoThuChi = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBaoCaoTonKho = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuBaoCaoBieuDo = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStripMain = new System.Windows.Forms.StatusStrip();
             this.lblStatusUser = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblStatusRole = new System.Windows.Forms.ToolStripStatusLabel();
@@ -228,7 +224,6 @@ namespace DNQH_KeToanBanHang.Forms
             this.toolStripSeparator1,
             this.menuQuanLyTaiKhoan,
             this.menuQuanLyNhanVien,
-            this.menuNhatKyHoatDong,
             this.toolStripSeparatorTraCuuPhimTat,
             this.menuTraCuuPhimTat,
             this.toolStripSeparator2,
@@ -268,15 +263,7 @@ namespace DNQH_KeToanBanHang.Forms
             this.menuQuanLyNhanVien.Size = new System.Drawing.Size(209, 24);
             this.menuQuanLyNhanVien.Text = "Quản Lý Nhân Viên";
             this.menuQuanLyNhanVien.Click += new System.EventHandler(this.menuQuanLyNhanVien_Click);
-            // 
-            // menuNhatKyHoatDong
-            // 
-            this.menuNhatKyHoatDong.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.menuNhatKyHoatDong.Name = "menuNhatKyHoatDong";
-            this.menuNhatKyHoatDong.Size = new System.Drawing.Size(250, 24);
-            this.menuNhatKyHoatDong.Text = "📋 Nhật Ký Hoạt Động (Audit Trail)";
-            this.menuNhatKyHoatDong.Click += new System.EventHandler(this.menuNhatKyHoatDong_Click);
-            // 
+
             // toolStripSeparatorTraCuuPhimTat
             // 
             this.toolStripSeparatorTraCuuPhimTat.Name = "toolStripSeparatorTraCuuPhimTat";
@@ -533,9 +520,7 @@ namespace DNQH_KeToanBanHang.Forms
             // 
             this.menuKeToanChiTiet.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuSoChiTietKhachHang,
-            this.menuSoChiTietSanPham,
-            this.menuSoChiTietHoaDon,
-            this.menuBaoCaoTuoiNo});
+            this.menuSoChiTietSanPham});
             this.menuKeToanChiTiet.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.menuKeToanChiTiet.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(40)))), ((int)(((byte)(217)))));
             this.menuKeToanChiTiet.Name = "menuKeToanChiTiet";
@@ -557,30 +542,14 @@ namespace DNQH_KeToanBanHang.Forms
             this.menuSoChiTietSanPham.Size = new System.Drawing.Size(236, 24);
             this.menuSoChiTietSanPham.Text = "Sổ Chi Tiết Sản Phẩm";
             this.menuSoChiTietSanPham.Click += new System.EventHandler(this.menuSoChiTietSanPham_Click);
-            // 
-            // menuSoChiTietHoaDon
-            // 
-            this.menuSoChiTietHoaDon.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.menuSoChiTietHoaDon.Name = "menuSoChiTietHoaDon";
-            this.menuSoChiTietHoaDon.Size = new System.Drawing.Size(236, 24);
-            this.menuSoChiTietHoaDon.Text = "Sổ Chi Tiết Hóa Đơn";
-            this.menuSoChiTietHoaDon.Click += new System.EventHandler(this.menuSoChiTietHoaDon_Click);
-            // 
-            // menuBaoCaoTuoiNo
-            // 
-            this.menuBaoCaoTuoiNo.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.menuBaoCaoTuoiNo.Name = "menuBaoCaoTuoiNo";
-            this.menuBaoCaoTuoiNo.Size = new System.Drawing.Size(260, 24);
-            this.menuBaoCaoTuoiNo.Text = "Báo Cáo Tuổi Nợ & Quá Hạn";
-            this.menuBaoCaoTuoiNo.Click += new System.EventHandler(this.menuBaoCaoTuoiNo_Click);
+
             // 
             // menuKeToanTongHop
             // 
             this.menuKeToanTongHop.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuBaoCaoDoanhThu,
             this.menuBaoCaoThuChi,
-            this.menuBaoCaoTonKho,
-            this.menuBaoCaoBieuDo});
+            this.menuBaoCaoTonKho});
             this.menuKeToanTongHop.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.menuKeToanTongHop.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(40)))), ((int)(((byte)(217)))));
             this.menuKeToanTongHop.Name = "menuKeToanTongHop";
@@ -610,14 +579,6 @@ namespace DNQH_KeToanBanHang.Forms
             this.menuBaoCaoTonKho.Size = new System.Drawing.Size(280, 24);
             this.menuBaoCaoTonKho.Text = "Báo Cáo Tổng Hợp Tồn Kho";
             this.menuBaoCaoTonKho.Click += new System.EventHandler(this.menuBaoCaoTonKho_Click);
-            // 
-            // menuBaoCaoBieuDo
-            // 
-            this.menuBaoCaoBieuDo.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.menuBaoCaoBieuDo.Name = "menuBaoCaoBieuDo";
-            this.menuBaoCaoBieuDo.Size = new System.Drawing.Size(280, 24);
-            this.menuBaoCaoBieuDo.Text = "Biểu Đồ Phân Tích & Trực Quan";
-            this.menuBaoCaoBieuDo.Click += new System.EventHandler(this.menuBaoCaoBieuDo_Click);
             // 
             // statusStripMain
             // 
@@ -2186,13 +2147,10 @@ namespace DNQH_KeToanBanHang.Forms
         private System.Windows.Forms.ToolStripMenuItem menuKeToanChiTiet;
         private System.Windows.Forms.ToolStripMenuItem menuSoChiTietKhachHang;
         private System.Windows.Forms.ToolStripMenuItem menuSoChiTietSanPham;
-        private System.Windows.Forms.ToolStripMenuItem menuSoChiTietHoaDon;
-        private System.Windows.Forms.ToolStripMenuItem menuBaoCaoTuoiNo;
         private System.Windows.Forms.ToolStripMenuItem menuKeToanTongHop;
         private System.Windows.Forms.ToolStripMenuItem menuBaoCaoDoanhThu;
         private System.Windows.Forms.ToolStripMenuItem menuBaoCaoThuChi;
         private System.Windows.Forms.ToolStripMenuItem menuBaoCaoTonKho;
-        private System.Windows.Forms.ToolStripMenuItem menuBaoCaoBieuDo;
         private System.Windows.Forms.StatusStrip statusStripMain;
         private System.Windows.Forms.ToolStripStatusLabel lblStatusUser;
         private System.Windows.Forms.ToolStripStatusLabel lblStatusRole;
@@ -2299,7 +2257,6 @@ namespace DNQH_KeToanBanHang.Forms
         private System.Windows.Forms.Label lblRoleNoteText;
         private System.Windows.Forms.Label lblRoleNoteTitle;
         private System.Windows.Forms.ToolStripMenuItem menuTrangChu;
-        private System.Windows.Forms.ToolStripMenuItem menuNhatKyHoatDong;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparatorTraCuuPhimTat;
         private System.Windows.Forms.ToolStripMenuItem menuTraCuuPhimTat;
     }

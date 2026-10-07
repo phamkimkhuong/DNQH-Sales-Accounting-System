@@ -17,13 +17,10 @@ namespace DNQH_KeToanBanHang.Forms
         private readonly ReportingService _reportingService;
         private readonly KhachHangDAL _khachHangDAL;
         private readonly SanPhamDAL _sanPhamDAL;
-        private readonly HoaDonBanDAL _hoaDonBanDAL;
         private Label _khachHangStatus;
         private Label _sanPhamStatus;
-        private Label _hoaDonStatus;
         private List<SoChiTietKhachHangDTO> _currentKHList;
         private List<SoChiTietSanPhamDTO> _currentSPList;
-        private SoChiTietHoaDonDTO _currentHDBDetail;
 
         public frmKeToanChiTiet()
         {
@@ -33,7 +30,6 @@ namespace DNQH_KeToanBanHang.Forms
             _reportingService = new ReportingService();
             _khachHangDAL = new KhachHangDAL();
             _sanPhamDAL = new SanPhamDAL();
-            _hoaDonBanDAL = new HoaDonBanDAL();
         }
 
         private async void frmKeToanChiTiet_Load(object sender, EventArgs e)
@@ -51,21 +47,7 @@ namespace DNQH_KeToanBanHang.Forms
             InitComboBoxes();
             InitGridColumns();
 
-            // Hook sự kiện chuyển tab để tự động nạp dữ liệu Tuổi nợ nếu chưa có
-            tabControlMain.SelectedIndexChanged += async (s, ev) =>
-            {
-                if (tabControlMain.SelectedIndex == 3 && _currentTuoiNoTongHop == null)
-                {
-                    await LoadBaoCaoTuoiNoAsync(btnXemTuoiNo);
-                }
-            };
-
-            // Tự động tải dữ liệu nếu có
-            if (tabControlMain.SelectedIndex == 3)
-            {
-                await LoadBaoCaoTuoiNoAsync(btnXemTuoiNo);
-            }
-            else if (cboKhachHang.Items.Count > 0)
+            if (cboKhachHang.Items.Count > 0)
             {
                 cboKhachHang.SelectedIndex = 0;
                 await LoadSoKhachHangAsync(null);
@@ -90,11 +72,6 @@ namespace DNQH_KeToanBanHang.Forms
 
             dtpTuNgaySP.Value = startOfMonth;
             dtpDenNgaySP.Value = now;
-
-            if (dtpNgayChot != null)
-            {
-                dtpNgayChot.Value = now;
-            }
         }
 
         private void InitComboBoxes()
@@ -110,28 +87,6 @@ namespace DNQH_KeToanBanHang.Forms
             catch (Exception ex)
             {
                 LogLookupError("LOAD_CUSTOMER_LOOKUP", "khách hàng", ex);
-            }
-
-            // 1.1 Khách hàng cho Tab 4 (Tuổi nợ)
-            try
-            {
-                DataTable dtKHTuoiNo = _khachHangDAL.GetAll();
-                DataRow emptyRow = dtKHTuoiNo.NewRow();
-                emptyRow["MaKH"] = "";
-                emptyRow["TenKH"] = "--- Tất cả khách hàng ---";
-                dtKHTuoiNo.Rows.InsertAt(emptyRow, 0);
-
-                if (cboKhachHangTuoiNo != null)
-                {
-                    cboKhachHangTuoiNo.DataSource = dtKHTuoiNo;
-                    cboKhachHangTuoiNo.DisplayMember = "TenKH";
-                    cboKhachHangTuoiNo.ValueMember = "MaKH";
-                    cboKhachHangTuoiNo.SelectedIndex = 0;
-                }
-            }
-            catch (Exception ex)
-            {
-                LogLookupError("LOAD_CUSTOMER_AGING_LOOKUP", "khách hàng (tuổi nợ)", ex);
             }
 
             // 2. Sản phẩm cho Tab 2
@@ -150,28 +105,6 @@ namespace DNQH_KeToanBanHang.Forms
             catch (Exception ex)
             {
                 LogLookupError("LOAD_PRODUCT_LOOKUP", "sản phẩm", ex);
-            }
-
-            // 3. Hóa đơn bán cho Tab 3
-            try
-            {
-                DataTable dtHDB = _hoaDonBanDAL.GetAll();
-                cboHoaDon.Items.Clear();
-                foreach (DataRow r in dtHDB.Rows)
-                {
-                    string maHDB = r["MaHDB"].ToString().Trim();
-                    string tenKH = r["TenKH"] != DBNull.Value ? r["TenKH"].ToString().Trim() : "";
-                    decimal tongTien = Convert.ToDecimal(r["TongTien"]);
-                    cboHoaDon.Items.Add(string.Format("{0} - {1} ({2:N0} VNĐ)", maHDB, tenKH, tongTien));
-                }
-                if (cboHoaDon.Items.Count > 0)
-                {
-                    cboHoaDon.SelectedIndex = 0;
-                }
-            }
-            catch (Exception ex)
-            {
-                LogLookupError("LOAD_INVOICE_LOOKUP", "hóa đơn", ex);
             }
         }
 
@@ -416,167 +349,6 @@ namespace DNQH_KeToanBanHang.Forms
 
         #endregion
 
-        #region Tab 3: Sổ Hóa Đơn & Chứng Từ
-
-        private async void btnXemHDB_Click(object sender, EventArgs e)
-        {
-            await LoadSoHoaDonAsync(btnXemHDB);
-        }
-
-        private void btnXuatCsvHDB_Click(object sender, EventArgs e)
-        {
-            CsvExporter.ExportDataGridViewToExcel(dgvMatHang, "ChiTietHoaDon", "CHI TIẾT MẶT HÀNG HÓA ĐƠN BÁN " + lblHDBMa.Text);
-        }
-
-        private void btnInHDB_Click(object sender, EventArgs e)
-        {
-            if (_currentHDBDetail == null)
-            {
-                UiFeedbackHelper.ShowToast(this, "Không có thông tin hóa đơn để in. Vui lòng nhấn 'Xem Chi Tiết' trước.", UiStatusKind.Warning, 3000);
-                return;
-            }
-
-            string html = ReportPrintHelper.GenerateSoChiTietHoaDonHtml(_currentHDBDetail);
-            frmInChungTu.ShowVoucher(this, "Hồ Sơ Luân Chuyển Hóa Đơn & Chứng Từ", html,
-                string.Format("HoSoHoaDon_{0}_{1:yyyyMMdd}", _currentHDBDetail.MaHDB, DateTime.Now));
-        }
-
-        private async Task<bool> LoadSoHoaDonAsync(Button actionButton)
-        {
-            if (cboHoaDon.SelectedItem == null)
-            {
-                UiStyler.StyleStatusLabel(_hoaDonStatus, UiStatusKind.Warning, "Vui lòng chọn hóa đơn cần xem chi tiết.");
-                cboHoaDon.Focus();
-                return false;
-            }
-            string selectedText = cboHoaDon.SelectedItem.ToString();
-            string maHDB = selectedText.Split('-')[0].Trim();
-
-            string err = string.Empty;
-            SoChiTietHoaDonDTO hdb = null;
-            SetInvoiceGridsLoading("Đang tải chi tiết hóa đơn...");
-            UiStyler.StyleStatusLabel(_hoaDonStatus, UiStatusKind.Information, "Đang tải mặt hàng, phiếu thu và định khoản...");
-            await UiFeedbackHelper.RunBusyAsync(
-                this,
-                actionButton,
-                "ĐANG TẢI...",
-                delegate
-                {
-                    hdb = _reportingService.GetSoChiTietHoaDon(maHDB, out err);
-                    return true;
-                });
-            if (IsDisposed)
-            {
-                return false;
-            }
-
-            if (!string.IsNullOrEmpty(err))
-            {
-                UiStyler.StyleStatusLabel(_hoaDonStatus, UiStatusKind.Error, err);
-                SetInvoiceGridsError(err);
-                return false;
-            }
-
-            if (hdb == null)
-            {
-                UiStyler.StyleStatusLabel(_hoaDonStatus, UiStatusKind.Warning, "Không tìm thấy thông tin chi tiết của hóa đơn đã chọn.");
-                ClearInvoiceGridStates();
-                UpdateInvoiceGridEmptyStates();
-                return false;
-            }
-
-            _currentHDBDetail = hdb;
-
-            // Cập nhật Header Panel
-            lblHDBMa.Text = string.Format("Mã HĐ: {0}", hdb.MaHDB);
-            lblHDBNgay.Text = string.Format("Ngày lập: {0:dd/MM/yyyy}", hdb.NgayLap);
-            lblHDBKhachHang.Text = string.Format("Khách hàng: {0} ({1})", hdb.TenKH, hdb.DienThoai);
-            lblHDBTongTien.Text = string.Format("Tổng tiền HĐ: {0:N0} VNĐ", hdb.TongTien);
-            lblHDBDaThu.Text = string.Format("Đã thu: {0:N0} VNĐ", hdb.DaThu);
-            lblHDBConLai.Text = string.Format("Còn nợ: {0:N0} VNĐ", hdb.ConLai);
-            lblHDBTrangThai.Text = string.Format("Trạng thái: {0}", hdb.TrangThai);
-
-            // Nạp chi tiết mặt hàng
-            dgvMatHang.Rows.Clear();
-            foreach (var item in hdb.DanhSachMatHang)
-            {
-                dgvMatHang.Rows.Add(
-                    item.MaSP,
-                    item.TenSP,
-                    item.DonViTinh,
-                    item.SoLuong,
-                    item.DonGia,
-                    item.GiamGia,
-                    item.ThanhTien
-                );
-            }
-
-            // Nạp danh sách phiếu thu
-            dgvPhieuThu.Rows.Clear();
-            foreach (var pt in hdb.DanhSachPhieuThu)
-            {
-                dgvPhieuThu.Rows.Add(
-                    pt.MaPT,
-                    pt.NgayThu,
-                    pt.NguoiNop,
-                    pt.SoTien,
-                    pt.HinhThuc,
-                    pt.LyDoThu
-                );
-            }
-
-            // Nạp danh sách định khoản chứng từ
-            dgvDinhKhoan.Rows.Clear();
-            foreach (var dk in hdb.DanhSachDinhKhoan)
-            {
-                dgvDinhKhoan.Rows.Add(
-                    dk.MaCT,
-                    dk.NgayLap,
-                    dk.STT,
-                    dk.TaiKhoanNo,
-                    dk.TaiKhoanCo,
-                    dk.SoTien,
-                    dk.DienGiai
-                );
-            }
-            UiStyler.StyleStatusLabel(
-                _hoaDonStatus,
-                UiStatusKind.Neutral,
-                string.Format("Đã nạp {0:N0} mặt hàng, {1:N0} phiếu thu và {2:N0} bút toán.",
-                    hdb.DanhSachMatHang.Count, hdb.DanhSachPhieuThu.Count, hdb.DanhSachDinhKhoan.Count));
-            ClearInvoiceGridStates();
-            UpdateInvoiceGridEmptyStates();
-            return true;
-        }
-
-        private void SetInvoiceGridsLoading(string message)
-        {
-            UiStyler.SetGridLoading(dgvMatHang, message);
-            UiStyler.SetGridLoading(dgvPhieuThu, message);
-            UiStyler.SetGridLoading(dgvDinhKhoan, message);
-        }
-
-        private void SetInvoiceGridsError(string message)
-        {
-            UiStyler.SetGridError(dgvMatHang, message);
-            UiStyler.SetGridError(dgvPhieuThu, message);
-            UiStyler.SetGridError(dgvDinhKhoan, message);
-        }
-
-        private void ClearInvoiceGridStates()
-        {
-            UiStyler.ClearGridState(dgvMatHang);
-            UiStyler.ClearGridState(dgvPhieuThu);
-            UiStyler.ClearGridState(dgvDinhKhoan);
-        }
-
-        private void UpdateInvoiceGridEmptyStates()
-        {
-            UiStyler.UpdateGridEmptyState(dgvMatHang, "Hóa đơn không có mặt hàng.");
-            UiStyler.UpdateGridEmptyState(dgvPhieuThu, "Hóa đơn chưa có phiếu thu.");
-            UiStyler.UpdateGridEmptyState(dgvDinhKhoan, "Hóa đơn chưa có định khoản.");
-        }
-
         private bool ValidateDateRange(DateTimePicker fromPicker, DateTimePicker toPicker, Label status)
         {
             if (fromPicker.Value.Date <= toPicker.Value.Date)
@@ -586,7 +358,5 @@ namespace DNQH_KeToanBanHang.Forms
             fromPicker.Focus();
             return false;
         }
-
-        #endregion
     }
 }

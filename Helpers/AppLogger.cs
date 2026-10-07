@@ -2,8 +2,6 @@ using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using DNQH_KeToanBanHang.DataAccess;
-using DNQH_KeToanBanHang.Models;
 
 namespace DNQH_KeToanBanHang.Helpers
 {
@@ -230,64 +228,6 @@ namespace DNQH_KeToanBanHang.Helpers
                                 dateStr));
                         }
                     }
-                }
-
-                // Ghi nhận vào bảng NHATKYHOATDONG tập trung trên SQL Server (Chỉ lưu các nghiệp vụ kinh doanh thực tế, bỏ qua sự kiện khởi động/tắt máy, đăng nhập và KPI ngầm)
-                bool isSystemOrAuth = 
-                    operation == "LogRetention" || 
-                    operation == "DevStartup" ||
-                    operation == "ApplicationStartup" ||
-                    operation == "ApplicationShutdown" ||
-                    operation == "LOGIN" ||
-                    operation == "LOGOUT" ||
-                    operation == "DANG_NHAP" ||
-                    operation == "REPORT_KPI" ||
-                    operation == "LoadStockAlerts";
-
-                if (!isSystemOrAuth)
-                {
-                    try
-                    {
-                        string tenNV = null;
-                        if (SessionManager.CurrentUser != null)
-                        {
-                            tenNV = SessionManager.CurrentUser.HoTen;
-                            if (string.IsNullOrEmpty(userId))
-                            {
-                                userId = SessionManager.CurrentUser.MaNV;
-                            }
-                            if (string.IsNullOrEmpty(role))
-                            {
-                                role = SessionManager.CurrentUser.VaiTro;
-                            }
-                        }
-
-                        string fullNoiDung = message;
-                        if (ex != null)
-                        {
-                            fullNoiDung += string.Format(" [Lỗi: {0} - {1}]", ex.GetType().Name, ex.Message);
-                        }
-
-                        NhatKyHoatDong auditEntry = new NhatKyHoatDong
-                        {
-                            ThoiGian = now,
-                            CapDo = level ?? "INFO",
-                            HanhDong = operation ?? "Unknown",
-                            MaNV = userId,
-                            TenNV = tenNV,
-                            VaiTro = role,
-                            TenMay = Environment.MachineName,
-                            LoaiDoiTuong = entityType,
-                            MaDoiTuong = entityId,
-                            KetQua = result ?? (level == "ERROR" ? "Thất bại" : "Thành công"),
-                            ThoiGianXuLyMs = durationMs,
-                            CorrelationId = correlationId,
-                            NoiDung = fullNoiDung
-                        };
-
-                        Task.Run(() => NhatKyHoatDongDal.GhiNhatKy(auditEntry));
-                    }
-                    catch { }
                 }
             }
             catch (Exception writeEx)

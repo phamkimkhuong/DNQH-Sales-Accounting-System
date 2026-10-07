@@ -46,27 +46,12 @@ namespace DNQH_KeToanBanHang.Forms
             InitDatePickers();
             InitComboBoxKho();
             InitGridColumns();
-            InitializeChartComponents();
-
-            // Hook chuyển tab để tự động nạp Biểu đồ khi chọn Tab 4
-            tabControlMain.SelectedIndexChanged += async (s, ev) =>
-            {
-                if (tabControlMain.SelectedIndex == 3)
-                {
-                    await LoadChartsAsync(btnXemBieuDo);
-                }
-            };
 
             // Tải dữ liệu mặc định
             await RefreshKpiBannerAsync(dtpTuNgayDT.Value, dtpDenNgayDT.Value);
             await LoadDoanhThuAsync(null);
             await LoadThuChiAsync(null);
             await LoadTonKhoAsync(null);
-
-            if (tabControlMain.SelectedIndex == 3)
-            {
-                await LoadChartsAsync(btnXemBieuDo);
-            }
         }
 
         public void SelectTab(int index)

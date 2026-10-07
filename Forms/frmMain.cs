@@ -16,10 +16,10 @@ namespace DNQH_KeToanBanHang.Forms
 
         public frmMain()
         {
-            InitializeComponent();
-            ApplyFoundationDesign();
             authService = new AuthService();
             reportingService = new ReportingService();
+            InitializeComponent();
+            ApplyFoundationDesign();
         }
 
         private void ApplyFoundationDesign()
@@ -139,14 +139,11 @@ namespace DNQH_KeToanBanHang.Forms
             // Menu con Kế Toán Chi Tiết
             menuSoChiTietKhachHang.Image = UiIconProvider.GetIcon(UiIconType.Users, 16, Color.FromArgb(14, 165, 233));
             menuSoChiTietSanPham.Image = UiIconProvider.GetIcon(UiIconType.Product, 16, Color.FromArgb(59, 130, 246));
-            menuSoChiTietHoaDon.Image = UiIconProvider.GetIcon(UiIconType.Invoice, 16, Color.FromArgb(30, 64, 175));
-            menuBaoCaoTuoiNo.Image = UiIconProvider.GetIcon(UiIconType.DetailLedger, 16, Color.FromArgb(220, 38, 38));
 
             // Menu con Kế Toán Tổng Hợp
             menuBaoCaoDoanhThu.Image = UiIconProvider.GetIcon(UiIconType.Revenue, 16, Color.FromArgb(37, 99, 235));
             menuBaoCaoThuChi.Image = UiIconProvider.GetIcon(UiIconType.MoneyIn, 16, Color.FromArgb(16, 185, 129));
             menuBaoCaoTonKho.Image = UiIconProvider.GetIcon(UiIconType.Stock, 16, Color.FromArgb(234, 88, 12));
-            menuBaoCaoBieuDo.Image = UiIconProvider.GetIcon(UiIconType.GeneralReport, 16, Color.FromArgb(30, 64, 175));
         }
 
         private void ApplyKpiCardBadges()

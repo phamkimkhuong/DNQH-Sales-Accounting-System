@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 using DNQH_KeToanBanHang.Helpers;
 using DNQH_KeToanBanHang.Models;
 
@@ -12,19 +11,6 @@ namespace DNQH_KeToanBanHang.Forms
 {
     public partial class frmMain
     {
-        private Panel pnlDashboardCharts;
-        private TableLayoutPanel tlpDashboardCharts;
-        private Chart chartDashRevenue;
-        private Chart chartDashCategory;
-        private Button btnDashChart7D;
-        private Button btnDashChart14D;
-        private Button btnDashChart30D;
-        private Button btnDashChartThisMonth;
-        private Button btnDashChartDetail;
-        private int _currentDashDays = 7;
-        private bool _isDashThisMonth = false;
-        private bool _dashChartsInitialized = false;
-
         public void ShowDashboard()
         {
             CloseCurrentChildForm();
@@ -39,20 +25,20 @@ namespace DNQH_KeToanBanHang.Forms
             UpdateHeaderNavigationLayout();
             SetActiveNavigation(btnNavDashboard);
 
+            SetupDashboardLayoutOrder();
+
             Task fireAndForget = LoadDashboardKPIAsync();
         }
 
         private async Task LoadDashboardKPIAsync()
         {
+            if (reportingService == null) return;
             try
             {
                 if (SessionManager.IsAdmin() || SessionManager.IsAccountant())
                 {
                     tlpKPICards.Visible = true;
                     btnRefreshKPI.Visible = true;
-
-                    InitializeDashboardCharts();
-                    await LoadDashboardChartsAsync(_currentDashDays, _isDashThisMonth);
 
                     // Lấy toàn bộ chỉ số từ đầu năm đến nay
                     DateTime fromDate = new DateTime(DateTime.Today.Year, 1, 1);
@@ -73,7 +59,6 @@ namespace DNQH_KeToanBanHang.Forms
                 {
                     tlpKPICards.Visible = false;
                     btnRefreshKPI.Visible = false;
-                    if (pnlDashboardCharts != null) pnlDashboardCharts.Visible = false;
                 }
             }
             catch (Exception ex)
@@ -94,7 +79,7 @@ namespace DNQH_KeToanBanHang.Forms
         private async Task LoadStockAlertsAsync()
         {
             bool canViewStock = SessionManager.IsAdmin() || SessionManager.IsAccountant() || SessionManager.IsWarehouse() || SessionManager.IsSales();
-            if (!canViewStock)
+            if (!canViewStock || reportingService == null)
             {
                 pnlStockAlertContainer.Visible = false;
                 return;
@@ -179,7 +164,7 @@ namespace DNQH_KeToanBanHang.Forms
 
         private async void cboSafetyThreshold_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!this.IsDisposed)
+            if (!this.IsDisposed && reportingService != null)
             {
                 await LoadStockAlertsAsync();
             }
@@ -323,229 +308,15 @@ namespace DNQH_KeToanBanHang.Forms
             }
         }
 
-        private void InitializeDashboardCharts()
+        private void SetupDashboardLayoutOrder()
         {
-            if (_dashChartsInitialized) return;
-
-            pnlDashboardCharts = new Panel
+            if (pnlDashboard != null)
             {
-                Dock = DockStyle.Top,
-                Height = 340,
-                BackColor = Color.White,
-                Margin = new Padding(0, 0, 0, 16),
-                Padding = new Padding(16, 10, 16, 12)
-            };
-
-            Panel pnlHeader = new Panel
-            {
-                Dock = DockStyle.Top,
-                Height = 38,
-                BackColor = Color.White
-            };
-
-            Label lblHeaderTitle = new Label
-            {
-                Text = "📈 XU HƯỚNG KINH DOANH & CƠ CẤU DOANH SỐ",
-                Font = new Font("Segoe UI", 10F, FontStyle.Bold),
-                ForeColor = Color.FromArgb(30, 41, 59),
-                AutoSize = true,
-                Location = new Point(0, 8)
-            };
-
-            FlowLayoutPanel flpActions = new FlowLayoutPanel
-            {
-                Dock = DockStyle.Right,
-                AutoSize = true,
-                WrapContents = false
-            };
-
-            btnDashChart7D = CreateDashboardFilterButton("7 Ngày", 65);
-            btnDashChart14D = CreateDashboardFilterButton("14 Ngày", 70);
-            btnDashChart30D = CreateDashboardFilterButton("30 Ngày", 70);
-            btnDashChartThisMonth = CreateDashboardFilterButton("Tháng Này", 82);
-
-            btnDashChartDetail = new Button
-            {
-                Text = "Báo Cáo Chi Tiết ➔",
-                AutoSize = true,
-                Height = 28,
-                Margin = new Padding(8, 4, 0, 4),
-                Cursor = Cursors.Hand
-            };
-            UiStyler.StyleButton(btnDashChartDetail, UiButtonRole.Secondary);
-            btnDashChartDetail.Click += (s, e) =>
-            {
-                OpenBaoCaoTongHop(3);
-            };
-
-            HighlightDashboardFilterButton(btnDashChart7D);
-
-            btnDashChart7D.Click += async (s, e) =>
-            {
-                HighlightDashboardFilterButton(btnDashChart7D);
-                await LoadDashboardChartsAsync(7, false);
-            };
-            btnDashChart14D.Click += async (s, e) =>
-            {
-                HighlightDashboardFilterButton(btnDashChart14D);
-                await LoadDashboardChartsAsync(14, false);
-            };
-            btnDashChart30D.Click += async (s, e) =>
-            {
-                HighlightDashboardFilterButton(btnDashChart30D);
-                await LoadDashboardChartsAsync(30, false);
-            };
-            btnDashChartThisMonth.Click += async (s, e) =>
-            {
-                HighlightDashboardFilterButton(btnDashChartThisMonth);
-                await LoadDashboardChartsAsync(0, true);
-            };
-
-            flpActions.Controls.AddRange(new Control[] {
-                btnDashChart7D, btnDashChart14D, btnDashChart30D, btnDashChartThisMonth, btnDashChartDetail
-            });
-
-            pnlHeader.Controls.Add(lblHeaderTitle);
-            pnlHeader.Controls.Add(flpActions);
-
-            tlpDashboardCharts = new TableLayoutPanel
-            {
-                Dock = DockStyle.Fill,
-                ColumnCount = 2,
-                RowCount = 1,
-                Margin = new Padding(0)
-            };
-            tlpDashboardCharts.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 58F));
-            tlpDashboardCharts.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 42F));
-            tlpDashboardCharts.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-
-            chartDashRevenue = new Chart { Dock = DockStyle.Fill, Margin = new Padding(0, 0, 8, 0) };
-            chartDashCategory = new Chart { Dock = DockStyle.Fill, Margin = new Padding(8, 0, 0, 0) };
-
-            tlpDashboardCharts.Controls.Add(chartDashRevenue, 0, 0);
-            tlpDashboardCharts.Controls.Add(chartDashCategory, 1, 0);
-
-            pnlDashboardCharts.Controls.Add(tlpDashboardCharts);
-            pnlDashboardCharts.Controls.Add(pnlHeader);
-
-            pnlDashboard.Controls.Add(pnlDashboardCharts);
-            pnlDashboard.Controls.SetChildIndex(pnlWelcomeBanner, 0);
-            pnlDashboard.Controls.SetChildIndex(tlpKPICards, 1);
-            pnlDashboard.Controls.SetChildIndex(pnlDashboardCharts, 2);
-            pnlDashboard.Controls.SetChildIndex(pnlStockAlertContainer, 3);
-            pnlDashboard.Controls.SetChildIndex(pnlQuickActionsContainer, 4);
-            pnlDashboard.Controls.SetChildIndex(pnlRoleNote, 5);
-
-            _dashChartsInitialized = true;
-        }
-
-        private async Task LoadDashboardChartsAsync(int days, bool isThisMonth = false)
-        {
-            if (!SessionManager.IsAdmin() && !SessionManager.IsAccountant())
-            {
-                if (pnlDashboardCharts != null) pnlDashboardCharts.Visible = false;
-                return;
-            }
-
-            if (pnlDashboardCharts != null) pnlDashboardCharts.Visible = true;
-            _currentDashDays = days;
-            _isDashThisMonth = isThisMonth;
-
-            DateTime tuNgay;
-            DateTime denNgay = DateTime.Today;
-
-            if (isThisMonth)
-            {
-                tuNgay = new DateTime(denNgay.Year, denNgay.Month, 1);
-            }
-            else
-            {
-                tuNgay = denNgay.AddDays(-days + 1);
-            }
-
-            try
-            {
-                List<BaoCaoDoanhThuDTO> listDT = null;
-                List<DoanhThuTheoLoaiSPDTO> listCoCau = null;
-
-                await Task.Run(() =>
-                {
-                    string errDT, errCC;
-                    listDT = reportingService.GetBaoCaoDoanhThu(tuNgay, denNgay, out errDT);
-                    listCoCau = reportingService.GetCoCauDoanhThuTheoLoaiSP(tuNgay, denNgay, out errCC);
-                });
-
-                if (this.IsDisposed || chartDashRevenue == null || chartDashCategory == null) return;
-
-                List<DoanhThuTheoNgayDTO> dataDoanhThu = new List<DoanhThuTheoNgayDTO>();
-                if (listDT != null && listDT.Count > 0)
-                {
-                    dataDoanhThu = listDT
-                        .GroupBy(x => x.NgayLap.Date)
-                        .OrderBy(g => g.Key)
-                        .Select(g => new DoanhThuTheoNgayDTO
-                        {
-                            Ngay = g.Key,
-                            NhanNgay = g.Key.ToString("dd/MM"),
-                            DoanhThu = g.Sum(x => x.TongTien),
-                            SoHoaDon = g.Count()
-                        }).ToList();
-                }
-
-                string chartTitleDT = isThisMonth
-                    ? string.Format("DOANH THU THÁNG {0:MM/yyyy}", denNgay)
-                    : string.Format("DOANH THU {0} NGÀY GẦN NHẤT ({1:dd/MM} - {2:dd/MM})", days, tuNgay, denNgay);
-
-                UiChartHelper.SetupDashboardRevenueChart(chartDashRevenue, chartTitleDT, dataDoanhThu);
-
-                string chartTitleCC = isThisMonth
-                    ? string.Format("CƠ CẤU LOẠI HÀNG THÁNG {0:MM/yyyy}", denNgay)
-                    : string.Format("CƠ CẤU LOẠI HÀNG ({0:dd/MM} - {1:dd/MM})", tuNgay, denNgay);
-
-                UiChartHelper.SetupDashboardCategoryChart(chartDashCategory, chartTitleCC, listCoCau);
-            }
-            catch (Exception ex)
-            {
-                AppLogger.Warn("LoadDashboardCharts", "Không thể cập nhật biểu đồ Dashboard: " + ex.Message);
-            }
-        }
-
-        private Button CreateDashboardFilterButton(string text, int width)
-        {
-            Button btn = new Button
-            {
-                Text = text,
-                Width = width,
-                Height = 28,
-                Margin = new Padding(2, 4, 2, 4),
-                Cursor = Cursors.Hand,
-                FlatStyle = FlatStyle.Flat,
-                Font = new Font("Segoe UI", 8.5F, FontStyle.Regular),
-                BackColor = Color.FromArgb(241, 245, 249),
-                ForeColor = Color.FromArgb(51, 65, 85)
-            };
-            btn.FlatAppearance.BorderSize = 0;
-            return btn;
-        }
-
-        private void HighlightDashboardFilterButton(Button activeBtn)
-        {
-            Button[] btns = new Button[] { btnDashChart7D, btnDashChart14D, btnDashChart30D, btnDashChartThisMonth };
-            foreach (var b in btns)
-            {
-                if (b == null) continue;
-                if (b == activeBtn)
-                {
-                    b.BackColor = Color.FromArgb(99, 102, 241);
-                    b.ForeColor = Color.White;
-                    b.Font = new Font("Segoe UI", 8.5F, FontStyle.Bold);
-                }
-                else
-                {
-                    b.BackColor = Color.FromArgb(241, 245, 249);
-                    b.ForeColor = Color.FromArgb(51, 65, 85);
-                    b.Font = new Font("Segoe UI", 8.5F, FontStyle.Regular);
-                }
+                pnlDashboard.Controls.SetChildIndex(pnlWelcomeBanner, 0);
+                pnlDashboard.Controls.SetChildIndex(tlpKPICards, 1);
+                pnlDashboard.Controls.SetChildIndex(pnlStockAlertContainer, 2);
+                pnlDashboard.Controls.SetChildIndex(pnlQuickActionsContainer, 3);
+                pnlDashboard.Controls.SetChildIndex(pnlRoleNote, 4);
             }
         }
     }

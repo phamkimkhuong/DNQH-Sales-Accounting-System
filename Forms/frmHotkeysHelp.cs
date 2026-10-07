@@ -94,8 +94,8 @@ namespace DNQH_KeToanBanHang.Forms
             AddRowDH("Ctrl + 5", "Phiếu Xuất Kho", "Lập phiếu xuất kho giao hàng cho khách");
             AddRowDH("Ctrl + K", "Danh Mục Khách Hàng", "Hồ sơ khách hàng, công nợ, xuất/nhập Excel");
             AddRowDH("Ctrl + M", "Danh Mục Sản Phẩm", "Hàng hóa, bảng giá, đơn vị tính, xuất/nhập Excel");
-            AddRowDH("Ctrl + B", "Báo Cáo Tổng Hợp", "Báo cáo doanh thu, trực quan hóa biểu đồ động");
-            AddRowDH("Ctrl + T", "Kế Toán Chi Tiết", "Sổ quỹ tiền mặt, sổ chi tiết bán hàng, phân tích tuổi nợ");
+            AddRowDH("Ctrl + B", "Báo Cáo Tổng Hợp", "Báo cáo doanh thu bán hàng, thu - chi sổ quỹ, tồn kho");
+            AddRowDH("Ctrl + T", "Kế Toán Chi Tiết", "Sổ chi tiết công nợ khách hàng, sổ chi tiết bán hàng sản phẩm");
         }
 
         private void AddRowDH(string key, string action, string scope)

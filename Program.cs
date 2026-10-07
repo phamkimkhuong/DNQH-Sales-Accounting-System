@@ -56,9 +56,8 @@ namespace DNQH_KeToanBanHang
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Tự động dọn dẹp các file log cục bộ và nhật ký cơ sở dữ liệu quá hạn (Log Retention 30 ngày)
+            // Tự động dọn dẹp các file log cục bộ quá hạn (Log Retention 30 ngày)
             AppLogger.CleanOldLogs(30);
-            System.Threading.Tasks.Task.Run(() => DNQH_KeToanBanHang.DataAccess.NhatKyHoatDongDal.DonDepNhatKy(30));
 
             AppLogger.Info("ApplicationStartup", "Hệ thống DNQH Kế Toán Bán Hàng đang khởi động.");
 

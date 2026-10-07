@@ -1,4 +1,4 @@
-namespace DNQH_KeToanBanHang.Forms
+﻿namespace DNQH_KeToanBanHang.Forms
 {
     partial class frmKeToanChiTiet
     {
@@ -60,31 +60,6 @@ namespace DNQH_KeToanBanHang.Forms
             this.lblSPTongSoLuong = new System.Windows.Forms.Label();
             this.lblSPTongDoanhThu = new System.Windows.Forms.Label();
 
-            // Tab 3: Hoa Don
-            this.tabHoaDon = new System.Windows.Forms.TabPage();
-            this.pnlFilterHDB = new System.Windows.Forms.Panel();
-            this.lblChonHDB = new System.Windows.Forms.Label();
-            this.cboHoaDon = new System.Windows.Forms.ComboBox();
-            this.btnXemHDB = new System.Windows.Forms.Button();
-            this.btnXuatCsvHDB = new System.Windows.Forms.Button();
-            this.btnInHDB = new System.Windows.Forms.Button();
-            this.pnlHDBInfo = new System.Windows.Forms.Panel();
-            this.lblHDBMa = new System.Windows.Forms.Label();
-            this.lblHDBNgay = new System.Windows.Forms.Label();
-            this.lblHDBKhachHang = new System.Windows.Forms.Label();
-            this.lblHDBTongTien = new System.Windows.Forms.Label();
-            this.lblHDBDaThu = new System.Windows.Forms.Label();
-            this.lblHDBConLai = new System.Windows.Forms.Label();
-            this.lblHDBTrangThai = new System.Windows.Forms.Label();
-            this.grpMatHang = new System.Windows.Forms.GroupBox();
-            this.dgvMatHang = new System.Windows.Forms.DataGridView();
-            this.grpKetoanLienKet = new System.Windows.Forms.GroupBox();
-            this.tabSubDetails = new System.Windows.Forms.TabControl();
-            this.tabSubPhieuThu = new System.Windows.Forms.TabPage();
-            this.dgvPhieuThu = new System.Windows.Forms.DataGridView();
-            this.tabSubDinhKhoan = new System.Windows.Forms.TabPage();
-            this.dgvDinhKhoan = new System.Windows.Forms.DataGridView();
-
             this.pnlHeader.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabKhachHang.SuspendLayout();
@@ -95,17 +70,6 @@ namespace DNQH_KeToanBanHang.Forms
             this.pnlFilterSP.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSanPham)).BeginInit();
             this.pnlSummarySP.SuspendLayout();
-            this.tabHoaDon.SuspendLayout();
-            this.pnlFilterHDB.SuspendLayout();
-            this.pnlHDBInfo.SuspendLayout();
-            this.grpMatHang.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMatHang)).BeginInit();
-            this.grpKetoanLienKet.SuspendLayout();
-            this.tabSubDetails.SuspendLayout();
-            this.tabSubPhieuThu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPhieuThu)).BeginInit();
-            this.tabSubDinhKhoan.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDinhKhoan)).BeginInit();
             this.SuspendLayout();
 
             // 
@@ -154,14 +118,13 @@ namespace DNQH_KeToanBanHang.Forms
             this.lblSubTitle.Name = "lblSubTitle";
             this.lblSubTitle.Size = new System.Drawing.Size(430, 15);
             this.lblSubTitle.TabIndex = 1;
-            this.lblSubTitle.Text = "Tra cứu chi tiết công nợ khách hàng, doanh số sản phẩm và chứng từ kế toán liên quan";
+            this.lblSubTitle.Text = "Tra cứu chi tiết công nợ khách hàng và doanh số bán hàng sản phẩm";
 
             // 
             // tabControlMain
             // 
             this.tabControlMain.Controls.Add(this.tabKhachHang);
             this.tabControlMain.Controls.Add(this.tabSanPham);
-            this.tabControlMain.Controls.Add(this.tabHoaDon);
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlMain.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular);
             this.tabControlMain.Location = new System.Drawing.Point(0, 60);
@@ -489,259 +452,6 @@ namespace DNQH_KeToanBanHang.Forms
             this.lblSPTongDoanhThu.Text = "Tổng doanh số bán: 0 VNĐ";
 
             // 
-            // tabHoaDon
-            // 
-            this.tabHoaDon.Controls.Add(this.grpKetoanLienKet);
-            this.tabHoaDon.Controls.Add(this.grpMatHang);
-            this.tabHoaDon.Controls.Add(this.pnlHDBInfo);
-            this.tabHoaDon.Controls.Add(this.pnlFilterHDB);
-            this.tabHoaDon.Location = new System.Drawing.Point(4, 26);
-            this.tabHoaDon.Name = "tabHoaDon";
-            this.tabHoaDon.Padding = new System.Windows.Forms.Padding(8);
-            this.tabHoaDon.Size = new System.Drawing.Size(1072, 610);
-            this.tabHoaDon.TabIndex = 2;
-            this.tabHoaDon.Text = "3. Sổ Chi Tiết Hóa Đơn & Chứng Từ";
-            this.tabHoaDon.UseVisualStyleBackColor = true;
-
-            // pnlFilterHDB
-            this.pnlFilterHDB.BackColor = System.Drawing.Color.FromArgb(245, 248, 252);
-            this.pnlFilterHDB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlFilterHDB.Controls.Add(this.btnInHDB);
-            this.pnlFilterHDB.Controls.Add(this.btnXuatCsvHDB);
-            this.pnlFilterHDB.Controls.Add(this.btnXemHDB);
-            this.pnlFilterHDB.Controls.Add(this.cboHoaDon);
-            this.pnlFilterHDB.Controls.Add(this.lblChonHDB);
-            this.pnlFilterHDB.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlFilterHDB.Location = new System.Drawing.Point(8, 8);
-            this.pnlFilterHDB.Name = "pnlFilterHDB";
-            this.pnlFilterHDB.Size = new System.Drawing.Size(1056, 45);
-            this.pnlFilterHDB.TabIndex = 0;
-
-            this.lblChonHDB.AutoSize = true;
-            this.lblChonHDB.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.lblChonHDB.Location = new System.Drawing.Point(12, 14);
-            this.lblChonHDB.Name = "lblChonHDB";
-            this.lblChonHDB.Size = new System.Drawing.Size(92, 15);
-            this.lblChonHDB.Text = "Chọn Hóa Đơn:";
-
-            this.cboHoaDon.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboHoaDon.FormattingEnabled = true;
-            this.cboHoaDon.Location = new System.Drawing.Point(115, 10);
-            this.cboHoaDon.Name = "cboHoaDon";
-            this.cboHoaDon.Size = new System.Drawing.Size(350, 25);
-            this.cboHoaDon.TabIndex = 1;
-
-            this.btnXemHDB.BackColor = System.Drawing.Color.FromArgb(30, 64, 175);
-            this.btnXemHDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXemHDB.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.btnXemHDB.ForeColor = System.Drawing.Color.White;
-            this.btnXemHDB.Location = new System.Drawing.Point(480, 7);
-            this.btnXemHDB.Name = "btnXemHDB";
-            this.btnXemHDB.Size = new System.Drawing.Size(120, 30);
-            this.btnXemHDB.TabIndex = 2;
-            this.btnXemHDB.Text = "Xem Chi Tiết";
-            this.btnXemHDB.UseVisualStyleBackColor = false;
-            this.btnXemHDB.Click += new System.EventHandler(this.btnXemHDB_Click);
-
-            // btnXuatCsvHDB
-            this.btnXuatCsvHDB.BackColor = System.Drawing.Color.FromArgb(39, 174, 96);
-            this.btnXuatCsvHDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXuatCsvHDB.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.btnXuatCsvHDB.ForeColor = System.Drawing.Color.White;
-            this.btnXuatCsvHDB.Location = new System.Drawing.Point(610, 7);
-            this.btnXuatCsvHDB.Name = "btnXuatCsvHDB";
-            this.btnXuatCsvHDB.Size = new System.Drawing.Size(110, 30);
-            this.btnXuatCsvHDB.TabIndex = 3;
-            this.btnXuatCsvHDB.Text = "Xuất CSV";
-            this.btnXuatCsvHDB.UseVisualStyleBackColor = false;
-            this.btnXuatCsvHDB.Click += new System.EventHandler(this.btnXuatCsvHDB_Click);
-
-            // btnInHDB
-            this.btnInHDB.BackColor = System.Drawing.Color.FromArgb(52, 152, 219);
-            this.btnInHDB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnInHDB.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.btnInHDB.ForeColor = System.Drawing.Color.White;
-            this.btnInHDB.Location = new System.Drawing.Point(740, 7);
-            this.btnInHDB.Name = "btnInHDB";
-            this.btnInHDB.Size = new System.Drawing.Size(130, 30);
-            this.btnInHDB.TabIndex = 4;
-            this.btnInHDB.Text = "🖨️ In Hồ Sơ HĐ";
-            this.btnInHDB.UseVisualStyleBackColor = false;
-            this.btnInHDB.Click += new System.EventHandler(this.btnInHDB_Click);
-
-            // pnlHDBInfo
-            this.pnlHDBInfo.BackColor = System.Drawing.Color.White;
-            this.pnlHDBInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlHDBInfo.Controls.Add(this.lblHDBTrangThai);
-            this.pnlHDBInfo.Controls.Add(this.lblHDBConLai);
-            this.pnlHDBInfo.Controls.Add(this.lblHDBDaThu);
-            this.pnlHDBInfo.Controls.Add(this.lblHDBTongTien);
-            this.pnlHDBInfo.Controls.Add(this.lblHDBKhachHang);
-            this.pnlHDBInfo.Controls.Add(this.lblHDBNgay);
-            this.pnlHDBInfo.Controls.Add(this.lblHDBMa);
-            this.pnlHDBInfo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlHDBInfo.Location = new System.Drawing.Point(8, 53);
-            this.pnlHDBInfo.Name = "pnlHDBInfo";
-            this.pnlHDBInfo.Size = new System.Drawing.Size(1056, 65);
-            this.pnlHDBInfo.TabIndex = 1;
-
-            this.lblHDBMa.AutoSize = true;
-            this.lblHDBMa.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.lblHDBMa.Location = new System.Drawing.Point(12, 10);
-            this.lblHDBMa.Name = "lblHDBMa";
-            this.lblHDBMa.Size = new System.Drawing.Size(99, 15);
-            this.lblHDBMa.Text = "Mã HĐ: (Chưa chọn)";
-
-            this.lblHDBNgay.AutoSize = true;
-            this.lblHDBNgay.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblHDBNgay.Location = new System.Drawing.Point(230, 10);
-            this.lblHDBNgay.Name = "lblHDBNgay";
-            this.lblHDBNgay.Size = new System.Drawing.Size(61, 15);
-            this.lblHDBNgay.Text = "Ngày lập: --";
-
-            this.lblHDBKhachHang.AutoSize = true;
-            this.lblHDBKhachHang.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblHDBKhachHang.Location = new System.Drawing.Point(450, 10);
-            this.lblHDBKhachHang.Name = "lblHDBKhachHang";
-            this.lblHDBKhachHang.Size = new System.Drawing.Size(81, 15);
-            this.lblHDBKhachHang.Text = "Khách hàng: --";
-
-            this.lblHDBTongTien.AutoSize = true;
-            this.lblHDBTongTien.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.lblHDBTongTien.Location = new System.Drawing.Point(12, 38);
-            this.lblHDBTongTien.Name = "lblHDBTongTien";
-            this.lblHDBTongTien.Size = new System.Drawing.Size(117, 15);
-            this.lblHDBTongTien.Text = "Tổng tiền HĐ: 0 VNĐ";
-
-            this.lblHDBDaThu.AutoSize = true;
-            this.lblHDBDaThu.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.lblHDBDaThu.ForeColor = System.Drawing.Color.FromArgb(39, 174, 96);
-            this.lblHDBDaThu.Location = new System.Drawing.Point(230, 38);
-            this.lblHDBDaThu.Name = "lblHDBDaThu";
-            this.lblHDBDaThu.Size = new System.Drawing.Size(95, 15);
-            this.lblHDBDaThu.Text = "Đã thu: 0 VNĐ";
-
-            this.lblHDBConLai.AutoSize = true;
-            this.lblHDBConLai.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.lblHDBConLai.ForeColor = System.Drawing.Color.FromArgb(192, 57, 43);
-            this.lblHDBConLai.Location = new System.Drawing.Point(450, 38);
-            this.lblHDBConLai.Name = "lblHDBConLai";
-            this.lblHDBConLai.Size = new System.Drawing.Size(97, 15);
-            this.lblHDBConLai.Text = "Còn nợ: 0 VNĐ";
-
-            this.lblHDBTrangThai.AutoSize = true;
-            this.lblHDBTrangThai.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.lblHDBTrangThai.Location = new System.Drawing.Point(750, 38);
-            this.lblHDBTrangThai.Name = "lblHDBTrangThai";
-            this.lblHDBTrangThai.Size = new System.Drawing.Size(76, 15);
-            this.lblHDBTrangThai.Text = "Trạng thái: --";
-
-            // grpMatHang
-            this.grpMatHang.Controls.Add(this.dgvMatHang);
-            this.grpMatHang.Dock = System.Windows.Forms.DockStyle.Top;
-            this.grpMatHang.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.grpMatHang.Location = new System.Drawing.Point(8, 118);
-            this.grpMatHang.Name = "grpMatHang";
-            this.grpMatHang.Padding = new System.Windows.Forms.Padding(6);
-            this.grpMatHang.Size = new System.Drawing.Size(1056, 220);
-            this.grpMatHang.TabIndex = 2;
-            this.grpMatHang.TabStop = false;
-            this.grpMatHang.Text = "Chi Tiết Mặt Hàng Đã Bán";
-
-            // dgvMatHang
-            this.dgvMatHang.AllowUserToAddRows = false;
-            this.dgvMatHang.AllowUserToDeleteRows = false;
-            this.dgvMatHang.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvMatHang.BackgroundColor = System.Drawing.Color.White;
-            this.dgvMatHang.ColumnHeadersDefaultCellStyle = dgvHeaderStyle;
-            this.dgvMatHang.ColumnHeadersHeight = 28;
-            this.dgvMatHang.DefaultCellStyle = dgvRowStyle;
-            this.dgvMatHang.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvMatHang.Location = new System.Drawing.Point(6, 22);
-            this.dgvMatHang.Name = "dgvMatHang";
-            this.dgvMatHang.ReadOnly = true;
-            this.dgvMatHang.RowHeadersVisible = false;
-            this.dgvMatHang.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMatHang.Size = new System.Drawing.Size(1044, 192);
-            this.dgvMatHang.TabIndex = 0;
-
-            // grpKetoanLienKet
-            this.grpKetoanLienKet.Controls.Add(this.tabSubDetails);
-            this.grpKetoanLienKet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpKetoanLienKet.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold);
-            this.grpKetoanLienKet.Location = new System.Drawing.Point(8, 338);
-            this.grpKetoanLienKet.Name = "grpKetoanLienKet";
-            this.grpKetoanLienKet.Padding = new System.Windows.Forms.Padding(6);
-            this.grpKetoanLienKet.Size = new System.Drawing.Size(1056, 264);
-            this.grpKetoanLienKet.TabIndex = 3;
-            this.grpKetoanLienKet.TabStop = false;
-            this.grpKetoanLienKet.Text = "Chứng Từ & Thanh Toán Liên Quan";
-
-            // tabSubDetails
-            this.tabSubDetails.Controls.Add(this.tabSubPhieuThu);
-            this.tabSubDetails.Controls.Add(this.tabSubDinhKhoan);
-            this.tabSubDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabSubDetails.Location = new System.Drawing.Point(6, 22);
-            this.tabSubDetails.Name = "tabSubDetails";
-            this.tabSubDetails.SelectedIndex = 0;
-            this.tabSubDetails.Size = new System.Drawing.Size(1044, 236);
-            this.tabSubDetails.TabIndex = 0;
-
-            // tabSubPhieuThu
-            this.tabSubPhieuThu.Controls.Add(this.dgvPhieuThu);
-            this.tabSubPhieuThu.Location = new System.Drawing.Point(4, 24);
-            this.tabSubPhieuThu.Name = "tabSubPhieuThu";
-            this.tabSubPhieuThu.Padding = new System.Windows.Forms.Padding(4);
-            this.tabSubPhieuThu.Size = new System.Drawing.Size(1036, 208);
-            this.tabSubPhieuThu.TabIndex = 0;
-            this.tabSubPhieuThu.Text = "Phiếu Thu Đã Lập";
-            this.tabSubPhieuThu.UseVisualStyleBackColor = true;
-
-            // dgvPhieuThu
-            this.dgvPhieuThu.AllowUserToAddRows = false;
-            this.dgvPhieuThu.AllowUserToDeleteRows = false;
-            this.dgvPhieuThu.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvPhieuThu.BackgroundColor = System.Drawing.Color.White;
-            this.dgvPhieuThu.ColumnHeadersDefaultCellStyle = dgvHeaderStyle;
-            this.dgvPhieuThu.ColumnHeadersHeight = 28;
-            this.dgvPhieuThu.DefaultCellStyle = dgvRowStyle;
-            this.dgvPhieuThu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPhieuThu.Location = new System.Drawing.Point(4, 4);
-            this.dgvPhieuThu.Name = "dgvPhieuThu";
-            this.dgvPhieuThu.ReadOnly = true;
-            this.dgvPhieuThu.RowHeadersVisible = false;
-            this.dgvPhieuThu.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPhieuThu.Size = new System.Drawing.Size(1028, 200);
-            this.dgvPhieuThu.TabIndex = 0;
-
-            // tabSubDinhKhoan
-            this.tabSubDinhKhoan.Controls.Add(this.dgvDinhKhoan);
-            this.tabSubDinhKhoan.Location = new System.Drawing.Point(4, 24);
-            this.tabSubDinhKhoan.Name = "tabSubDinhKhoan";
-            this.tabSubDinhKhoan.Padding = new System.Windows.Forms.Padding(4);
-            this.tabSubDinhKhoan.Size = new System.Drawing.Size(1036, 208);
-            this.tabSubDinhKhoan.TabIndex = 1;
-            this.tabSubDinhKhoan.Text = "Bút Toán Định Khoản (Chứng Từ)";
-            this.tabSubDinhKhoan.UseVisualStyleBackColor = true;
-
-            // dgvDinhKhoan
-            this.dgvDinhKhoan.AllowUserToAddRows = false;
-            this.dgvDinhKhoan.AllowUserToDeleteRows = false;
-            this.dgvDinhKhoan.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvDinhKhoan.BackgroundColor = System.Drawing.Color.White;
-            this.dgvDinhKhoan.ColumnHeadersDefaultCellStyle = dgvHeaderStyle;
-            this.dgvDinhKhoan.ColumnHeadersHeight = 28;
-            this.dgvDinhKhoan.DefaultCellStyle = dgvRowStyle;
-            this.dgvDinhKhoan.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDinhKhoan.Location = new System.Drawing.Point(4, 4);
-            this.dgvDinhKhoan.Name = "dgvDinhKhoan";
-            this.dgvDinhKhoan.ReadOnly = true;
-            this.dgvDinhKhoan.RowHeadersVisible = false;
-            this.dgvDinhKhoan.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDinhKhoan.Size = new System.Drawing.Size(1028, 200);
-            this.dgvDinhKhoan.TabIndex = 0;
-
-            // 
             // frmKeToanChiTiet
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -771,19 +481,6 @@ namespace DNQH_KeToanBanHang.Forms
             ((System.ComponentModel.ISupportInitialize)(this.dgvSanPham)).EndInit();
             this.pnlSummarySP.ResumeLayout(false);
             this.pnlSummarySP.PerformLayout();
-            this.tabHoaDon.ResumeLayout(false);
-            this.pnlFilterHDB.ResumeLayout(false);
-            this.pnlFilterHDB.PerformLayout();
-            this.pnlHDBInfo.ResumeLayout(false);
-            this.pnlHDBInfo.PerformLayout();
-            this.grpMatHang.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMatHang)).EndInit();
-            this.grpKetoanLienKet.ResumeLayout(false);
-            this.tabSubDetails.ResumeLayout(false);
-            this.tabSubPhieuThu.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPhieuThu)).EndInit();
-            this.tabSubDinhKhoan.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDinhKhoan)).EndInit();
             this.ResumeLayout(false);
         }
 
@@ -828,30 +525,5 @@ namespace DNQH_KeToanBanHang.Forms
         private System.Windows.Forms.Panel pnlSummarySP;
         private System.Windows.Forms.Label lblSPTongSoLuong;
         private System.Windows.Forms.Label lblSPTongDoanhThu;
-
-        // Tab HDB
-        private System.Windows.Forms.TabPage tabHoaDon;
-        private System.Windows.Forms.Panel pnlFilterHDB;
-        private System.Windows.Forms.Label lblChonHDB;
-        private System.Windows.Forms.ComboBox cboHoaDon;
-        private System.Windows.Forms.Button btnXemHDB;
-        private System.Windows.Forms.Button btnXuatCsvHDB;
-        private System.Windows.Forms.Button btnInHDB;
-        private System.Windows.Forms.Panel pnlHDBInfo;
-        private System.Windows.Forms.Label lblHDBMa;
-        private System.Windows.Forms.Label lblHDBNgay;
-        private System.Windows.Forms.Label lblHDBKhachHang;
-        private System.Windows.Forms.Label lblHDBTongTien;
-        private System.Windows.Forms.Label lblHDBDaThu;
-        private System.Windows.Forms.Label lblHDBConLai;
-        private System.Windows.Forms.Label lblHDBTrangThai;
-        private System.Windows.Forms.GroupBox grpMatHang;
-        private System.Windows.Forms.DataGridView dgvMatHang;
-        private System.Windows.Forms.GroupBox grpKetoanLienKet;
-        private System.Windows.Forms.TabControl tabSubDetails;
-        private System.Windows.Forms.TabPage tabSubPhieuThu;
-        private System.Windows.Forms.DataGridView dgvPhieuThu;
-        private System.Windows.Forms.TabPage tabSubDinhKhoan;
-        private System.Windows.Forms.DataGridView dgvDinhKhoan;
     }
 }

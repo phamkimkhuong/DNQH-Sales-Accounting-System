@@ -460,188 +460,359 @@ GO
 
 -- ============================================================================
 -- 9. NẠP DANH MỤC ĐƠN ĐẶT HÀNG & CHI TIẾT (DONDATHANG, CHITIETDONDATHANG)
+-- Số liệu giao dịch chuẩn mẫu Tháng 10 & Tháng 11/2026
 -- ============================================================================
-PRINT N'==> Đang nạp danh mục Đơn Đặt Hàng...';
+PRINT N'==> Đang nạp danh mục Đơn Đặt Hàng (Tháng 10 & Tháng 11/2026)...';
 
--- DDH0000001: Đã lập HĐ & Giao hàng (Cty Minh Khang)
+-- DDH0000001: Tháng 10 - Cty Minh Khang (Đã lập HĐ & Xuất kho, Đã thanh toán)
 IF NOT EXISTS (SELECT 1 FROM DONDATHANG WHERE MaDDH = 'DDH0000001')
     INSERT INTO DONDATHANG (MaDDH, MaNV, MaKH, NgayDat, NgayGiaoDuKien, TongTien, TrangThai, GhiChu)
-    VALUES ('DDH0000001', 'NV002', 'KH001', DATEADD(DAY, -5, GETDATE()), CAST(DATEADD(DAY, -3, GETDATE()) AS date), 89300000, N'Đã lập hóa đơn', N'Hợp đồng cung cấp thiết bị tin học đợt 1');
+    VALUES ('DDH0000001', 'NV002', 'KH001', '2026-10-01 09:30:00', '2026-10-04', 89300000, N'Đã lập hóa đơn', N'Hợp đồng cung cấp thiết bị tin học đợt 1');
 ELSE
-    UPDATE DONDATHANG SET MaNV = 'NV002', MaKH = 'KH001', NgayDat = DATEADD(DAY, -5, GETDATE()), NgayGiaoDuKien = CAST(DATEADD(DAY, -3, GETDATE()) AS date), TongTien = 89300000, TrangThai = N'Đã lập hóa đơn', GhiChu = N'Hợp đồng cung cấp thiết bị tin học đợt 1' WHERE MaDDH = 'DDH0000001';
+    UPDATE DONDATHANG SET MaNV = 'NV002', MaKH = 'KH001', NgayDat = '2026-10-01 09:30:00', NgayGiaoDuKien = '2026-10-04', TongTien = 89300000, TrangThai = N'Đã lập hóa đơn', GhiChu = N'Hợp đồng cung cấp thiết bị tin học đợt 1' WHERE MaDDH = 'DDH0000001';
 
 DELETE FROM CHITIETDONDATHANG WHERE MaDDH = 'DDH0000001';
 INSERT INTO CHITIETDONDATHANG (MaDDH, MaSP, SoLuong, DonGia, GiamGia, ThanhTien) VALUES
 ('DDH0000001', 'SP006', 5, 15490000, 0, 77450000),
 ('DDH0000001', 'SP003', 3, 3950000, 0, 11850000);
 
--- DDH0000002: Đã lập HĐ & ĐANG CHỜ XUẤT KHO (Đại học Kinh Tế Quốc Dân)
+-- DDH0000002: Tháng 10 - ĐH Kinh Tế Quốc Dân (Đã lập HĐ, Thanh toán 1 phần)
 IF NOT EXISTS (SELECT 1 FROM DONDATHANG WHERE MaDDH = 'DDH0000002')
     INSERT INTO DONDATHANG (MaDDH, MaNV, MaKH, NgayDat, NgayGiaoDuKien, TongTien, TrangThai, GhiChu)
-    VALUES ('DDH0000002', 'NV002', 'KH004', GETDATE(), CAST(DATEADD(DAY, 2, GETDATE()) AS date), 147600000, N'Đã lập hóa đơn', N'Dự án trang bị phòng thực hành tin học NEU');
+    VALUES ('DDH0000002', 'NV002', 'KH004', '2026-10-03 08:45:00', '2026-10-07', 147600000, N'Đã lập hóa đơn', N'Dự án trang bị phòng thực hành tin học NEU');
 ELSE
-    UPDATE DONDATHANG SET MaNV = 'NV002', MaKH = 'KH004', NgayDat = GETDATE(), NgayGiaoDuKien = CAST(DATEADD(DAY, 2, GETDATE()) AS date), TongTien = 147600000, TrangThai = N'Đã lập hóa đơn', GhiChu = N'Dự án trang bị phòng thực hành tin học NEU' WHERE MaDDH = 'DDH0000002';
+    UPDATE DONDATHANG SET MaNV = 'NV002', MaKH = 'KH004', NgayDat = '2026-10-03 08:45:00', NgayGiaoDuKien = '2026-10-07', TongTien = 147600000, TrangThai = N'Đã lập hóa đơn', GhiChu = N'Dự án trang bị phòng thực hành tin học NEU' WHERE MaDDH = 'DDH0000002';
 
 DELETE FROM CHITIETDONDATHANG WHERE MaDDH = 'DDH0000002';
 INSERT INTO CHITIETDONDATHANG (MaDDH, MaSP, SoLuong, DonGia, GiamGia, ThanhTien) VALUES
 ('DDH0000002', 'SP004', 8, 14800000, 0, 118400000),
 ('DDH0000002', 'SP009', 8, 3650000, 0, 29200000);
 
--- DDH0000003: Đã lập HĐ & ĐÃ XUẤT KHO 1 PHẦN (Tập Đoàn Xây Dựng Hòa Bình)
+-- DDH0000003: Tháng 10 - Cty Xây Dựng Hòa Bình (Đã lập HĐ, Đã xuất 1 phần, Chưa thanh toán)
 IF NOT EXISTS (SELECT 1 FROM DONDATHANG WHERE MaDDH = 'DDH0000003')
     INSERT INTO DONDATHANG (MaDDH, MaNV, MaKH, NgayDat, NgayGiaoDuKien, TongTien, TrangThai, GhiChu)
-    VALUES ('DDH0000003', 'NV002', 'KH007', DATEADD(DAY, -2, GETDATE()), CAST(DATEADD(DAY, 1, GETDATE()) AS date), 51000000, N'Đã lập hóa đơn', N'Cung cấp TV và phụ kiện phòng họp Ban Giám Đốc');
+    VALUES ('DDH0000003', 'NV002', 'KH007', '2026-10-05 14:00:00', '2026-10-08', 51000000, N'Đã lập hóa đơn', N'Cung cấp TV và phụ kiện phòng họp Ban Giám Đốc');
 ELSE
-    UPDATE DONDATHANG SET MaNV = 'NV002', MaKH = 'KH007', NgayDat = DATEADD(DAY, -2, GETDATE()), NgayGiaoDuKien = CAST(DATEADD(DAY, 1, GETDATE()) AS date), TongTien = 51000000, TrangThai = N'Đã lập hóa đơn', GhiChu = N'Cung cấp TV và phụ kiện phòng họp Ban Giám Đốc' WHERE MaDDH = 'DDH0000003';
+    UPDATE DONDATHANG SET MaNV = 'NV002', MaKH = 'KH007', NgayDat = '2026-10-05 14:00:00', NgayGiaoDuKien = '2026-10-08', TongTien = 51000000, TrangThai = N'Đã lập hóa đơn', GhiChu = N'Cung cấp TV và phụ kiện phòng họp Ban Giám Đốc' WHERE MaDDH = 'DDH0000003';
 
 DELETE FROM CHITIETDONDATHANG WHERE MaDDH = 'DDH0000003';
 INSERT INTO CHITIETDONDATHANG (MaDDH, MaSP, SoLuong, DonGia, GiamGia, ThanhTien) VALUES
 ('DDH0000003', 'SP010', 4, 11200000, 0, 44800000),
 ('DDH0000003', 'SP014', 10, 620000, 0, 6200000);
 
--- DDH0000004: ĐƠN MỚI CHƯA LẬP HÓA ĐƠN (Bệnh viện Vinmec - Dùng để demo lập hóa đơn)
+-- DDH0000004: Tháng 10 - BV Vinmec (Đơn mới ĐÃ DUYỆT - Demo chức năng Lập Hóa Đơn)
 IF NOT EXISTS (SELECT 1 FROM DONDATHANG WHERE MaDDH = 'DDH0000004')
     INSERT INTO DONDATHANG (MaDDH, MaNV, MaKH, NgayDat, NgayGiaoDuKien, TongTien, TrangThai, GhiChu)
-    VALUES ('DDH0000004', 'NV002', 'KH005', DATEADD(DAY, -1, GETDATE()), CAST(DATEADD(DAY, 3, GETDATE()) AS date), 26600000, N'Đã duyệt', N'Trang bị máy lọc không khí và gia dụng cho khu điều trị');
+    VALUES ('DDH0000004', 'NV002', 'KH005', '2026-10-06 16:30:00', '2026-10-10', 26600000, N'Đã duyệt', N'Trang bị máy lọc không khí và gia dụng cho khu điều trị');
 ELSE
-    UPDATE DONDATHANG SET MaNV = 'NV002', MaKH = 'KH005', NgayDat = DATEADD(DAY, -1, GETDATE()), NgayGiaoDuKien = CAST(DATEADD(DAY, 3, GETDATE()) AS date), TongTien = 26600000, TrangThai = N'Đã duyệt', GhiChu = N'Trang bị máy lọc không khí và gia dụng cho khu điều trị' WHERE MaDDH = 'DDH0000004';
+    UPDATE DONDATHANG SET MaNV = 'NV002', MaKH = 'KH005', NgayDat = '2026-10-06 16:30:00', NgayGiaoDuKien = '2026-10-10', TongTien = 26600000, TrangThai = N'Đã duyệt', GhiChu = N'Trang bị máy lọc không khí và gia dụng cho khu điều trị' WHERE MaDDH = 'DDH0000004';
 
 DELETE FROM CHITIETDONDATHANG WHERE MaDDH = 'DDH0000004';
 INSERT INTO CHITIETDONDATHANG (MaDDH, MaSP, SoLuong, DonGia, GiamGia, ThanhTien) VALUES
 ('DDH0000004', 'SP002', 6, 3200000, 0, 19200000),
 ('DDH0000004', 'SP001', 4, 1850000, 0, 7400000);
+
+-- DDH0000005: Tháng 11 - Tập Đoàn Á Châu (Đã lập HĐ, Đã xuất kho, Đã thanh toán)
+IF NOT EXISTS (SELECT 1 FROM DONDATHANG WHERE MaDDH = 'DDH0000005')
+    INSERT INTO DONDATHANG (MaDDH, MaNV, MaKH, NgayDat, NgayGiaoDuKien, TongTien, TrangThai, GhiChu)
+    VALUES ('DDH0000005', 'NV005', 'KH002', '2026-11-02 09:00:00', '2026-11-05', 63530000, N'Đã lập hóa đơn', N'Cung cấp tủ lạnh và máy điều hòa cho văn phòng Á Châu Đà Nẵng');
+ELSE
+    UPDATE DONDATHANG SET MaNV = 'NV005', MaKH = 'KH002', NgayDat = '2026-11-02 09:00:00', NgayGiaoDuKien = '2026-11-05', TongTien = 63530000, TrangThai = N'Đã lập hóa đơn', GhiChu = N'Cung cấp tủ lạnh và máy điều hòa cho văn phòng Á Châu Đà Nẵng' WHERE MaDDH = 'DDH0000005';
+
+DELETE FROM CHITIETDONDATHANG WHERE MaDDH = 'DDH0000005';
+INSERT INTO CHITIETDONDATHANG (MaDDH, MaSP, SoLuong, DonGia, GiamGia, ThanhTien) VALUES
+('DDH0000005', 'SP008', 3, 11990000, 0, 35970000),
+('DDH0000005', 'SP007', 4, 6890000, 0, 27560000);
+
+-- DDH0000006: Tháng 11 - Chuỗi Cửa Hàng Toàn Cầu (Đã lập HĐ, Thanh toán 1 phần)
+IF NOT EXISTS (SELECT 1 FROM DONDATHANG WHERE MaDDH = 'DDH0000006')
+    INSERT INTO DONDATHANG (MaDDH, MaNV, MaKH, NgayDat, NgayGiaoDuKien, TongTien, TrangThai, GhiChu)
+    VALUES ('DDH0000006', 'NV002', 'KH003', '2026-11-05 08:30:00', '2026-11-08', 89460000, N'Đã lập hóa đơn', N'Cung cấp thiết bị gia dụng và mực in cho chuỗi siêu thị');
+ELSE
+    UPDATE DONDATHANG SET MaNV = 'NV002', MaKH = 'KH003', NgayDat = '2026-11-05 08:30:00', NgayGiaoDuKien = '2026-11-08', TongTien = 89460000, TrangThai = N'Đã lập hóa đơn', GhiChu = N'Cung cấp thiết bị gia dụng và mực in cho chuỗi siêu thị' WHERE MaDDH = 'DDH0000006';
+
+DELETE FROM CHITIETDONDATHANG WHERE MaDDH = 'DDH0000006';
+INSERT INTO CHITIETDONDATHANG (MaDDH, MaSP, SoLuong, DonGia, GiamGia, ThanhTien) VALUES
+('DDH0000006', 'SP005', 4, 9490000, 0, 37960000),
+('DDH0000006', 'SP011', 5, 7800000, 0, 39000000),
+('DDH0000006', 'SP013', 10, 1250000, 0, 12500000);
+
+-- DDH0000007: Tháng 11 - Cty Phương Nam (Đã lập HĐ, Đã xuất kho, Chưa thanh toán)
+IF NOT EXISTS (SELECT 1 FROM DONDATHANG WHERE MaDDH = 'DDH0000007')
+    INSERT INTO DONDATHANG (MaDDH, MaNV, MaKH, NgayDat, NgayGiaoDuKien, TongTien, TrangThai, GhiChu)
+    VALUES ('DDH0000007', 'NV002', 'KH006', '2026-11-10 10:00:00', '2026-11-14', 34580000, N'Đã lập hóa đơn', N'Cung cấp Laptop Dell và giấy in văn phòng Phương Nam');
+ELSE
+    UPDATE DONDATHANG SET MaNV = 'NV002', MaKH = 'KH006', NgayDat = '2026-11-10 10:00:00', NgayGiaoDuKien = '2026-11-14', TongTien = 34580000, TrangThai = N'Đã lập hóa đơn', GhiChu = N'Cung cấp Laptop Dell và giấy in văn phòng Phương Nam' WHERE MaDDH = 'DDH0000007';
+
+DELETE FROM CHITIETDONDATHANG WHERE MaDDH = 'DDH0000007';
+INSERT INTO CHITIETDONDATHANG (MaDDH, MaSP, SoLuong, DonGia, GiamGia, ThanhTien) VALUES
+('DDH0000007', 'SP006', 2, 15490000, 0, 30980000),
+('DDH0000007', 'SP012', 50, 72000, 0, 3600000);
+
+-- DDH0000008: Tháng 11 - Điện Máy Xanh Miền Bắc (Đơn mới ĐÃ DUYỆT - Demo tháng 11)
+IF NOT EXISTS (SELECT 1 FROM DONDATHANG WHERE MaDDH = 'DDH0000008')
+    INSERT INTO DONDATHANG (MaDDH, MaNV, MaKH, NgayDat, NgayGiaoDuKien, TongTien, TrangThai, GhiChu)
+    VALUES ('DDH0000008', 'NV002', 'KH008', '2026-11-15 14:00:00', '2026-11-20', 34500000, N'Đã duyệt', N'Đơn đặt hàng cung cấp gia dụng đợt 2 cho Điện Máy Xanh');
+ELSE
+    UPDATE DONDATHANG SET MaNV = 'NV002', MaKH = 'KH008', NgayDat = '2026-11-15 14:00:00', NgayGiaoDuKien = '2026-11-20', TongTien = 34500000, TrangThai = N'Đã duyệt', GhiChu = N'Đơn đặt hàng cung cấp gia dụng đợt 2 cho Điện Máy Xanh' WHERE MaDDH = 'DDH0000008';
+
+DELETE FROM CHITIETDONDATHANG WHERE MaDDH = 'DDH0000008';
+INSERT INTO CHITIETDONDATHANG (MaDDH, MaSP, SoLuong, DonGia, GiamGia, ThanhTien) VALUES
+('DDH0000008', 'SP001', 10, 1850000, 0, 18500000),
+('DDH0000008', 'SP002', 5, 3200000, 0, 16000000);
 GO
 
 -- ============================================================================
 -- 10. NẠP DANH MỤC HÓA ĐƠN BÁN HÀNG & CHI TIẾT (HOADONBAN, CHITIETHOADONBAN)
 -- ============================================================================
-PRINT N'==> Đang nạp danh mục Hóa Đơn Bán Hàng...';
+PRINT N'==> Đang nạp danh mục Hóa Đơn Bán Hàng (Tháng 10 & Tháng 11/2026)...';
 
--- HDB0000001 (Theo DDH0000001 - Cty Minh Khang - Đã thanh toán 100%)
+-- HDB0000001 (DDH0000001 - Cty Minh Khang - Đã thanh toán 100%)
 IF NOT EXISTS (SELECT 1 FROM HOADONBAN WHERE MaHDB = 'HDB0000001')
     INSERT INTO HOADONBAN (MaHDB, MaNV, MaDDH, MaKH, NgayLap, TongTien, GhiChu, TrangThai)
-    VALUES ('HDB0000001', 'NV002', 'DDH0000001', 'KH001', DATEADD(DAY, -4, GETDATE()), 89300000, N'Hóa đơn GTGT điện tử cung cấp thiết bị văn phòng', N'Đã thanh toán');
+    VALUES ('HDB0000001', 'NV002', 'DDH0000001', 'KH001', '2026-10-02 10:15:00', 89300000, N'Hóa đơn GTGT điện tử cung cấp thiết bị văn phòng', N'Đã thanh toán');
 ELSE
-    UPDATE HOADONBAN SET MaNV = 'NV002', MaDDH = 'DDH0000001', MaKH = 'KH001', NgayLap = DATEADD(DAY, -4, GETDATE()), TongTien = 89300000, GhiChu = N'Hóa đơn GTGT điện tử cung cấp thiết bị văn phòng', TrangThai = N'Đã thanh toán' WHERE MaHDB = 'HDB0000001';
+    UPDATE HOADONBAN SET MaNV = 'NV002', MaDDH = 'DDH0000001', MaKH = 'KH001', NgayLap = '2026-10-02 10:15:00', TongTien = 89300000, GhiChu = N'Hóa đơn GTGT điện tử cung cấp thiết bị văn phòng', TrangThai = N'Đã thanh toán' WHERE MaHDB = 'HDB0000001';
 
 DELETE FROM CHITIETHOADONBAN WHERE MaHDB = 'HDB0000001';
 INSERT INTO CHITIETHOADONBAN (MaHDB, MaSP, SoLuong, DonGia, GiamGia, ThanhTien) VALUES
 ('HDB0000001', 'SP006', 5, 15490000, 0, 77450000),
 ('HDB0000001', 'SP003', 3, 3950000, 0, 11850000);
 
--- HDB0000002 (Theo DDH0000002 - ĐH Kinh Tế Quốc Dân - CHỜ XUẤT KHO)
+-- HDB0000002 (DDH0000002 - ĐH Kinh Tế Quốc Dân - Thanh toán một phần 70tr/147.6tr)
 IF NOT EXISTS (SELECT 1 FROM HOADONBAN WHERE MaHDB = 'HDB0000002')
     INSERT INTO HOADONBAN (MaHDB, MaNV, MaDDH, MaKH, NgayLap, TongTien, GhiChu, TrangThai)
-    VALUES ('HDB0000002', 'NV002', 'DDH0000002', 'KH004', GETDATE(), 147600000, N'Hóa đơn bán hàng theo dự án phòng lab NEU', N'Chưa thanh toán');
+    VALUES ('HDB0000002', 'NV002', 'DDH0000002', 'KH004', '2026-10-04 09:30:00', 147600000, N'Hóa đơn bán hàng theo dự án phòng lab NEU', N'Thanh toán một phần');
 ELSE
-    UPDATE HOADONBAN SET MaNV = 'NV002', MaDDH = 'DDH0000002', MaKH = 'KH004', NgayLap = GETDATE(), TongTien = 147600000, GhiChu = N'Hóa đơn bán hàng theo dự án phòng lab NEU', TrangThai = N'Chưa thanh toán' WHERE MaHDB = 'HDB0000002';
+    UPDATE HOADONBAN SET MaNV = 'NV002', MaDDH = 'DDH0000002', MaKH = 'KH004', NgayLap = '2026-10-04 09:30:00', TongTien = 147600000, GhiChu = N'Hóa đơn bán hàng theo dự án phòng lab NEU', TrangThai = N'Thanh toán một phần' WHERE MaHDB = 'HDB0000002';
 
 DELETE FROM CHITIETHOADONBAN WHERE MaHDB = 'HDB0000002';
 INSERT INTO CHITIETHOADONBAN (MaHDB, MaSP, SoLuong, DonGia, GiamGia, ThanhTien) VALUES
 ('HDB0000002', 'SP004', 8, 14800000, 0, 118400000),
 ('HDB0000002', 'SP009', 8, 3650000, 0, 29200000);
 
--- HDB0000003 (Theo DDH0000003 - Tập Đoàn Hòa Bình - ĐÃ XUẤT 1 PHẦN, NỢ 50%)
+-- HDB0000003 (DDH0000003 - Tập Đoàn Hòa Bình - Nợ 100% = 51tr)
 IF NOT EXISTS (SELECT 1 FROM HOADONBAN WHERE MaHDB = 'HDB0000003')
     INSERT INTO HOADONBAN (MaHDB, MaNV, MaDDH, MaKH, NgayLap, TongTien, GhiChu, TrangThai)
-    VALUES ('HDB0000003', 'NV002', 'DDH0000003', 'KH007', DATEADD(DAY, -2, GETDATE()), 51000000, N'Hóa đơn cung cấp TV & bàn phím chuột', N'Thanh toán một phần');
+    VALUES ('HDB0000003', 'NV002', 'DDH0000003', 'KH007', '2026-10-06 11:00:00', 51000000, N'Hóa đơn cung cấp TV & bàn phím chuột', N'Chưa thanh toán');
 ELSE
-    UPDATE HOADONBAN SET MaNV = 'NV002', MaDDH = 'DDH0000003', MaKH = 'KH007', NgayLap = DATEADD(DAY, -2, GETDATE()), TongTien = 51000000, GhiChu = N'Hóa đơn cung cấp TV & bàn phím chuột', TrangThai = N'Thanh toán một phần' WHERE MaHDB = 'HDB0000003';
+    UPDATE HOADONBAN SET MaNV = 'NV002', MaDDH = 'DDH0000003', MaKH = 'KH007', NgayLap = '2026-10-06 11:00:00', TongTien = 51000000, GhiChu = N'Hóa đơn cung cấp TV & bàn phím chuột', TrangThai = N'Chưa thanh toán' WHERE MaHDB = 'HDB0000003';
 
 DELETE FROM CHITIETHOADONBAN WHERE MaHDB = 'HDB0000003';
 INSERT INTO CHITIETHOADONBAN (MaHDB, MaSP, SoLuong, DonGia, GiamGia, ThanhTien) VALUES
 ('HDB0000003', 'SP010', 4, 11200000, 0, 44800000),
 ('HDB0000003', 'SP014', 10, 620000, 0, 6200000);
+
+-- HDB0000004 (DDH0000005 - Tập Đoàn Á Châu - Tháng 11 - Đã thanh toán 100%)
+IF NOT EXISTS (SELECT 1 FROM HOADONBAN WHERE MaHDB = 'HDB0000004')
+    INSERT INTO HOADONBAN (MaHDB, MaNV, MaDDH, MaKH, NgayLap, TongTien, GhiChu, TrangThai)
+    VALUES ('HDB0000004', 'NV005', 'DDH0000005', 'KH002', '2026-11-03 10:30:00', 63530000, N'Hóa đơn cung cấp điều hòa và tủ lạnh chi nhánh Đà Nẵng', N'Đã thanh toán');
+ELSE
+    UPDATE HOADONBAN SET MaNV = 'NV005', MaDDH = 'DDH0000005', MaKH = 'KH002', NgayLap = '2026-11-03 10:30:00', TongTien = 63530000, GhiChu = N'Hóa đơn cung cấp điều hòa và tủ lạnh chi nhánh Đà Nẵng', TrangThai = N'Đã thanh toán' WHERE MaHDB = 'HDB0000004';
+
+DELETE FROM CHITIETHOADONBAN WHERE MaHDB = 'HDB0000004';
+INSERT INTO CHITIETHOADONBAN (MaHDB, MaSP, SoLuong, DonGia, GiamGia, ThanhTien) VALUES
+('HDB0000004', 'SP008', 3, 11990000, 0, 35970000),
+('HDB0000004', 'SP007', 4, 6890000, 0, 27560000);
+
+-- HDB0000005 (DDH0000006 - Chuỗi Toàn Cầu - Tháng 11 - Thanh toán một phần 45tr/89.46tr)
+IF NOT EXISTS (SELECT 1 FROM HOADONBAN WHERE MaHDB = 'HDB0000005')
+    INSERT INTO HOADONBAN (MaHDB, MaNV, MaDDH, MaKH, NgayLap, TongTien, GhiChu, TrangThai)
+    VALUES ('HDB0000005', 'NV002', 'DDH0000006', 'KH003', '2026-11-06 09:15:00', 89460000, N'Hóa đơn bán lẻ cung cấp thiết bị gia dụng Toàn Cầu', N'Thanh toán một phần');
+ELSE
+    UPDATE HOADONBAN SET MaNV = 'NV002', MaDDH = 'DDH0000006', MaKH = 'KH003', NgayLap = '2026-11-06 09:15:00', TongTien = 89460000, GhiChu = N'Hóa đơn bán lẻ cung cấp thiết bị gia dụng Toàn Cầu', TrangThai = N'Thanh toán một phần' WHERE MaHDB = 'HDB0000005';
+
+DELETE FROM CHITIETHOADONBAN WHERE MaHDB = 'HDB0000005';
+INSERT INTO CHITIETHOADONBAN (MaHDB, MaSP, SoLuong, DonGia, GiamGia, ThanhTien) VALUES
+('HDB0000005', 'SP005', 4, 9490000, 0, 37960000),
+('HDB0000005', 'SP011', 5, 7800000, 0, 39000000),
+('HDB0000005', 'SP013', 10, 1250000, 0, 12500000);
+
+-- HDB0000006 (DDH0000007 - Cty Phương Nam - Tháng 11 - Chưa thanh toán 34.58tr)
+IF NOT EXISTS (SELECT 1 FROM HOADONBAN WHERE MaHDB = 'HDB0000006')
+    INSERT INTO HOADONBAN (MaHDB, MaNV, MaDDH, MaKH, NgayLap, TongTien, GhiChu, TrangThai)
+    VALUES ('HDB0000006', 'NV002', 'DDH0000007', 'KH006', '2026-11-12 11:00:00', 34580000, N'Hóa đơn bán Laptop và giấy in công ty Phương Nam', N'Chưa thanh toán');
+ELSE
+    UPDATE HOADONBAN SET MaNV = 'NV002', MaDDH = 'DDH0000007', MaKH = 'KH006', NgayLap = '2026-11-12 11:00:00', TongTien = 34580000, GhiChu = N'Hóa đơn bán Laptop và giấy in công ty Phương Nam', TrangThai = N'Chưa thanh toán' WHERE MaHDB = 'HDB0000006';
+
+DELETE FROM CHITIETHOADONBAN WHERE MaHDB = 'HDB0000006';
+INSERT INTO CHITIETHOADONBAN (MaHDB, MaSP, SoLuong, DonGia, GiamGia, ThanhTien) VALUES
+('HDB0000006', 'SP006', 2, 15490000, 0, 30980000),
+('HDB0000006', 'SP012', 50, 72000, 0, 3600000);
 GO
 
 -- ============================================================================
 -- 11. NẠP DANH MỤC PHIẾU XUẤT KHO & CHI TIẾT (PHIEUXUATKHO, CHITIETPHIEUXUATKHO)
 -- ============================================================================
-PRINT N'==> Đang nạp danh mục Phiếu Xuất Kho...';
+PRINT N'==> Đang nạp danh mục Phiếu Xuất Kho (Tháng 10 & Tháng 11/2026)...';
 
--- PXK0000001: Xuất đủ cho HDB0000001 tại KHO01 (Kho Tổng Miền Bắc)
+-- PXK0000001: Tháng 10 - Xuất đủ cho HDB0000001 tại KHO01 (Kho Tổng Miền Bắc)
 IF NOT EXISTS (SELECT 1 FROM PHIEUXUATKHO WHERE MaPXK = 'PXK0000001')
     INSERT INTO PHIEUXUATKHO (MaPXK, MaNV, MaHDB, MaKho, NgayXuat, LyDoXuat, TrangThai)
-    VALUES ('PXK0000001', 'NV003', 'HDB0000001', 'KHO01', DATEADD(DAY, -4, GETDATE()), N'Xuất kho giao hàng theo hóa đơn bán HDB0000001', N'Đã xuất');
+    VALUES ('PXK0000001', 'NV003', 'HDB0000001', 'KHO01', '2026-10-02 14:00:00', N'Xuất kho giao hàng theo hóa đơn bán HDB0000001', N'Đã xuất');
 ELSE
-    UPDATE PHIEUXUATKHO SET MaNV = 'NV003', MaHDB = 'HDB0000001', MaKho = 'KHO01', NgayXuat = DATEADD(DAY, -4, GETDATE()), LyDoXuat = N'Xuất kho giao hàng theo hóa đơn bán HDB0000001', TrangThai = N'Đã xuất' WHERE MaPXK = 'PXK0000001';
+    UPDATE PHIEUXUATKHO SET MaNV = 'NV003', MaHDB = 'HDB0000001', MaKho = 'KHO01', NgayXuat = '2026-10-02 14:00:00', LyDoXuat = N'Xuất kho giao hàng theo hóa đơn bán HDB0000001', TrangThai = N'Đã xuất' WHERE MaPXK = 'PXK0000001';
 
 DELETE FROM CHITIETPHIEUXUATKHO WHERE MaPXK = 'PXK0000001';
 INSERT INTO CHITIETPHIEUXUATKHO (MaPXK, MaSP, SoLuongXuat) VALUES
 ('PXK0000001', 'SP006', 5),
 ('PXK0000001', 'SP003', 3);
 
--- PXK0000002: Xuất đợt 1 cho HDB0000003 tại KHO02 (Kho Miền Nam: Xuất 2 TV, 10 chuột phím)
+-- PXK0000002: Tháng 10 - Xuất đủ cho HDB0000002 tại KHO01 (Kho Tổng Miền Bắc)
 IF NOT EXISTS (SELECT 1 FROM PHIEUXUATKHO WHERE MaPXK = 'PXK0000002')
     INSERT INTO PHIEUXUATKHO (MaPXK, MaNV, MaHDB, MaKho, NgayXuat, LyDoXuat, TrangThai)
-    VALUES ('PXK0000002', 'NV003', 'HDB0000003', 'KHO02', DATEADD(DAY, -1, GETDATE()), N'Xuất kho giao hàng đợt 1 theo hóa đơn bán HDB0000003', N'Đã xuất');
+    VALUES ('PXK0000002', 'NV003', 'HDB0000002', 'KHO01', '2026-10-05 10:00:00', N'Xuất kho thiết bị phòng lab NEU theo HDB0000002', N'Đã xuất');
 ELSE
-    UPDATE PHIEUXUATKHO SET MaNV = 'NV003', MaHDB = 'HDB0000003', MaKho = 'KHO02', NgayXuat = DATEADD(DAY, -1, GETDATE()), LyDoXuat = N'Xuất kho giao hàng đợt 1 theo hóa đơn bán HDB0000003', TrangThai = N'Đã xuất' WHERE MaPXK = 'PXK0000002';
+    UPDATE PHIEUXUATKHO SET MaNV = 'NV003', MaHDB = 'HDB0000002', MaKho = 'KHO01', NgayXuat = '2026-10-05 10:00:00', LyDoXuat = N'Xuất kho thiết bị phòng lab NEU theo HDB0000002', TrangThai = N'Đã xuất' WHERE MaPXK = 'PXK0000002';
 
 DELETE FROM CHITIETPHIEUXUATKHO WHERE MaPXK = 'PXK0000002';
 INSERT INTO CHITIETPHIEUXUATKHO (MaPXK, MaSP, SoLuongXuat) VALUES
-('PXK0000002', 'SP010', 2),
-('PXK0000002', 'SP014', 10);
+('PXK0000002', 'SP004', 8),
+('PXK0000002', 'SP009', 8);
+
+-- PXK0000003: Tháng 10 - Xuất đợt 1 cho HDB0000003 tại KHO02 (Kho Miền Nam: Xuất 2 TV, 10 chuột phím)
+IF NOT EXISTS (SELECT 1 FROM PHIEUXUATKHO WHERE MaPXK = 'PXK0000003')
+    INSERT INTO PHIEUXUATKHO (MaPXK, MaNV, MaHDB, MaKho, NgayXuat, LyDoXuat, TrangThai)
+    VALUES ('PXK0000003', 'NV003', 'HDB0000003', 'KHO02', '2026-10-06 15:30:00', N'Xuất kho giao hàng đợt 1 theo hóa đơn bán HDB0000003', N'Đã xuất');
+ELSE
+    UPDATE PHIEUXUATKHO SET MaNV = 'NV003', MaHDB = 'HDB0000003', MaKho = 'KHO02', NgayXuat = '2026-10-06 15:30:00', LyDoXuat = N'Xuất kho giao hàng đợt 1 theo hóa đơn bán HDB0000003', TrangThai = N'Đã xuất' WHERE MaPXK = 'PXK0000003';
+
+DELETE FROM CHITIETPHIEUXUATKHO WHERE MaPXK = 'PXK0000003';
+INSERT INTO CHITIETPHIEUXUATKHO (MaPXK, MaSP, SoLuongXuat) VALUES
+('PXK0000003', 'SP010', 2),
+('PXK0000003', 'SP014', 10);
+
+-- PXK0000004: Tháng 11 - Xuất đủ cho HDB0000004 tại KHO03 (Kho Miền Trung)
+IF NOT EXISTS (SELECT 1 FROM PHIEUXUATKHO WHERE MaPXK = 'PXK0000004')
+    INSERT INTO PHIEUXUATKHO (MaPXK, MaNV, MaHDB, MaKho, NgayXuat, LyDoXuat, TrangThai)
+    VALUES ('PXK0000004', 'NV003', 'HDB0000004', 'KHO03', '2026-11-03 15:00:00', N'Xuất kho tủ lạnh điều hòa giao Á Châu theo HDB0000004', N'Đã xuất');
+ELSE
+    UPDATE PHIEUXUATKHO SET MaNV = 'NV003', MaHDB = 'HDB0000004', MaKho = 'KHO03', NgayXuat = '2026-11-03 15:00:00', LyDoXuat = N'Xuất kho tủ lạnh điều hòa giao Á Châu theo HDB0000004', TrangThai = N'Đã xuất' WHERE MaPXK = 'PXK0000004';
+
+DELETE FROM CHITIETPHIEUXUATKHO WHERE MaPXK = 'PXK0000004';
+INSERT INTO CHITIETPHIEUXUATKHO (MaPXK, MaSP, SoLuongXuat) VALUES
+('PXK0000004', 'SP008', 3),
+('PXK0000004', 'SP007', 4);
+
+-- PXK0000005: Tháng 11 - Xuất đủ cho HDB0000005 tại KHO02 (Kho Miền Nam)
+IF NOT EXISTS (SELECT 1 FROM PHIEUXUATKHO WHERE MaPXK = 'PXK0000005')
+    INSERT INTO PHIEUXUATKHO (MaPXK, MaNV, MaHDB, MaKho, NgayXuat, LyDoXuat, TrangThai)
+    VALUES ('PXK0000005', 'NV003', 'HDB0000005', 'KHO02', '2026-11-06 14:30:00', N'Xuất kho gia dụng theo hóa đơn bán HDB0000005', N'Đã xuất');
+ELSE
+    UPDATE PHIEUXUATKHO SET MaNV = 'NV003', MaHDB = 'HDB0000005', MaKho = 'KHO02', NgayXuat = '2026-11-06 14:30:00', LyDoXuat = N'Xuất kho gia dụng theo hóa đơn bán HDB0000005', TrangThai = N'Đã xuất' WHERE MaPXK = 'PXK0000005';
+
+DELETE FROM CHITIETPHIEUXUATKHO WHERE MaPXK = 'PXK0000005';
+INSERT INTO CHITIETPHIEUXUATKHO (MaPXK, MaSP, SoLuongXuat) VALUES
+('PXK0000005', 'SP005', 4),
+('PXK0000005', 'SP011', 5),
+('PXK0000005', 'SP013', 10);
+
+-- PXK0000006: Tháng 11 - Xuất đủ cho HDB0000006 tại KHO02 (Kho Miền Nam)
+IF NOT EXISTS (SELECT 1 FROM PHIEUXUATKHO WHERE MaPXK = 'PXK0000006')
+    INSERT INTO PHIEUXUATKHO (MaPXK, MaNV, MaHDB, MaKho, NgayXuat, LyDoXuat, TrangThai)
+    VALUES ('PXK0000006', 'NV003', 'HDB0000006', 'KHO02', '2026-11-12 15:00:00', N'Xuất kho giao thiết bị cho Cty Phương Nam theo HDB0000006', N'Đã xuất');
+ELSE
+    UPDATE PHIEUXUATKHO SET MaNV = 'NV003', MaHDB = 'HDB0000006', MaKho = 'KHO02', NgayXuat = '2026-11-12 15:00:00', LyDoXuat = N'Xuất kho giao thiết bị cho Cty Phương Nam theo HDB0000006', TrangThai = N'Đã xuất' WHERE MaPXK = 'PXK0000006';
+
+DELETE FROM CHITIETPHIEUXUATKHO WHERE MaPXK = 'PXK0000006';
+INSERT INTO CHITIETPHIEUXUATKHO (MaPXK, MaSP, SoLuongXuat) VALUES
+('PXK0000006', 'SP006', 2),
+('PXK0000006', 'SP012', 50);
 GO
 
 -- ============================================================================
 -- 12. NẠP DANH MỤC PHIẾU THU BÁN HÀNG (PHIEUTHU)
 -- ============================================================================
-PRINT N'==> Đang nạp danh mục Phiếu Thu...';
+PRINT N'==> Đang nạp danh mục Phiếu Thu (Tháng 10 & Tháng 11/2026)...';
 
--- PT0000001: Thu đủ 100% cho HDB0000001 (89.300.000 VNĐ)
+-- PT0000001: Tháng 10 - Thu đủ 100% cho HDB0000001 (89.300.000 VNĐ)
 IF NOT EXISTS (SELECT 1 FROM PHIEUTHU WHERE MaPT = 'PT0000001')
     INSERT INTO PHIEUTHU (MaPT, MaNV, MaHDB, NgayThu, NguoiNop, LyDoThu, SoTien, HinhThuc, GhiChu)
-    VALUES ('PT0000001', 'NV004', 'HDB0000001', DATEADD(DAY, -3, GETDATE()), N'Nguyễn Minh Khang (Giám đốc)', N'Thanh toán toàn bộ tiền hàng theo hóa đơn HDB0000001', 89300000, N'Chuyển khoản', N'Đã đối soát ủy nhiệm chi VCB thành công');
+    VALUES ('PT0000001', 'NV004', 'HDB0000001', '2026-10-03 11:00:00', N'Nguyễn Minh Khang (Giám đốc)', N'Thanh toán toàn bộ tiền hàng theo hóa đơn HDB0000001', 89300000, N'Chuyển khoản', N'Đã đối soát ủy nhiệm chi VCB thành công');
 ELSE
-    UPDATE PHIEUTHU SET MaNV = 'NV004', MaHDB = 'HDB0000001', NgayThu = DATEADD(DAY, -3, GETDATE()), NguoiNop = N'Nguyễn Minh Khang (Giám đốc)', LyDoThu = N'Thanh toán toàn bộ tiền hàng theo hóa đơn HDB0000001', SoTien = 89300000, HinhThuc = N'Chuyển khoản', GhiChu = N'Đã đối soát ủy nhiệm chi VCB thành công' WHERE MaPT = 'PT0000001';
+    UPDATE PHIEUTHU SET MaNV = 'NV004', MaHDB = 'HDB0000001', NgayThu = '2026-10-03 11:00:00', NguoiNop = N'Nguyễn Minh Khang (Giám đốc)', LyDoThu = N'Thanh toán toàn bộ tiền hàng theo hóa đơn HDB0000001', SoTien = 89300000, HinhThuc = N'Chuyển khoản', GhiChu = N'Đã đối soát ủy nhiệm chi VCB thành công' WHERE MaPT = 'PT0000001';
 
--- PT0000002: Tạm ứng 50% cho HDB0000003 (25.500.000 VNĐ)
+-- PT0000002: Tháng 10 - Tạm ứng tiền đợt 1 cho HDB0000002 (70.000.000 VNĐ)
 IF NOT EXISTS (SELECT 1 FROM PHIEUTHU WHERE MaPT = 'PT0000002')
     INSERT INTO PHIEUTHU (MaPT, MaNV, MaHDB, NgayThu, NguoiNop, LyDoThu, SoTien, HinhThuc, GhiChu)
-    VALUES ('PT0000002', 'NV004', 'HDB0000003', DATEADD(DAY, -1, GETDATE()), N'Lê Minh Tuấn (Mua hàng)', N'Tạm ứng 50% tiền hàng đợt 1 theo hóa đơn HDB0000003', 25500000, N'Chuyển khoản', N'Còn lại 25.500.000 đ thanh toán sau khi nhận đủ hàng');
+    VALUES ('PT0000002', 'NV004', 'HDB0000002', '2026-10-06 14:30:00', N'Ban Quản Lý Dự Án NEU', N'Tạm ứng tiền thiết bị phòng lab theo hóa đơn HDB0000002', 70000000, N'Chuyển khoản', N'Số còn lại thanh toán sau nghiệm thu bàn giao');
 ELSE
-    UPDATE PHIEUTHU SET MaNV = 'NV004', MaHDB = 'HDB0000003', NgayThu = DATEADD(DAY, -1, GETDATE()), NguoiNop = N'Lê Minh Tuấn (Mua hàng)', LyDoThu = N'Tạm ứng 50% tiền hàng đợt 1 theo hóa đơn HDB0000003', SoTien = 25500000, HinhThuc = N'Chuyển khoản', GhiChu = N'Còn lại 25.500.000 đ thanh toán sau khi nhận đủ hàng' WHERE MaPT = 'PT0000002';
+    UPDATE PHIEUTHU SET MaNV = 'NV004', MaHDB = 'HDB0000002', NgayThu = '2026-10-06 14:30:00', NguoiNop = N'Ban Quản Lý Dự Án NEU', LyDoThu = N'Tạm ứng tiền thiết bị phòng lab theo hóa đơn HDB0000002', SoTien = 70000000, HinhThuc = N'Chuyển khoản', GhiChu = N'Số còn lại thanh toán sau nghiệm thu bàn giao' WHERE MaPT = 'PT0000002';
+
+-- PT0000003: Tháng 11 - Thu đủ 100% cho HDB0000004 (63.530.000 VNĐ)
+IF NOT EXISTS (SELECT 1 FROM PHIEUTHU WHERE MaPT = 'PT0000003')
+    INSERT INTO PHIEUTHU (MaPT, MaNV, MaHDB, NgayThu, NguoiNop, LyDoThu, SoTien, HinhThuc, GhiChu)
+    VALUES ('PT0000003', 'NV004', 'HDB0000004', '2026-11-04 11:00:00', N'Trần Á Châu (Phó Giám Đốc)', N'Thanh toán toàn bộ tiền điều hòa tủ lạnh theo hóa đơn HDB0000004', 63530000, N'Chuyển khoản', N'Đã thanh toán qua ngân hàng BIDV');
+ELSE
+    UPDATE PHIEUTHU SET MaNV = 'NV004', MaHDB = 'HDB0000004', NgayThu = '2026-11-04 11:00:00', NguoiNop = N'Trần Á Châu (Phó Giám Đốc)', LyDoThu = N'Thanh toán toàn bộ tiền điều hòa tủ lạnh theo hóa đơn HDB0000004', SoTien = 63530000, HinhThuc = N'Chuyển khoản', GhiChu = N'Đã thanh toán qua ngân hàng BIDV' WHERE MaPT = 'PT0000003';
+
+-- PT0000004: Tháng 11 - Tạm ứng tiền đợt 1 cho HDB0000005 (45.000.000 VNĐ)
+IF NOT EXISTS (SELECT 1 FROM PHIEUTHU WHERE MaPT = 'PT0000004')
+    INSERT INTO PHIEUTHU (MaPT, MaNV, MaHDB, NgayThu, NguoiNop, LyDoThu, SoTien, HinhThuc, GhiChu)
+    VALUES ('PT0000004', 'NV004', 'HDB0000005', '2026-11-08 10:00:00', N'Kế toán Chuỗi Toàn Cầu', N'Tạm ứng đợt 1 tiền mua gia dụng theo hóa đơn HDB0000005', 45000000, N'Chuyển khoản', N'Còn lại 44.460.000 đ thanh toán cuối tháng 11');
+ELSE
+    UPDATE PHIEUTHU SET MaNV = 'NV004', MaHDB = 'HDB0000005', NgayThu = '2026-11-08 10:00:00', NguoiNop = N'Kế toán Chuỗi Toàn Cầu', LyDoThu = N'Tạm ứng đợt 1 tiền mua gia dụng theo hóa đơn HDB0000005', SoTien = 45000000, HinhThuc = N'Chuyển khoản', GhiChu = N'Còn lại 44.460.000 đ thanh toán cuối tháng 11' WHERE MaPT = 'PT0000004';
 GO
 
 -- ============================================================================
 -- 13. NẠP DANH MỤC PHIẾU CHI HOẠT ĐỘNG (PHIEUCHI)
 -- ============================================================================
-PRINT N'==> Đang nạp danh mục Phiếu Chi...';
+PRINT N'==> Đang nạp danh mục Phiếu Chi (Tháng 10 & Tháng 11/2026)...';
 
--- PC0000001: Chi tiếp khách ký hợp đồng
+-- PC0000001: Tháng 10 - Chi tiếp khách ký hợp đồng Minh Khang
 IF NOT EXISTS (SELECT 1 FROM PHIEUCHI WHERE MaPC = 'PC0000001')
     INSERT INTO PHIEUCHI (MaPC, MaNV, NgayChi, NguoiNhan, LyDoChi, SoTien, HinhThuc, GhiChu)
-    VALUES ('PC0000001', 'NV002', DATEADD(DAY, -4, GETDATE()), N'Trần Thị Hàng (Kinh doanh)', N'Chi tiếp khách ký kết hợp đồng cung cấp thiết bị Minh Khang', 2500000, N'Tiền mặt', N'Đã duyệt theo phiếu đề xuất thanh toán số 12/KD');
+    VALUES ('PC0000001', 'NV002', '2026-10-02 16:00:00', N'Trần Thị Hàng (Kinh doanh)', N'Chi tiếp khách ký kết hợp đồng cung cấp thiết bị Minh Khang', 2500000, N'Tiền mặt', N'Đã duyệt theo phiếu đề xuất thanh toán số 12/KD');
 ELSE
-    UPDATE PHIEUCHI SET MaNV = 'NV002', NgayChi = DATEADD(DAY, -4, GETDATE()), NguoiNhan = N'Trần Thị Hàng (Kinh doanh)', LyDoChi = N'Chi tiếp khách ký kết hợp đồng cung cấp thiết bị Minh Khang', SoTien = 2500000, HinhThuc = N'Tiền mặt', GhiChu = N'Đã duyệt theo phiếu đề xuất thanh toán số 12/KD' WHERE MaPC = 'PC0000001';
+    UPDATE PHIEUCHI SET MaNV = 'NV002', NgayChi = '2026-10-02 16:00:00', NguoiNhan = N'Trần Thị Hàng (Kinh doanh)', LyDoChi = N'Chi tiếp khách ký kết hợp đồng cung cấp thiết bị Minh Khang', SoTien = 2500000, HinhThuc = N'Tiền mặt', GhiChu = N'Đã duyệt theo phiếu đề xuất thanh toán số 12/KD' WHERE MaPC = 'PC0000001';
 
--- PC0000002: Chi vận chuyển hàng hóa
+-- PC0000002: Tháng 10 - Chi vận chuyển hàng hóa NEU
 IF NOT EXISTS (SELECT 1 FROM PHIEUCHI WHERE MaPC = 'PC0000002')
     INSERT INTO PHIEUCHI (MaPC, MaNV, NgayChi, NguoiNhan, LyDoChi, SoTien, HinhThuc, GhiChu)
-    VALUES ('PC0000002', 'NV003', DATEADD(DAY, -2, GETDATE()), N'Nhà xe vận tải Hưng Thịnh', N'Cước vận chuyển xe tải giao hàng cho đối tác Minh Khang', 1800000, N'Tiền mặt', N'Kèm hóa đơn dịch vụ vận chuyển đường bộ');
+    VALUES ('PC0000002', 'NV003', '2026-10-04 11:30:00', N'Nhà xe vận tải Hưng Thịnh', N'Cước vận chuyển thiết bị phòng lab giao trường ĐH NEU', 1800000, N'Tiền mặt', N'Kèm hóa đơn dịch vụ vận chuyển đường bộ');
 ELSE
-    UPDATE PHIEUCHI SET MaNV = 'NV003', NgayChi = DATEADD(DAY, -2, GETDATE()), NguoiNhan = N'Nhà xe vận tải Hưng Thịnh', LyDoChi = N'Cước vận chuyển xe tải giao hàng cho đối tác Minh Khang', SoTien = 1800000, HinhThuc = N'Tiền mặt', GhiChu = N'Kèm hóa đơn dịch vụ vận chuyển đường bộ' WHERE MaPC = 'PC0000002';
+    UPDATE PHIEUCHI SET MaNV = 'NV003', NgayChi = '2026-10-04 11:30:00', NguoiNhan = N'Nhà xe vận tải Hưng Thịnh', LyDoChi = N'Cước vận chuyển thiết bị phòng lab giao trường ĐH NEU', SoTien = 1800000, HinhThuc = N'Tiền mặt', GhiChu = N'Kèm hóa đơn dịch vụ vận chuyển đường bộ' WHERE MaPC = 'PC0000002';
 
--- PC0000003: Mua văn phòng phẩm
+-- PC0000003: Tháng 10 - Mua văn phòng phẩm
 IF NOT EXISTS (SELECT 1 FROM PHIEUCHI WHERE MaPC = 'PC0000003')
     INSERT INTO PHIEUCHI (MaPC, MaNV, NgayChi, NguoiNhan, LyDoChi, SoTien, HinhThuc, GhiChu)
-    VALUES ('PC0000003', 'NV004', DATEADD(DAY, -1, GETDATE()), N'Phạm Thị Toán (Kế toán)', N'Mua giấy in A4, bút viết, bìa còng lưu trữ chứng từ bán hàng', 650000, N'Tiền mặt', N'Hóa đơn bán lẻ Công ty CP VPP Hồng Hà');
+    VALUES ('PC0000003', 'NV004', '2026-10-06 10:15:00', N'Phạm Thị Toán (Kế toán)', N'Mua giấy in A4, bút viết, bìa còng lưu trữ chứng từ bán hàng', 650000, N'Tiền mặt', N'Hóa đơn bán lẻ Công ty CP VPP Hồng Hà');
 ELSE
-    UPDATE PHIEUCHI SET MaNV = 'NV004', NgayChi = DATEADD(DAY, -1, GETDATE()), NguoiNhan = N'Phạm Thị Toán (Kế toán)', LyDoChi = N'Mua giấy in A4, bút viết, bìa còng lưu trữ chứng từ bán hàng', SoTien = 650000, HinhThuc = N'Tiền mặt', GhiChu = N'Hóa đơn bán lẻ Công ty CP VPP Hồng Hà' WHERE MaPC = 'PC0000003';
+    UPDATE PHIEUCHI SET MaNV = 'NV004', NgayChi = '2026-10-06 10:15:00', NguoiNhan = N'Phạm Thị Toán (Kế toán)', LyDoChi = N'Mua giấy in A4, bút viết, bìa còng lưu trữ chứng từ bán hàng', SoTien = 650000, HinhThuc = N'Tiền mặt', GhiChu = N'Hóa đơn bán lẻ Công ty CP VPP Hồng Hà' WHERE MaPC = 'PC0000003';
+
+-- PC0000004: Tháng 11 - Chi tiếp đối tác Á Châu Đà Nẵng
+IF NOT EXISTS (SELECT 1 FROM PHIEUCHI WHERE MaPC = 'PC0000004')
+    INSERT INTO PHIEUCHI (MaPC, MaNV, NgayChi, NguoiNhan, LyDoChi, SoTien, HinhThuc, GhiChu)
+    VALUES ('PC0000004', 'NV005', '2026-11-03 16:30:00', N'Hoàng Minh Đức (Kinh doanh)', N'Chi phí tiếp đối tác Tập đoàn Á Châu tại Đà Nẵng', 3200000, N'Tiền mặt', N'Theo giấy đề nghị tạm ứng công tác phí miền Trung');
+ELSE
+    UPDATE PHIEUCHI SET MaNV = 'NV005', NgayChi = '2026-11-03 16:30:00', NguoiNhan = N'Hoàng Minh Đức (Kinh doanh)', LyDoChi = N'Chi phí tiếp đối tác Tập đoàn Á Châu tại Đà Nẵng', SoTien = 3200000, HinhThuc = N'Tiền mặt', GhiChu = N'Theo giấy đề nghị tạm ứng công tác phí miền Trung' WHERE MaPC = 'PC0000004';
+
+-- PC0000005: Tháng 11 - Cước vận chuyển giao hàng Chuỗi Toàn Cầu
+IF NOT EXISTS (SELECT 1 FROM PHIEUCHI WHERE MaPC = 'PC0000005')
+    INSERT INTO PHIEUCHI (MaPC, MaNV, NgayChi, NguoiNhan, LyDoChi, SoTien, HinhThuc, GhiChu)
+    VALUES ('PC0000005', 'NV003', '2026-11-06 17:00:00', N'Đội xe vận tải Viettel Post', N'Cước vận chuyển hàng cho Chuỗi Cửa Hàng Toàn Cầu', 2100000, N'Tiền mặt', N'Phiếu thu tiền cước vận chuyển đường bộ');
+ELSE
+    UPDATE PHIEUCHI SET MaNV = 'NV003', NgayChi = '2026-11-06 17:00:00', NguoiNhan = N'Đội xe vận tải Viettel Post', LyDoChi = N'Cước vận chuyển hàng cho Chuỗi Cửa Hàng Toàn Cầu', SoTien = 2100000, HinhThuc = N'Tiền mặt', GhiChu = N'Phiếu thu tiền cước vận chuyển đường bộ' WHERE MaPC = 'PC0000005';
+
+-- PC0000006: Tháng 11 - Tiền điện thoại internet văn phòng tháng 11
+IF NOT EXISTS (SELECT 1 FROM PHIEUCHI WHERE MaPC = 'PC0000006')
+    INSERT INTO PHIEUCHI (MaPC, MaNV, NgayChi, NguoiNhan, LyDoChi, SoTien, HinhThuc, GhiChu)
+    VALUES ('PC0000006', 'NV004', '2026-11-10 09:30:00', N'VNPT Vinaphone', N'Thanh toán tiền điện thoại internet văn phòng tháng 11/2026', 1200000, N'Tiền mặt', N'Hóa đơn điện tử cước viễn thông tháng 11');
+ELSE
+    UPDATE PHIEUCHI SET MaNV = 'NV004', NgayChi = '2026-11-10 09:30:00', NguoiNhan = N'VNPT Vinaphone', LyDoChi = N'Thanh toán tiền điện thoại internet văn phòng tháng 11/2026', SoTien = 1200000, HinhThuc = N'Tiền mặt', GhiChu = N'Hóa đơn điện tử cước viễn thông tháng 11' WHERE MaPC = 'PC0000006';
 GO
 
 -- ============================================================================
 -- 14. NẠP DANH MỤC CHỨNG TỪ KẾ TOÁN & ĐỊNH KHOẢN (CHUNGTU, CHITIETCHUNGTU)
 -- ============================================================================
-PRINT N'==> Đang nạp danh mục Chứng Từ Kế Toán...';
+PRINT N'==> Đang nạp danh mục Chứng Từ Kế Toán (Tháng 10 & Tháng 11/2026)...';
 
--- CT0000001: Hạch toán nghiệp vụ bán hàng HDB0000001
+-- CT0000001: Tháng 10 - Hạch toán nghiệp vụ bán hàng HDB0000001 (Cty Minh Khang)
 IF NOT EXISTS (SELECT 1 FROM CHUNGTU WHERE MaCT = 'CT0000001')
     INSERT INTO CHUNGTU (MaCT, MaNV, MaHDB, NgayCT, LoaiCT, DienGiai)
-    VALUES ('CT0000001', 'NV004', 'HDB0000001', DATEADD(DAY, -3, GETDATE()), N'Hóa đơn bán hàng', N'Hạch toán doanh thu, giá vốn và thu tiền HDB0000001 - Cty Minh Khang');
+    VALUES ('CT0000001', 'NV004', 'HDB0000001', '2026-10-03 11:30:00', N'Hóa đơn bán hàng', N'Hạch toán doanh thu, giá vốn và thu tiền HDB0000001 - Cty Minh Khang');
 ELSE
-    UPDATE CHUNGTU SET MaNV = 'NV004', MaHDB = 'HDB0000001', NgayCT = DATEADD(DAY, -3, GETDATE()), LoaiCT = N'Hóa đơn bán hàng', DienGiai = N'Hạch toán doanh thu, giá vốn và thu tiền HDB0000001 - Cty Minh Khang' WHERE MaCT = 'CT0000001';
+    UPDATE CHUNGTU SET MaNV = 'NV004', MaHDB = 'HDB0000001', NgayCT = '2026-10-03 11:30:00', LoaiCT = N'Hóa đơn bán hàng', DienGiai = N'Hạch toán doanh thu, giá vốn và thu tiền HDB0000001 - Cty Minh Khang' WHERE MaCT = 'CT0000001';
 
 DELETE FROM CHITIETCHUNGTU WHERE MaCT = 'CT0000001';
 INSERT INTO CHITIETCHUNGTU (MaCT, STT, TaiKhoanNo, TaiKhoanCo, SoTien, DienGiai) VALUES
@@ -649,20 +820,99 @@ INSERT INTO CHITIETCHUNGTU (MaCT, STT, TaiKhoanNo, TaiKhoanCo, SoTien, DienGiai)
 ('CT0000001', 2, '131', '3331', 8118182, N'Thuế GTGT đầu ra phải nộp 10%'),
 ('CT0000001', 3, '1121', '131', 89300000, N'Khách hàng chuyển khoản thanh toán toàn bộ qua ngân hàng VCB'),
 ('CT0000001', 4, '632', '156', 71400000, N'Giá vốn hàng bán xuất kho tương ứng theo phiếu PXK0000001');
+
+-- CT0000002: Tháng 10 - Hạch toán nghiệp vụ bán hàng HDB0000002 (ĐH Kinh Tế Quốc Dân)
+IF NOT EXISTS (SELECT 1 FROM CHUNGTU WHERE MaCT = 'CT0000002')
+    INSERT INTO CHUNGTU (MaCT, MaNV, MaHDB, NgayCT, LoaiCT, DienGiai)
+    VALUES ('CT0000002', 'NV004', 'HDB0000002', '2026-10-06 15:00:00', N'Hóa đơn bán hàng', N'Hạch toán doanh thu, thuế, tạm ứng tiền và giá vốn HDB0000002 - ĐH NEU');
+ELSE
+    UPDATE CHUNGTU SET MaNV = 'NV004', MaHDB = 'HDB0000002', NgayCT = '2026-10-06 15:00:00', LoaiCT = N'Hóa đơn bán hàng', DienGiai = N'Hạch toán doanh thu, thuế, tạm ứng tiền và giá vốn HDB0000002 - ĐH NEU' WHERE MaCT = 'CT0000002';
+
+DELETE FROM CHITIETCHUNGTU WHERE MaCT = 'CT0000002';
+INSERT INTO CHITIETCHUNGTU (MaCT, STT, TaiKhoanNo, TaiKhoanCo, SoTien, DienGiai) VALUES
+('CT0000002', 1, '131', '511', 134181818, N'Ghi nhận doanh thu bán hàng chưa VAT (8 TV Samsung, 8 Màn hình Dell)'),
+('CT0000002', 2, '131', '3331', 13418182, N'Thuế GTGT đầu ra phải nộp 10%'),
+('CT0000002', 3, '1121', '131', 70000000, N'Khách hàng tạm ứng tiền đợt 1 qua ngân hàng theo PT0000002'),
+('CT0000002', 4, '632', '156', 118000000, N'Giá vốn hàng bán xuất kho theo phiếu PXK0000002');
+
+-- CT0000003: Tháng 10 - Hạch toán nghiệp vụ bán hàng HDB0000003 (Cty Hòa Bình)
+IF NOT EXISTS (SELECT 1 FROM CHUNGTU WHERE MaCT = 'CT0000003')
+    INSERT INTO CHUNGTU (MaCT, MaNV, MaHDB, NgayCT, LoaiCT, DienGiai)
+    VALUES ('CT0000003', 'NV004', 'HDB0000003', '2026-10-06 16:00:00', N'Hóa đơn bán hàng', N'Hạch toán doanh thu, thuế và giá vốn HDB0000003 - Cty Hòa Bình');
+ELSE
+    UPDATE CHUNGTU SET MaNV = 'NV004', MaHDB = 'HDB0000003', NgayCT = '2026-10-06 16:00:00', LoaiCT = N'Hóa đơn bán hàng', DienGiai = N'Hạch toán doanh thu, thuế và giá vốn HDB0000003 - Cty Hòa Bình' WHERE MaCT = 'CT0000003';
+
+DELETE FROM CHITIETCHUNGTU WHERE MaCT = 'CT0000003';
+INSERT INTO CHITIETCHUNGTU (MaCT, STT, TaiKhoanNo, TaiKhoanCo, SoTien, DienGiai) VALUES
+('CT0000003', 1, '131', '511', 46363636, N'Ghi nhận doanh thu bán hàng chưa VAT (4 TV LG, 10 Chuột phím Logitech)'),
+('CT0000003', 2, '131', '3331', 4636364, N'Thuế GTGT đầu ra phải nộp 10%'),
+('CT0000003', 3, '632', '156', 40800000, N'Giá vốn hàng bán xuất kho theo phiếu PXK0000003');
+
+-- CT0000004: Tháng 11 - Hạch toán nghiệp vụ bán hàng HDB0000004 (Tập Đoàn Á Châu)
+IF NOT EXISTS (SELECT 1 FROM CHUNGTU WHERE MaCT = 'CT0000004')
+    INSERT INTO CHUNGTU (MaCT, MaNV, MaHDB, NgayCT, LoaiCT, DienGiai)
+    VALUES ('CT0000004', 'NV004', 'HDB0000004', '2026-11-04 14:00:00', N'Hóa đơn bán hàng', N'Hạch toán doanh thu, giá vốn và thanh toán HDB0000004 - Tập Đoàn Á Châu');
+ELSE
+    UPDATE CHUNGTU SET MaNV = 'NV004', MaHDB = 'HDB0000004', NgayCT = '2026-11-04 14:00:00', LoaiCT = N'Hóa đơn bán hàng', DienGiai = N'Hạch toán doanh thu, giá vốn và thanh toán HDB0000004 - Tập Đoàn Á Châu' WHERE MaCT = 'CT0000004';
+
+DELETE FROM CHITIETCHUNGTU WHERE MaCT = 'CT0000004';
+INSERT INTO CHITIETCHUNGTU (MaCT, STT, TaiKhoanNo, TaiKhoanCo, SoTien, DienGiai) VALUES
+('CT0000004', 1, '131', '511', 57754545, N'Ghi nhận doanh thu bán hàng chưa VAT (3 Tủ lạnh Panasonic, 4 Điều hòa Casper)'),
+('CT0000004', 2, '131', '3331', 5775455, N'Thuế GTGT đầu ra phải nộp 10%'),
+('CT0000004', 3, '1121', '131', 63530000, N'Khách hàng chuyển khoản BIDV thanh toán toàn bộ theo PT0000003'),
+('CT0000004', 4, '632', '156', 50800000, N'Giá vốn hàng bán xuất kho theo phiếu PXK0000004');
+
+-- CT0000005: Tháng 11 - Hạch toán nghiệp vụ bán hàng HDB0000005 (Chuỗi Toàn Cầu)
+IF NOT EXISTS (SELECT 1 FROM CHUNGTU WHERE MaCT = 'CT0000005')
+    INSERT INTO CHUNGTU (MaCT, MaNV, MaHDB, NgayCT, LoaiCT, DienGiai)
+    VALUES ('CT0000005', 'NV004', 'HDB0000005', '2026-11-08 10:30:00', N'Hóa đơn bán hàng', N'Hạch toán doanh thu, thuế, tạm ứng và giá vốn HDB0000005 - Chuỗi Toàn Cầu');
+ELSE
+    UPDATE CHUNGTU SET MaNV = 'NV004', MaHDB = 'HDB0000005', NgayCT = '2026-11-08 10:30:00', LoaiCT = N'Hóa đơn bán hàng', DienGiai = N'Hạch toán doanh thu, thuế, tạm ứng và giá vốn HDB0000005 - Chuỗi Toàn Cầu' WHERE MaCT = 'CT0000005';
+
+DELETE FROM CHITIETCHUNGTU WHERE MaCT = 'CT0000005';
+INSERT INTO CHITIETCHUNGTU (MaCT, STT, TaiKhoanNo, TaiKhoanCo, SoTien, DienGiai) VALUES
+('CT0000005', 1, '131', '511', 81327273, N'Ghi nhận doanh thu chưa VAT (4 Máy giặt LG, 5 Máy hút bụi Dyson, 10 Hộp mực HP)'),
+('CT0000005', 2, '131', '3331', 8132727, N'Thuế GTGT đầu ra phải nộp 10%'),
+('CT0000005', 3, '1121', '131', 45000000, N'Khách hàng tạm ứng tiền đợt 1 qua ngân hàng theo PT0000004'),
+('CT0000005', 4, '632', '156', 71500000, N'Giá vốn hàng bán xuất kho theo phiếu PXK0000005');
+
+-- CT0000006: Tháng 11 - Hạch toán nghiệp vụ bán hàng HDB0000006 (Cty Phương Nam)
+IF NOT EXISTS (SELECT 1 FROM CHUNGTU WHERE MaCT = 'CT0000006')
+    INSERT INTO CHUNGTU (MaCT, MaNV, MaHDB, NgayCT, LoaiCT, DienGiai)
+    VALUES ('CT0000006', 'NV004', 'HDB0000006', '2026-11-12 16:00:00', N'Hóa đơn bán hàng', N'Hạch toán doanh thu, thuế và giá vốn HDB0000006 - Cty Phương Nam');
+ELSE
+    UPDATE CHUNGTU SET MaNV = 'NV004', MaHDB = 'HDB0000006', NgayCT = '2026-11-12 16:00:00', LoaiCT = N'Hóa đơn bán hàng', DienGiai = N'Hạch toán doanh thu, thuế và giá vốn HDB0000006 - Cty Phương Nam' WHERE MaCT = 'CT0000006';
+
+DELETE FROM CHITIETCHUNGTU WHERE MaCT = 'CT0000006';
+INSERT INTO CHITIETCHUNGTU (MaCT, STT, TaiKhoanNo, TaiKhoanCo, SoTien, DienGiai) VALUES
+('CT0000006', 1, '131', '511', 31436364, N'Ghi nhận doanh thu bán hàng chưa VAT (2 Laptop Dell, 50 Ram giấy in A4)'),
+('CT0000006', 2, '131', '3331', 3143636, N'Thuế GTGT đầu ra phải nộp 10%'),
+('CT0000006', 3, '632', '156', 27600000, N'Giá vốn hàng bán xuất kho theo phiếu PXK0000006');
 GO
 
 -- ============================================================================
--- 15. CẬP NHẬT LẠI TỒN KHO THỰC TẾ SAU CÁC ĐỢT XUẤT KHO MẪU (PXK0000001, PXK0000002)
+-- 15. CẬP NHẬT LẠI TỒN KHO THỰC TẾ SAU CÁC ĐỢT XUẤT KHO MẪU (PXK0000001 -> PXK0000006)
 -- ============================================================================
 PRINT N'==> Cập nhật lại tồn kho thực tế phản ánh chính xác các phiếu xuất đã lập...';
 
--- KHO01: SP006 xuất 5 chiếc (50 - 5 = 45), SP003 xuất 3 máy (40 - 3 = 37)
-UPDATE TONKHO SET SoLuongTon = 45, NgayCapNhat = GETDATE() WHERE MaKho = 'KHO01' AND MaSP = 'SP006';
-UPDATE TONKHO SET SoLuongTon = 37, NgayCapNhat = GETDATE() WHERE MaKho = 'KHO01' AND MaSP = 'SP003';
+-- KHO01: SP003 xuất 3 máy (45 - 3 = 42), SP004 xuất 8 TV (35 - 8 = 27), SP006 xuất 5 laptop (40 - 5 = 35), SP009 xuất 8 màn hình (55 - 8 = 47)
+UPDATE TONKHO SET SoLuongTon = 42, NgayCapNhat = '2026-10-02 14:00:00' WHERE MaKho = 'KHO01' AND MaSP = 'SP003';
+UPDATE TONKHO SET SoLuongTon = 27, NgayCapNhat = '2026-10-05 10:00:00' WHERE MaKho = 'KHO01' AND MaSP = 'SP004';
+UPDATE TONKHO SET SoLuongTon = 35, NgayCapNhat = '2026-10-02 14:00:00' WHERE MaKho = 'KHO01' AND MaSP = 'SP006';
+UPDATE TONKHO SET SoLuongTon = 47, NgayCapNhat = '2026-10-05 10:00:00' WHERE MaKho = 'KHO01' AND MaSP = 'SP009';
 
--- KHO02: SP010 xuất 2 chiếc (18 - 2 = 16), SP014 xuất 10 bộ (140 - 10 = 130)
-UPDATE TONKHO SET SoLuongTon = 16, NgayCapNhat = GETDATE() WHERE MaKho = 'KHO02' AND MaSP = 'SP010';
-UPDATE TONKHO SET SoLuongTon = 130, NgayCapNhat = GETDATE() WHERE MaKho = 'KHO02' AND MaSP = 'SP014';
+-- KHO02: SP005 xuất 4 (20 - 4 = 16), SP006 xuất 2 (30 - 2 = 28), SP010 xuất 2 (18 - 2 = 16), SP011 xuất 5 (35 - 5 = 30), SP012 xuất 50 (280 - 50 = 230), SP013 xuất 10 (95 - 10 = 85), SP014 xuất 10 (140 - 10 = 130)
+UPDATE TONKHO SET SoLuongTon = 16, NgayCapNhat = '2026-11-06 14:30:00' WHERE MaKho = 'KHO02' AND MaSP = 'SP005';
+UPDATE TONKHO SET SoLuongTon = 28, NgayCapNhat = '2026-11-12 15:00:00' WHERE MaKho = 'KHO02' AND MaSP = 'SP006';
+UPDATE TONKHO SET SoLuongTon = 16, NgayCapNhat = '2026-10-06 15:30:00' WHERE MaKho = 'KHO02' AND MaSP = 'SP010';
+UPDATE TONKHO SET SoLuongTon = 30, NgayCapNhat = '2026-11-06 14:30:00' WHERE MaKho = 'KHO02' AND MaSP = 'SP011';
+UPDATE TONKHO SET SoLuongTon = 230, NgayCapNhat = '2026-11-12 15:00:00' WHERE MaKho = 'KHO02' AND MaSP = 'SP012';
+UPDATE TONKHO SET SoLuongTon = 85, NgayCapNhat = '2026-11-06 14:30:00' WHERE MaKho = 'KHO02' AND MaSP = 'SP013';
+UPDATE TONKHO SET SoLuongTon = 130, NgayCapNhat = '2026-10-06 15:30:00' WHERE MaKho = 'KHO02' AND MaSP = 'SP014';
+
+-- KHO03: SP007 xuất 4 (10 - 4 = 6, mức tồn an toàn để demo cảnh báo), SP008 xuất 3 (35 - 3 = 32)
+UPDATE TONKHO SET SoLuongTon = 6, NgayCapNhat = '2026-11-03 15:00:00' WHERE MaKho = 'KHO03' AND MaSP = 'SP007';
+UPDATE TONKHO SET SoLuongTon = 32, NgayCapNhat = '2026-11-03 15:00:00' WHERE MaKho = 'KHO03' AND MaSP = 'SP008';
 GO
 
 PRINT N'================================================================================';
@@ -675,10 +925,11 @@ PRINT N'- 3 Kho hàng Bắc - Trung - Nam';
 PRINT N'- 42 Dòng tồn kho phản ánh chính xác số lượng thực tế sau xuất hàng';
 PRINT N'- 5 Nhân viên đầy đủ phòng ban (Admin, Bán hàng, Kho, Kế toán)';
 PRINT N'- 5 Tài khoản đăng nhập bảo mật PBKDF2 (Mật khẩu: 123456)';
-PRINT N'- 4 Đơn đặt hàng mẫu (Đã xuất HĐ, Chờ xuất kho, Xuất 1 phần, Đơn mới)';
-PRINT N'- 3 Hóa đơn bán hàng thương mại thực tế';
-PRINT N'- 2 Phiếu xuất kho theo hóa đơn đã lập';
-PRINT N'- 2 Phiếu thu tiền khách hàng (Thu 100% & Tạm ứng 50%)';
-PRINT N'- 3 Phiếu chi chi phí hoạt động doanh nghiệp';
-PRINT N'- 1 Chứng từ kế toán hoàn chỉnh kèm 4 dòng định khoản Nợ/Có';
+PRINT N'- 8 Đơn đặt hàng mẫu phân bổ Tháng 10 & Tháng 11/2026';
+PRINT N'- 6 Hóa đơn bán hàng thương mại thực tế (Doanh thu Tháng 10 & Tháng 11)';
+PRINT N'- 6 Phiếu xuất kho theo hóa đơn đã lập';
+PRINT N'- 4 Phiếu thu tiền khách hàng (Thu 100% & Tạm ứng đợt 1)';
+PRINT N'- 6 Phiếu chi chi phí hoạt động doanh nghiệp Tháng 10 & 11';
+PRINT N'- 6 Chứng từ kế toán hoàn chỉnh kèm định khoản Nợ/Có chuẩn VAS';
 PRINT N'================================================================================';
+

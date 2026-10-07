@@ -23,7 +23,6 @@ namespace DNQH_KeToanBanHang.Forms
             // Menu con Hệ Thống
             menuQuanLyTaiKhoan.Visible = false;
             menuQuanLyNhanVien.Visible = false;
-            menuNhatKyHoatDong.Visible = false;
             menuTraCuuPhimTat.Visible = true;
             toolStripSeparatorTraCuuPhimTat.Visible = false;
 
@@ -56,14 +55,11 @@ namespace DNQH_KeToanBanHang.Forms
             // Menu con Kế Toán Chi Tiết
             menuSoChiTietKhachHang.Visible = false;
             menuSoChiTietSanPham.Visible = false;
-            menuSoChiTietHoaDon.Visible = false;
-            menuBaoCaoTuoiNo.Visible = false;
 
             // Menu con Kế Toán Tổng Hợp
             menuBaoCaoDoanhThu.Visible = false;
             menuBaoCaoThuChi.Visible = false;
             menuBaoCaoTonKho.Visible = false;
-            menuBaoCaoBieuDo.Visible = false;
 
             // Ẩn tất cả nhóm Sidebar
             lblNavGroupSales.Visible = false;
@@ -107,7 +103,6 @@ namespace DNQH_KeToanBanHang.Forms
                 // Admin: Toàn quyền
                 menuQuanLyTaiKhoan.Visible = true;
                 menuQuanLyNhanVien.Visible = true;
-                menuNhatKyHoatDong.Visible = true;
                 toolStripSeparatorTraCuuPhimTat.Visible = true;
 
                 menuDanhMuc.Visible = true;
@@ -139,14 +134,11 @@ namespace DNQH_KeToanBanHang.Forms
                 menuKeToanChiTiet.Visible = true;
                 menuSoChiTietKhachHang.Visible = true;
                 menuSoChiTietSanPham.Visible = true;
-                menuSoChiTietHoaDon.Visible = true;
-                menuBaoCaoTuoiNo.Visible = true;
 
                 menuKeToanTongHop.Visible = true;
                 menuBaoCaoDoanhThu.Visible = true;
                 menuBaoCaoThuChi.Visible = true;
                 menuBaoCaoTonKho.Visible = true;
-                menuBaoCaoBieuDo.Visible = true;
 
                 // Sidebar
                 lblNavGroupSales.Visible = true;
@@ -271,14 +263,11 @@ namespace DNQH_KeToanBanHang.Forms
                 menuKeToanChiTiet.Visible = true;
                 menuSoChiTietKhachHang.Visible = true;
                 menuSoChiTietSanPham.Visible = true;
-                menuSoChiTietHoaDon.Visible = true;
-                menuBaoCaoTuoiNo.Visible = true;
 
                 menuKeToanTongHop.Visible = true;
                 menuBaoCaoDoanhThu.Visible = true;
                 menuBaoCaoThuChi.Visible = true;
                 menuBaoCaoTonKho.Visible = true;
-                menuBaoCaoBieuDo.Visible = true;
 
                 lblNavGroupSales.Visible = true;
                 btnNavHoaDon.Visible = true;
@@ -354,10 +343,10 @@ namespace DNQH_KeToanBanHang.Forms
                 return true;
             }
 
-            // Quản trị hệ thống (Tài khoản, Nhân viên, Nhật ký): Chỉ Quản trị viên
-            if (childForm is frmTaiKhoan || childForm is frmNhanVien || childForm is frmNhatKyHoatDong)
+            // Quản trị hệ thống (Tài khoản, Nhân viên): Chỉ Quản trị viên
+            if (childForm is frmTaiKhoan || childForm is frmNhanVien)
             {
-                reason = "Bạn không có quyền truy cập chức năng này.\nChỉ Quản trị viên mới có quyền quản lý Tài khoản, Nhân viên và Nhật ký hoạt động.";
+                reason = "Bạn không có quyền truy cập chức năng này.\nChỉ Quản trị viên mới có quyền quản lý Tài khoản và Nhân viên.";
                 return false;
             }
 
@@ -582,8 +571,6 @@ namespace DNQH_KeToanBanHang.Forms
             string subTitle = "Sổ Chi Tiết";
             if (tabIndex == 0) subTitle = "Sổ Chi Tiết Khách Hàng";
             else if (tabIndex == 1) subTitle = "Sổ Chi Tiết Sản Phẩm";
-            else if (tabIndex == 2) subTitle = "Sổ Chi Tiết Hóa Đơn";
-            else if (tabIndex == 3) subTitle = "Báo Cáo Tuổi Nợ";
             ShowEmbeddedForm(frm, "Kế Toán Chi Tiết", subTitle);
             frm.SelectTab(tabIndex);
         }
@@ -595,7 +582,6 @@ namespace DNQH_KeToanBanHang.Forms
             if (tabIndex == 0) subTitle = "Báo Cáo Doanh Thu";
             else if (tabIndex == 1) subTitle = "Báo Cáo Thu Chi";
             else if (tabIndex == 2) subTitle = "Báo Cáo Tồn Kho";
-            else if (tabIndex == 3) subTitle = "Biểu Đồ Phân Tích";
             ShowEmbeddedForm(frm, "Kế Toán Tổng Hợp", subTitle);
             frm.SelectTab(tabIndex);
         }
@@ -608,16 +594,6 @@ namespace DNQH_KeToanBanHang.Forms
         private void menuSoChiTietSanPham_Click(object sender, EventArgs e)
         {
             OpenKeToanChiTiet(1);
-        }
-
-        private void menuSoChiTietHoaDon_Click(object sender, EventArgs e)
-        {
-            OpenKeToanChiTiet(2);
-        }
-
-        private void menuBaoCaoTuoiNo_Click(object sender, EventArgs e)
-        {
-            OpenKeToanChiTiet(3);
         }
 
         private void menuBaoCaoDoanhThu_Click(object sender, EventArgs e)
@@ -633,11 +609,6 @@ namespace DNQH_KeToanBanHang.Forms
         private void menuBaoCaoTonKho_Click(object sender, EventArgs e)
         {
             OpenBaoCaoTongHop(2);
-        }
-
-        private void menuBaoCaoBieuDo_Click(object sender, EventArgs e)
-        {
-            OpenBaoCaoTongHop(3);
         }
 
         // --- DANH MỤC & QUẢN TRỊ ---
@@ -675,11 +646,6 @@ namespace DNQH_KeToanBanHang.Forms
         private void menuQuanLyTaiKhoan_Click(object sender, EventArgs e)
         {
             ShowEmbeddedForm(new frmTaiKhoan(), "Hệ Thống", "Quản Lý Tài Khoản");
-        }
-
-        private void menuNhatKyHoatDong_Click(object sender, EventArgs e)
-        {
-            ShowEmbeddedForm(new frmNhatKyHoatDong(), "Hệ Thống", "Nhật Ký Hoạt Động (Audit Trail)");
         }
 
         private void menuTraCuuPhimTat_Click(object sender, EventArgs e)
