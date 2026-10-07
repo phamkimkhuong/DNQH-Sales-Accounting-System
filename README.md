@@ -162,9 +162,9 @@ Sau khi nạp database thành công, hệ thống đã có sẵn dữ liệu pho
 | Tên Đăng Nhập | Mật Khẩu | Vai Trò | Nhân Viên Đại Diện | Quyền Hạn Nghiệp Vụ |
 | :--- | :---: | :--- | :--- | :--- |
 | **`admin`** | `123456` | Quản trị viên | Nguyễn Văn Trị (NV001) | Toàn quyền: Quản trị danh mục, người dùng, phân quyền, tất cả nghiệp vụ |
-| **`banhang`** | `123456` | Nhân viên bán hàng | Trần Thị Hàng (NV002) | Lập Đơn đặt hàng, phát hành Hóa đơn bán hàng, tra cứu |
+| **`banhang`** | `123456` | Nhân viên bán hàng | Trần Thị Bán Hàng (NV002) | Lập Đơn đặt hàng, phát hành Hóa đơn bán hàng, tra cứu |
 | **`kho`** | `123456` | Nhân viên kho | Lê Văn Kho (NV003) | Lập Phiếu xuất kho, trừ tồn kho, tra cứu thẻ kho |
-| **`ketoan`** | `123456` | Nhân viên kế toán | Phạm Thị Toán (NV004) | Lập Phiếu thu, Phiếu chi, Chứng từ sổ cái kế toán, Báo cáo tổng hợp |
+| **`ketoan`** | `123456` | Nhân viên kế toán | Phạm Thị Kế Toán (NV004) | Lập Phiếu thu, Phiếu chi, Chứng từ sổ cái kế toán, Báo cáo tổng hợp |
 
 #### 📊 Dữ liệu mẫu đã được nạp sẵn trong hệ thống:
 - **6 Nhà cung cấp uy tín:** Sunhouse, Samsung Vina, Tập đoàn CMC, Synnex FPT, Văn phòng phẩm Hồng Hà, LG Electronics.
