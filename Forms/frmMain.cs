@@ -117,7 +117,7 @@ namespace DNQH_KeToanBanHang.Forms
             menuSanPham.Image = UiIconProvider.GetIcon(UiIconType.Product, 16, Color.FromArgb(59, 130, 246));
             menuKho.Image = UiIconProvider.GetIcon(UiIconType.Warehouse, 16, Color.FromArgb(234, 88, 12));
 
-            // Menu con Kế Toán Bán Hàng
+            // Menu con Quản Lý Bán Hàng
             menuDonDatHang.Image = UiIconProvider.GetIcon(UiIconType.Order, 16, Color.FromArgb(37, 99, 235));
             menuTraCuuDonDatHang.Image = UiIconProvider.GetIcon(UiIconType.Search, 16, Color.FromArgb(100, 116, 139));
             menuHoaDonBan.Image = UiIconProvider.GetIcon(UiIconType.Invoice, 16, Color.FromArgb(30, 64, 175));

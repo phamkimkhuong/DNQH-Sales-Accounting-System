@@ -33,7 +33,7 @@ namespace DNQH_KeToanBanHang.Forms
             menuSanPham.Visible = false;
             menuKho.Visible = false;
 
-            // Menu con Kế Toán Bán Hàng
+            // Menu con Quản Lý Bán Hàng
             menuDonDatHang.Visible = false;
             menuTraCuuDonDatHang.Visible = false;
             menuHoaDonBan.Visible = false;
@@ -526,12 +526,12 @@ namespace DNQH_KeToanBanHang.Forms
 
         private void menuDonDatHang_Click(object sender, EventArgs e)
         {
-            ShowEmbeddedForm(new frmDonDatHang(), "Kế Toán Bán Hàng", "Đơn Đặt Hàng");
+            ShowEmbeddedForm(new frmDonDatHang(), "Quản Lý Bán Hàng", "Đơn Đặt Hàng");
         }
 
         private void menuHoaDonBan_Click(object sender, EventArgs e)
         {
-            ShowEmbeddedForm(new frmHoaDonBan(), "Kế Toán Bán Hàng", "Hóa Đơn Bán Hàng");
+            ShowEmbeddedForm(new frmHoaDonBan(), "Quản Lý Bán Hàng", "Hóa Đơn Bán Hàng");
         }
 
         // --- QUẢN LÝ KHO ---
@@ -658,14 +658,14 @@ namespace DNQH_KeToanBanHang.Forms
         private void menuTraCuuDonDatHang_Click(object sender, EventArgs e)
         {
             var frm = new frmDonDatHang();
-            ShowEmbeddedForm(frm, "Kế Toán Bán Hàng", "Tra Cứu Đơn Đặt Hàng");
+            ShowEmbeddedForm(frm, "Quản Lý Bán Hàng", "Tra Cứu Đơn Đặt Hàng");
             frm.SelectTab(1);
         }
 
         private void menuTraCuuHoaDon_Click(object sender, EventArgs e)
         {
             var frm = new frmHoaDonBan();
-            ShowEmbeddedForm(frm, "Kế Toán Bán Hàng", "Tra Cứu Hóa Đơn Bán");
+            ShowEmbeddedForm(frm, "Quản Lý Bán Hàng", "Tra Cứu Hóa Đơn Bán");
             frm.SelectTab(1);
         }
 
@@ -720,12 +720,12 @@ namespace DNQH_KeToanBanHang.Forms
                 {
                     case Keys.D1:
                     case Keys.NumPad1:
-                        ShowEmbeddedForm(new frmDonDatHang(), "Kế Toán Bán Hàng", "Đơn Đặt Hàng");
+                        ShowEmbeddedForm(new frmDonDatHang(), "Quản Lý Bán Hàng", "Đơn Đặt Hàng");
                         return true;
 
                     case Keys.D2:
                     case Keys.NumPad2:
-                        ShowEmbeddedForm(new frmHoaDonBan(), "Kế Toán Bán Hàng", "Hóa Đơn Bán Hàng");
+                        ShowEmbeddedForm(new frmHoaDonBan(), "Quản Lý Bán Hàng", "Hóa Đơn Bán Hàng");
                         return true;
 
                     case Keys.D3:

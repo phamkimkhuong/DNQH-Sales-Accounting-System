@@ -366,7 +366,7 @@ namespace DNQH_KeToanBanHang.Forms
             this.menuKeToanBanHang.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(40)))), ((int)(((byte)(217)))));
             this.menuKeToanBanHang.Name = "menuKeToanBanHang";
             this.menuKeToanBanHang.Size = new System.Drawing.Size(161, 22);
-            this.menuKeToanBanHang.Text = "KẾ TOÁN BÁN HÀNG";
+            this.menuKeToanBanHang.Text = "QUẢN LÝ BÁN HÀNG";
             // 
             // menuDonDatHang
             // 
@@ -1185,7 +1185,7 @@ namespace DNQH_KeToanBanHang.Forms
             this.lblNavGroupSales.Padding = new System.Windows.Forms.Padding(12, 6, 0, 2);
             this.lblNavGroupSales.Size = new System.Drawing.Size(209, 28);
             this.lblNavGroupSales.TabIndex = 2;
-            this.lblNavGroupSales.Text = "KẾ TOÁN BÁN HÀNG";
+            this.lblNavGroupSales.Text = "QUẢN LÝ BÁN HÀNG";
             // 
             // btnNavDashboard
             // 
